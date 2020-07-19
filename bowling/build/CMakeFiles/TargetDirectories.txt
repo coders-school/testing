@@ -1,2 +1,0 @@
-/home/wojtek/cpp/Coders School/git_repos/bowling/bowling/build/CMakeFiles/rebuild_cache.dir
-/home/wojtek/cpp/Coders School/git_repos/bowling/bowling/build/CMakeFiles/edit_cache.dir
