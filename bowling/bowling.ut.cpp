@@ -38,10 +38,26 @@ SCENARIO("Strike in last turn") {
         game.push_back(5);
         game.push_back(5);
 
-        WHEN("Getting strike in every turn") {
+        WHEN("Getting strike in last turn") {
             int lengthAfterRolling = game.size();
-            THEN("Score should be 300 points") {
+            THEN("Should be 2 more rolls") {
                 REQUIRE(lengthBeforeRolling + 2 == lengthAfterRolling);
+            }
+        }
+    }
+}
+
+SCENARIO("Spare in last turn") {
+    GIVEN("Ten turns of game") {
+        std::vector<int> game(9, 0);
+        game.push_back(10);
+        auto lengthBeforeRolling = game.size();
+        game.push_back(5);
+
+        WHEN("Getting spare in last turn") {
+            int lengthAfterRolling = game.size();
+            THEN("Should be 1 more roll") {
+                REQUIRE(lengthBeforeRolling + 1 == lengthAfterRolling);
             }
         }
     }
