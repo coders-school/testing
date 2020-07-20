@@ -77,3 +77,17 @@ SCENARIO("First ball - 9, Second - 0") {
         }
     }
 }
+
+SCENARIO("Spare every turn") {
+    GIVEN("Ten turns of game") {
+        std::vector<int> game(20, 5);
+
+        WHEN("5 pins hit with the first ball, spare with the second one") {
+            auto gameScore = score(150);
+
+            THEN("Score should be equal 150") {
+                REQUIRE(gameScore == 150);
+            }
+        }
+    }
+}
