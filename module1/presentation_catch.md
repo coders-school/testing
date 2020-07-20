@@ -58,7 +58,7 @@ Lub
 * <!-- .element: class="fragment fade-in" --> <code>GIVEN( something )</code>
 * <!-- .element: class="fragment fade-in" --> <code>WHEN( something )</code>
 * <!-- .element: class="fragment fade-in" --> <code>THEN( something )</code>
-Gdzie `TEST_CASE` mapuje się na `SCENARIO`, natomiast `SECTION` na `GIVEN`, `WHEN` i `THEN`.
+Gdzie `SCENARIO` mapuje się na `TEST_CASE`, natomiast `GIVEN`, `WHEN` i `THEN` na `SECTION`.
 
 ___
 
