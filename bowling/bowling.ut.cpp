@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include <vector>
+
 #include "catch.hpp"
 
 int score(int number) {
@@ -58,6 +59,20 @@ SCENARIO("Spare in last turn") {
             int lengthAfterRolling = game.size();
             THEN("Should be 1 more roll") {
                 REQUIRE(lengthBeforeRolling + 1 == lengthAfterRolling);
+            }
+        }
+    }
+}
+
+SCENARIO("First ball - 9, Second - 0") {
+    GIVEN("Ten turns of game") {
+        std::vector<int> game(10, 9);
+
+        WHEN("9 pins hit with first ball and 0 with second one") {
+            auto gameScore = score(90);
+
+            THEN("Score should be equal 90") {
+                REQUIRE(gameScore == 90);
             }
         }
     }
