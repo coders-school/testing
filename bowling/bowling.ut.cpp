@@ -91,3 +91,17 @@ SCENARIO("Spare every turn") {
         }
     }
 }
+
+SCENARIO("Spare") {
+    GIVEN("Two turns") {
+        int firstShot = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        int secondTurn = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        WHEN("first ball - (1-9 pins); second ball - last ones") {
+            std::vector<int> game{firstShot, 10 - firstShot, secondTurn, 0};
+            auto firstTurnScore = score(10 + secondTurn);
+            THEN("Spare") {
+                REQUIRE(firstShot == 10 + secondTurn);
+            }
+        }
+    }
+}
