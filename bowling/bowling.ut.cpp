@@ -96,11 +96,28 @@ SCENARIO("Spare") {
     GIVEN("Two turns") {
         int firstShot = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
         int secondTurn = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
         WHEN("first ball - (1-9 pins); second ball - last ones") {
             std::vector<int> game{firstShot, 10 - firstShot, secondTurn, 0};
             auto firstTurnScore = score(10 + secondTurn);
+
             THEN("Spare") {
-                REQUIRE(firstShot == 10 + secondTurn);
+                REQUIRE(firstTurnScore == 10 + secondTurn);
+            }
+        }
+    }
+}
+
+SCENARIO("Strike") {
+    GIVEN("Two turns") {
+        int secondTurn = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        WHEN("first ball - 10 pins") {
+            std::vector<int> game{10, 0, secondTurn, 1};
+            auto firstTurnScore = score(10 + secondTurn + 1);
+
+            THEN("Strike") {
+                REQUIRE(firstTurnScore == 10 + secondTurn + 1);
             }
         }
     }
