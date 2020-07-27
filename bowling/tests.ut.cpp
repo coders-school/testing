@@ -32,3 +32,18 @@ SCENARIO("The frame end after spare", "[frames]") {
         }
     }
 }
+
+SCENARIO("If knocking down 10 pins", "[frames]") {
+    GIVEN("player make first move") {
+        WHEN("player knocks down all pins") {
+            THEN("all 10 pins down") {
+            }
+        }
+    }
+    GIVEN("player make first move") {
+        WHEN("player koocks all pins in first move") {
+            THEN("player got strike") {
+            }
+        }
+    }
+}
