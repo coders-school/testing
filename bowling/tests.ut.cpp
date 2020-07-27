@@ -16,11 +16,12 @@ SCENARIO("throw tests", "[throws]") {
         }
     }
 }
-//test bool spareTrue
-bool spareTrue() {
-    return 0 == 0;
-}
 
-TEST_CASE("The frame end after spare", "[frames]") {
-    REQUIRE(spareTrue() == true);
+SCENARIO("The frame end after spare", "[frames]") {
+    GIVEN("player make second move") {
+        WHEN("player knocks down all pins") {
+            THEN("pins is 0") {
+            }
+        }
+    }
 }
