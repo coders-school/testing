@@ -33,4 +33,10 @@ SCENARIO("If knocking down 10 pins", "[frames]") {
             }
         }
     }
+    GIVEN("player make first move") {
+        WHEN("player koocks all pins in first move") {
+            THEN("player got strike") {
+            }
+        }
+    }
 }
