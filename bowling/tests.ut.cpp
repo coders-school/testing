@@ -1,6 +1,13 @@
 #include "catch.hpp"
 
 SCENARIO("frame tests", "[frames]") {
+    GIVEN("start a frame") {
+        WHEN("player is before first throw in a frame") {
+            THEN("points and throws in this frame == 0") {
+            }
+        }
+    }
+
     GIVEN("throws: 10, 3, 4, 10, 5, 5, 1") {
         WHEN("actual frame is calculating") {
             THEN("return frame number == 5") {
@@ -9,7 +16,7 @@ SCENARIO("frame tests", "[frames]") {
     }
 
     GIVEN("player make a first move") {
-        WHEN("player knocks down all pins , strike") {
+        WHEN("player knocks down all pins, strike") {
             THEN("end frame") {
             }
         }
