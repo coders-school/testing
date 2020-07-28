@@ -43,6 +43,12 @@ SCENARIO("throw tests", "[throws]") {
             }
         }
     }
+    GIVEN("player makes second move") {
+        WHEN("player knocks down 10 pins") {
+            THEN("return spare") {
+            }
+        }
+    }
 }
 
 SCENARIO("The frame end after spare", "[frames]") {
