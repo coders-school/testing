@@ -21,6 +21,13 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
+
+    GIVEN("Before player a first move") {
+        WHEN("Pins count == 10 and has 2 ball") {
+            THEN("Begin a frame") {
+            }
+        }
+    }
 }
 
 SCENARIO("throw tests", "[throws]") {
