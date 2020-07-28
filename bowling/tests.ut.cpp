@@ -7,6 +7,13 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
+
+    GIVEN("player make a first move") {
+        WHEN("player knocks down all pins , strike") {
+            THEN("end frame") {
+            }
+        }
+    }
 }
 
 SCENARIO("throw tests", "[throws]") {
