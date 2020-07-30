@@ -35,7 +35,15 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
+
+    GIVEN("an completed game") {
+        WHEN("frames are calculating") {
+            THEN("number of frames == 10") {
+            }
+        }
+    }
 }
+
 SCENARIO("throw tests", "[throws]") {
     GIVEN("player makes a move / frame started") {
         WHEN("player already made 2 throws") {
