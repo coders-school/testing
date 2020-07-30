@@ -64,6 +64,12 @@ SCENARIO("The frame end after spare", "[frames]") {
             }
         }
     }
+    GIVEN("The last 10th frame") {
+        WHEN("player got a strike") {
+            THEN("player got two more bonus balls") {
+            }
+        }
+    }
 }
 
 SCENARIO("If knocking down 10 pins", "[frames]") {
