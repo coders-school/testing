@@ -88,4 +88,11 @@ SCENARIO("points test", "[points]") {
             }
         }
     }
+
+    GIVEN("player made 3 throws, first strike, and then: 2, 3") {
+        WHEN("point is calculating") {
+            THEN("points after two frames should be 20") {
+            }
+        }
+    }
 }
