@@ -28,8 +28,14 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
-}
 
+    GIVEN("Before frame ended by spare nad Player make a new frame") {
+        WHEN("Player got points") {
+            THEN("plus points by spare to first ball") {
+            }
+        }
+    }
+}
 SCENARIO("throw tests", "[throws]") {
     GIVEN("player makes a move / frame started") {
         WHEN("player already made 2 throws") {
