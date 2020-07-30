@@ -101,6 +101,12 @@ SCENARIO("points test", "[points]") {
             }
         }
     }
+    GIVEN("Last 10th frames") {
+        WHEN("player got strike") {
+            THEN("player got 20 bonus points") {
+            }
+        }
+    }
 
     GIVEN("an ended (completed) game") {
         WHEN("points are calculating") {
