@@ -108,4 +108,18 @@ SCENARIO("points test", "[points]") {
             }
         }
     }
+
+    GIVEN("spare in a bonus ball") {
+        WHEN("last frame is adding to overall score") {
+            THEN("overall score shouldn't be increase by extra points for spare") {
+            }
+        }
+    }
+
+    GIVEN("strike in a bonus ball") {
+        WHEN("last frame is adding to overall score") {
+            THEN("overall score shouldn't be increase by extra points for strike") {
+            }
+        }
+    }
 }
