@@ -88,16 +88,23 @@ SCENARIO("If knocking down 10 pins", "[frames]") {
 }
 
 SCENARIO("points test", "[points]") {
-    GIVEN("player made two throws: 2, 5 (not a strike or spare") {
-        WHEN("points is calculating") {
+    GIVEN("2 throws: 2, 5 (not a strike or spare") {
+        WHEN("points are calculating") {
             THEN("points in frame == 7") {
             }
         }
     }
 
-    GIVEN("player made 3 throws, first strike, and then: 2, 3") {
-        WHEN("point is calculating") {
+    GIVEN("3 throws: first strike, and then: 2, 3") {
+        WHEN("points are calculating") {
             THEN("points after two frames should be 20") {
+            }
+        }
+    }
+
+    GIVEN("an ended (completed) game") {
+        WHEN("points are calculating") {
+            THEN("overall score should be a total of all frame scores") {
             }
         }
     }
