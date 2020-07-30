@@ -102,7 +102,7 @@ SCENARIO("points test", "[points]") {
         }
     }
     GIVEN("Last 10th frames") {
-        WHEN("player got strikie") {
+        WHEN("player got strike") {
             THEN("player got 20 bonus points") {
             }
         }
