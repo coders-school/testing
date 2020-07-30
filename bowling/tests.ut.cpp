@@ -29,7 +29,7 @@ SCENARIO("frame tests", "[frames]") {
         }
     }
 
-    GIVEN("Before frame ended by spare nad Player make a new frame") {
+    GIVEN("Before frame ended by spare and Player make a new frame") {
         WHEN("Player got points") {
             THEN("plus points by spare to first ball") {
             }
@@ -76,6 +76,15 @@ SCENARIO("If knocking down 10 pins", "[frames]") {
     GIVEN("player make first move") {
         WHEN("player koocks all pins in first move") {
             THEN("player got strike") {
+            }
+        }
+    }
+}
+
+SCENARIO("points test", "[points]") {
+    GIVEN("player made two throws: 2, 5 (not a strike or spare") {
+        WHEN("points is calculating") {
+            THEN("points in frame == 7") {
             }
         }
     }
