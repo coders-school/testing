@@ -63,6 +63,24 @@ SCENARIO("throw tests", "[throws]") {
             }
         }
     }
+    GIVEN("start frame") {
+        WHEN("player start new frame") {
+            THEN("player got 2 throw") {
+            }
+        }
+    }
+    GIVEN("player makes a one throw") {
+        WHEN("player throw first ball") {
+            THEN("player got 1 throw") {
+            }
+        }
+    }
+    GIVEN("player makes a second throw") {
+        WHEN("player throw second ball") {
+            THEN("player got 0 throw") {
+            }
+        }
+    }
 }
 
 SCENARIO("The frame end after spare", "[frames]") {
