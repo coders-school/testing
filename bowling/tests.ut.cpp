@@ -109,9 +109,9 @@ SCENARIO("points test", "[points]") {
             }
         }
     }
-    GIVEN("Last 10th frames") {
+    GIVEN("Last 10th frame") {
         WHEN("player got strike") {
-            THEN("player got 20 bonus points") {
+            THEN("player gets bonus points for the next 2 extra balls") {
             }
         }
     }
