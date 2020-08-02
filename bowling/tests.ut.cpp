@@ -19,14 +19,14 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
-    GIVEN("Before player a first move") {
-        WHEN("Pins count == 10 and has 2 ball") {
-            THEN("Begin a frame") {
+    GIVEN("before player a first move") {
+        WHEN("pins count == 10 and has 2 ball") {
+            THEN("begin a frame") {
             }
         }
     }
-    GIVEN("Before frame ended by spare and Player make a new frame") {
-        WHEN("Player got points") {
+    GIVEN("before frame ended by spare and player make a new frame") {
+        WHEN("player got points") {
             THEN("plus points by spare to first ball") {
             }
         }
@@ -37,15 +37,15 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
-     GIVEN("The last 10th frame") {
-        WHEN("player got a strike") {
-            THEN("player got two more bonus balls") {
+     GIVEN("last 10th frame") {
+        WHEN("player throw a spare") {
+            THEN("player has one more bonus ball") {
             }
         }
     }
-    GIVEN("Last 10th frame") {
-        WHEN("player got spare") {
-            THEN("player got one more bonus ball") {
+     GIVEN("last 10th frame") {
+        WHEN("player throw a strike") {
+            THEN("player has two more bonus balls") {
             }
         }
     }
@@ -65,32 +65,32 @@ SCENARIO("throw tests", "[throws]") {
         }
     }
     GIVEN("player makes second move") {
-        WHEN("player knocks down 10 pins") {
+        WHEN("player knocks down 10 pins in total") {
             THEN("return spare") {
             }
         }
     }
     GIVEN("start frame") {
         WHEN("player start new frame") {
-            THEN("player got 2 throw") {
+            THEN("player has 2 throw") {
             }
         }
     }
     GIVEN("player makes a one throw") {
         WHEN("player throw first ball") {
-            THEN("player got 1 throw") {
+            THEN("player has 1 throw") {
             }
         }
     }
     GIVEN("player makes a second throw") {
         WHEN("player throw second ball") {
-            THEN("player got 0 throw") {
+            THEN("player has 0 throw") {
             }
         }
     }
 }
 
-SCENARIO("The frame end after spare", "[frames]") {
+SCENARIO("the frame end after spare", "[frames]") {
     GIVEN("player make second move") {
         WHEN("player knocks down all pins") {
             THEN("pins is 0") {
@@ -99,7 +99,7 @@ SCENARIO("The frame end after spare", "[frames]") {
     }   
 }
 
-SCENARIO("If knocking down 10 pins", "[frames]") {
+SCENARIO("if knocking down 10 pins", "[frames]") {
     GIVEN("player make first move") {
         WHEN("player knocks down all pins") {
             THEN("all 10 pins down") {
@@ -107,15 +107,15 @@ SCENARIO("If knocking down 10 pins", "[frames]") {
         }
     }
     GIVEN("player make first move") {
-        WHEN("player koocks all pins in first move") {
-            THEN("player got strike") {
+        WHEN("player knocks all pins in first move") {
+            THEN("player has a strike") {
             }
         }
     }
 }
 
 SCENARIO("points test", "[points]") {
-    GIVEN("2 throws: 2, 5 (not a strike or spare") {
+    GIVEN("2 throws: 2, 5 (not a strike nor a spare)") {
         WHEN("points are calculating") {
             THEN("points in frame == 7") {
             }
