@@ -7,49 +7,42 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
-
     GIVEN("throws: 10, 3, 4, 10, 5, 5, 1") {
         WHEN("actual frame is calculating") {
             THEN("return frame number == 5") {
             }
         }
     }
-
     GIVEN("player make a first move") {
         WHEN("player knocks down all pins, strike") {
             THEN("end frame") {
             }
         }
     }
-
     GIVEN("Before player a first move") {
         WHEN("Pins count == 10 and has 2 ball") {
             THEN("Begin a frame") {
             }
         }
     }
-
     GIVEN("Before frame ended by spare and Player make a new frame") {
         WHEN("Player got points") {
             THEN("plus points by spare to first ball") {
             }
         }
     }
-
     GIVEN("an completed game") {
         WHEN("frames are calculating") {
             THEN("number of frames == 10") {
             }
         }
     }
-
      GIVEN("The last 10th frame") {
         WHEN("player got a strike") {
             THEN("player got two more bonus balls") {
             }
         }
     }
-
     GIVEN("Last 10th frame") {
         WHEN("player got spare") {
             THEN("player got one more bonus ball") {
@@ -103,8 +96,7 @@ SCENARIO("The frame end after spare", "[frames]") {
             THEN("pins is 0") {
             }
         }
-    }
-   
+    }   
 }
 
 SCENARIO("If knocking down 10 pins", "[frames]") {
@@ -129,29 +121,24 @@ SCENARIO("points test", "[points]") {
             }
         }
     }
-
     GIVEN("3 throws: first strike, and then: 2, 3") {
         WHEN("points are calculating") {
             THEN("points after two frames should be 20") {
             }
         }
     }
-    
-
     GIVEN("an ended (completed) game") {
         WHEN("points are calculating") {
             THEN("overall score should be a total of all frame scores") {
             }
         }
     }
-
     GIVEN("spare in a bonus ball") {
         WHEN("last frame is adding to overall score") {
             THEN("overall score shouldn't be increase by extra points for spare") {
             }
         }
     }
-
     GIVEN("strike in a bonus ball") {
         WHEN("last frame is adding to overall score") {
             THEN("overall score shouldn't be increase by extra points for strike") {
