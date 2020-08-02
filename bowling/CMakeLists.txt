@@ -8,9 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(TEST_FILES tests.ut.cpp)
 
 add_library(lib STATIC ${TEST_FILES})
-add_executable(${PROJECT_NAME}-ut catchMain.cpp tests.ut.cpp)
-#add_executable(${PROJECT_NAME}-ut tests.ut.cpp)
-#target_compile_options( -Wall -Wextra -Werror -pedantic )
+add_executable(${PROJECT_NAME}-ut catchMain.cpp)
+
+target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Werror -pedantic)
 
 target_link_libraries(${PROJECT_NAME}-ut lib)
 

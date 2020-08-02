@@ -42,6 +42,20 @@ SCENARIO("frame tests", "[frames]") {
             }
         }
     }
+
+     GIVEN("The last 10th frame") {
+        WHEN("player got a strike") {
+            THEN("player got two more bonus balls") {
+            }
+        }
+    }
+
+    GIVEN("Last 10th frame") {
+        WHEN("player got spare") {
+            THEN("player got one more bonus ball") {
+            }
+        }
+    }
 }
 
 SCENARIO("throw tests", "[throws]") {
@@ -90,12 +104,7 @@ SCENARIO("The frame end after spare", "[frames]") {
             }
         }
     }
-    GIVEN("The last 10th frame") {
-        WHEN("player got a strike") {
-            THEN("player got two more bonus balls") {
-            }
-        }
-    }
+   
 }
 
 SCENARIO("If knocking down 10 pins", "[frames]") {
@@ -127,12 +136,7 @@ SCENARIO("points test", "[points]") {
             }
         }
     }
-    GIVEN("Last 10th frames") {
-        WHEN("player got strike") {
-            THEN("player got 20 bonus points") {
-            }
-        }
-    }
+    
 
     GIVEN("an ended (completed) game") {
         WHEN("points are calculating") {
