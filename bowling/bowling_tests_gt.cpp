@@ -7,6 +7,10 @@ class GameTests : public ::testing::Test {
     Game game;
 };
 
-TEST_F(GameTests, GameCanBeLoadedFromFile) {
-    game.loadFromFile("example.txt");
+using GameDeathTests = GameTests;
+
+TEST_F(GameDeathTests, GameIsLoadedFromNonExistingFile) {
+    std::string fileName{"example.txt"};
+    std::string expectedMessage = "file " + fileName + " could not be opened!";
+    ASSERT_DEATH(game.loadFromFile("example.txt"), expectedMessage);
 }
