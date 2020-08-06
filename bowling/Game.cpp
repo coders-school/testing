@@ -14,8 +14,8 @@ void Game::loadFromFile(const std::string& fileName) {
     while (getline(file, lineText)) {
         int currentCharIndex = 0;
         PlayerData player;
-        fillPlayerName(currentCharIndex, player.playerName, lineText);
-        fillPlayerRolls(currentCharIndex, player.playerRolls, lineText);
+        fillPlayerName(currentCharIndex, player.Name, lineText);
+        fillPlayerRolls(currentCharIndex, player.Rolls, lineText);
         players.push_back(player);
     }
     file.close();

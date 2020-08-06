@@ -10,8 +10,8 @@ struct Frame {
 };
 
 struct PlayerData {
-    std::string playerName;
-    std::vector<Frame> playerRolls;
+    std::string Name;
+    std::vector<Frame> Rolls;
 };
 
 class Game {
