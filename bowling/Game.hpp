@@ -10,16 +10,15 @@ struct Frame {
 };
 
 struct PlayerData {
-    std::string playerName;
-    std::vector<Frame> playerRolls;
+    std::string Name;
+    std::vector<Frame> Rolls;
 };
 
 class Game {
     std::vector<PlayerData> players;
-    void fillPlayerName(int& currentCharIndex, std::string& playerName, const std::string& lineText);
-    void fillPlayerRolls(int& currentCharIndex,
-                         std::vector<Frame>& playerRolls,
-                         const std::string& lineText);
+    void fillPlayerName(std::fstream& file, std::string& playerName);
+    void fillPlayerRolls(std::fstream& file,
+                         std::vector<Frame>& playerRolls);
 
    public:
     Game(){};
