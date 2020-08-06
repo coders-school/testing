@@ -2,6 +2,11 @@
 
 #include "Game.hpp"
 
-TEST(GameTests, GameCanBeCreated) {
+class GameTests : public ::testing::Test {
+    protected:
     Game game;
+};
+
+TEST_F(GameTests, GameCanBeLoadedFromFile) {
+    game.loadFromFile("example.txt");
 }
