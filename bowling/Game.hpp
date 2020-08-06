@@ -6,5 +6,5 @@ class Game {
     
     public:
     Game(){};
-    bool loadFromFile(const std::string& fileName) {}
+    bool loadFromFile(const std::string&) { return false; }
 };
