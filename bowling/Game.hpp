@@ -16,8 +16,7 @@ struct PlayerData {
 
 class Game {
     std::vector<PlayerData> players;
-    void fillPlayerName(std::fstream& file, std::string& playerName);
-    void fillPlayerRolls(std::fstream& file,
+    void loadPlayerRolls(std::fstream& file,
                          std::vector<Frame>& playerRolls);
 
    public:

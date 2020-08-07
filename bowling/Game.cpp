@@ -12,13 +12,13 @@ void Game::loadFromFile(const std::string& fileName) {
     while (!file.eof()) {
         PlayerData player;
         std::getline(file, player.Name, ':');
-        fillPlayerRolls(file, player.Rolls);
+        loadPlayerRolls(file, player.Rolls);
         players.push_back(player);
     }
     file.close();
 }
 
-void Game::fillPlayerRolls(std::fstream& file, std::vector<Frame>& playerRolls) {
+void Game::loadPlayerRolls(std::fstream& file, std::vector<Frame>& playerRolls) {
     std::string frame;
     while (true) {
         while (frame.empty()) {
