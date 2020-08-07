@@ -23,7 +23,8 @@ class Game {
     bool spare(const std::vector<Frame>& playerRolls);
     bool lastFrame(const std::vector<Frame>& playerRolls);
 
-        public : Game(){};
+   public:
+    Game(){};
     void loadFromFile(const std::string& fileName);
     const std::vector<PlayerData>& getPlayers() { return players; };
 };
