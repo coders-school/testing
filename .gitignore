@@ -1,5 +1,6 @@
 # CMake
 build/
+buildDebug/
 
 #vsc settings
 .vscode/
