@@ -18,3 +18,9 @@ TEST_F(GameDeathTests, GameIsLoadedFromNonExistingFile) {
     ASSERT_DEATH(game.loadFromFile(fileName), expectedMessage);
 }
 
+TEST_F(GameTests, loadFromFileShouldLoadPlayerName) {
+    std::string expectedPlayerName{"Franek"};
+    game.loadFromFile("franek.txt");
+    ASSERT_EQ(game.getPlayers()[0].Name, expectedPlayerName);
+}
+

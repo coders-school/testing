@@ -1,6 +1,5 @@
 #include "Game.hpp"
 
-#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -10,47 +9,28 @@ void Game::loadFromFile(const std::string& fileName) {
         std::cerr << "file " << fileName << " could not be opened!\n";
         abort();
     }
-    std::string lineText{};
-    while (getline(file, lineText)) {
-        int currentCharIndex = 0;
+    while (!file.eof()) {
         PlayerData player;
-        fillPlayerName(currentCharIndex, player.Name, lineText);
-        fillPlayerRolls(currentCharIndex, player.Rolls, lineText);
+        std::getline(file, player.Name, ':');
+        fillPlayerRolls(file, player.Rolls);
         players.push_back(player);
     }
     file.close();
 }
 
-void Game::fillPlayerName(int& currentCharIndex, std::string& playerName, const std::string& lineText) {
-    for (currentCharIndex; currentCharIndex < lineText.size(); ++currentCharIndex) {
-        if (lineText[currentCharIndex] != ':') {
-            playerName += lineText[currentCharIndex];
-        } else {
-            currentCharIndex++;
+void Game::fillPlayerRolls(std::fstream& file, std::vector<Frame>& playerRolls) {
+    std::string frame;
+    while (true) {
+        while (frame.empty()) {
+            std::getline(file, frame, '|');
+        }
+        if (frame[0] == 'X') {
+            frame += ' ';
+        }
+        playerRolls.push_back(Frame(frame[0], frame[1]));
+        if (frame.find('\n') != std::string::npos) {
             break;
         }
-    }
-
-}
-
-void Game::fillPlayerRolls(int& currentCharIndex, std::vector<Frame>& playerRolls, const std::string& lineText) {
-    for (currentCharIndex; currentCharIndex < lineText.size(); ++currentCharIndex) {
-        if (lineText[currentCharIndex] == 'X') {
-            playerRolls.push_back(Frame('X', ' '));
-            currentCharIndex++;
-        } else {
-            playerRolls.push_back(
-                Frame(lineText[currentCharIndex], lineText[currentCharIndex + 1]));
-            currentCharIndex += 2;
-        }
-        if (playerRolls.size() == 10) {
-            if (lineText[currentCharIndex - 1] == 'X') {
-                playerRolls.push_back(Frame(lineText[currentCharIndex + 2],
-                                            lineText[currentCharIndex + 3]));
-            } else if (lineText[currentCharIndex - 1] == '/') {
-                playerRolls.push_back(Frame(lineText[currentCharIndex + 2], ' '));
-            }
-            break;
-        }
+        frame.erase();
     }
 }
