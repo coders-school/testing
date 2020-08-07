@@ -6,7 +6,7 @@
 #include <fstream>
 
 class GameTests : public ::testing::Test {
-    protected:
+   protected:
     Game game;
 };
 
@@ -31,5 +31,3 @@ TEST_F(GameTests, loadFromFileShouldLoadPlayerName) {
     file.close();
     std::filesystem::remove(filePath);
 }
-
-
