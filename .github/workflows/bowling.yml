@@ -16,7 +16,6 @@ jobs:
       working-directory: bowling/build
       run: |
         sudo apt-get update
-        sudo apt-get upgrade
         cmake ..
         make
     - name: Run tests
