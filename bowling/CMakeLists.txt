@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 
 project(bowling)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_CXX_COMPILER_ID GNU)
+set(CMAKE_CXX_COMPILER_VERSION 9.3.0)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
