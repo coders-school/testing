@@ -8,7 +8,11 @@ struct Frame {
     char secondRoll;
     Frame() : firstRoll(' '), secondRoll(' ') {}
     Frame(char first, char second) : firstRoll(first), secondRoll(second) {}
+    bool operator==(const Frame& rhs) const {
+        return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll;
+    }
 };
+
 
 struct PlayerData {
     std::string name;
