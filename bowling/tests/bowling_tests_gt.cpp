@@ -8,6 +8,14 @@
 class GameTests : public ::testing::Test {
    protected:
     Game game;
+    std::ofstream file;
+    std::string filePath;
+
+    void SetUp() override {
+        std::string fileName = "/test_file.txt";
+        filePath = std::filesystem::current_path().string() + fileName;
+        file.open(filePath, std::ios_base::out);
+    }
 };
 
 using GameDeathTests = GameTests;
@@ -21,13 +29,15 @@ TEST_F(GameDeathTests, GameIsLoadedFromNonExistingFile) {
 
 TEST_F(GameTests, loadFromFileShouldLoadPlayerName) {
     std::string expectedPlayerName{"Franek"};
-    std::string fileName = "/franek.txt";
-    std::string filePath = std::filesystem::current_path().string() + fileName;
-    std::ofstream file(filePath, std::ios_base::out);
     file << "Franek:\n";
     file.flush();
     game.loadFromFile(filePath);
     ASSERT_EQ(game.getPlayers()[0].name, expectedPlayerName);
     file.close();
     std::filesystem::remove(filePath);
+}
+
+TEST_F(GameTests, loadFromFileShouldLoadEmptyPlayerName) {
+    std::string expectedPlayerName{};
+    std::string fileName{};
 }
