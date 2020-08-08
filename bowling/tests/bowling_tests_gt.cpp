@@ -60,3 +60,8 @@ TEST_F(GameTests, loadFromFileShouldLoadAllPlayersNames) {
     EXPECT_EQ(game.getPlayers()[1].name, expectedPlayerNames[1]);
     EXPECT_EQ(game.getPlayers()[2].name, expectedPlayerNames[2]);
 }
+
+TEST_F(GameTests, loadFromFileShouldNotLoadAnyPlayerFromEmptyFile) {
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getPlayers().size(), 0);
+}
