@@ -5,10 +5,7 @@ on: [push, pull_request]
 jobs:
   Game:
 
-    runs-on: 
-      os: ubuntu-18.04
-      compiler: g++
-      version: "9.3.0"
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Check out code
