@@ -42,5 +42,8 @@ TEST_F(GameTests, loadFromFileShouldLoadPlayerName) {
 
 TEST_F(GameTests, loadFromFileShouldLoadEmptyPlayerName) {
     std::string expectedPlayerName{};
-    std::string fileName{};
+    file << ":\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    ASSERT_EQ(game.getPlayers()[0].name, expectedPlayerName);
 }
