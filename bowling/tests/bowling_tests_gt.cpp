@@ -16,6 +16,11 @@ class GameTests : public ::testing::Test {
         filePath = std::filesystem::current_path().string() + fileName;
         file.open(filePath, std::ios_base::out);
     }
+
+    void TearDown() override {
+        file.close();
+        std::filesystem::remove(filePath);
+    }
 };
 
 using GameDeathTests = GameTests;
@@ -33,8 +38,6 @@ TEST_F(GameTests, loadFromFileShouldLoadPlayerName) {
     file.flush();
     game.loadFromFile(filePath);
     ASSERT_EQ(game.getPlayers()[0].name, expectedPlayerName);
-    file.close();
-    std::filesystem::remove(filePath);
 }
 
 TEST_F(GameTests, loadFromFileShouldLoadEmptyPlayerName) {
