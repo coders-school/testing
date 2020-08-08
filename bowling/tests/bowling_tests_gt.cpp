@@ -25,7 +25,7 @@ class GameTests : public ::testing::Test {
 
 using GameDeathTests = GameTests;
 
-TEST_F(GameDeathTests, GameIsLoadedFromNonExistingFile) {
+TEST_F(GameDeathTests, GameCrashesWhenLoadedFromNonExistingFile) {
     std::string fileName{"hiashdksjd.txt"};
     std::string filePath = std::filesystem::current_path().string() + fileName;
     std::string expectedMessage = "file " + filePath + " could not be opened!";
@@ -72,4 +72,19 @@ TEST_F(GameTests, loadFromFileShouldLoadPlayerRolls) {
     file.flush();
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
+}
+
+TEST_F(GameTests, loadFromFileShouldLoadAllPlayersRolls) {
+    std::vector<std::vector<Frame>> expectedAllPlayersRolls{{{'1', '2'}, {'X', ' '}, {'5', '/'}},
+                                                            {{'3', '/'}, {'5', '4'}, {'X', ' '}},
+                                                            {{'2', '2'}, {'8', '-'}, {'0', '-'}}};
+    file << "Player1:12|X|5/\n";
+    file << "Player2:3/|54|X\n";
+    file << "Player3:22|8-|0-\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    ASSERT_EQ(game.getPlayers().size(), 3);
+    EXPECT_EQ(game.getPlayers()[0].rolls, expectedAllPlayersRolls[0]);
+    EXPECT_EQ(game.getPlayers()[1].rolls, expectedAllPlayersRolls[1]);
+    EXPECT_EQ(game.getPlayers()[2].rolls, expectedAllPlayersRolls[2]);
 }
