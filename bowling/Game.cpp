@@ -23,18 +23,38 @@ void Game::loadFromFile(const std::string& filePath) {
 void Game::loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls) {
     std::string rolls{};
     Frame currentFrame{};
+    int frameCount = 1;
     std::getline(file, rolls);
     for (int currentRoll = 0; currentRoll < rolls.size(); ++currentRoll) {
-        if (rolls[currentRoll] == 'X') {
+        if (isStrike(rolls[currentRoll])) {
             currentFrame = Frame('X', ' ');
             currentRoll++;
-        } else if (rolls[currentRoll + 1] == '/') {
+            if (isLastFrame(frameCount)) {
+                currentRoll++;
+            }
+        } else if (isSpare(rolls[currentRoll + 1])) {
             currentFrame = Frame(rolls[currentRoll], '/');
             currentRoll += 2;
+            if (isLastFrame(frameCount)) {
+                currentRoll++;
+            }
         } else {
             currentFrame = Frame(rolls[currentRoll], rolls[currentRoll + 1]);
             currentRoll += 2;
         }
+        frameCount++;
         playerRolls.push_back(currentFrame);
     }
+}
+
+bool Game::isLastFrame(int frameCount) {
+    return frameCount == 10;
+}
+
+bool Game::isStrike(char currentRoll) {
+    return currentRoll == 'X';
+}
+
+bool Game::isSpare(char nextRoll) {
+    return nextRoll == '/';
 }

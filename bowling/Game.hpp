@@ -29,6 +29,10 @@ struct PlayerData {
 class Game {
     std::vector<PlayerData> players;
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
+    bool isLastFrame(int frameCount);
+    bool isStrike(char currentRoll);
+    bool isSpare(char nextRoll);
+
 
    public:
     Game(){};
