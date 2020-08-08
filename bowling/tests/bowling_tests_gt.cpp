@@ -88,3 +88,21 @@ TEST_F(GameTests, loadFromFileShouldLoadAllPlayersRolls) {
     EXPECT_EQ(game.getPlayers()[1].rolls, expectedAllPlayersRolls[1]);
     EXPECT_EQ(game.getPlayers()[2].rolls, expectedAllPlayersRolls[2]);
 }
+
+TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
+    std::vector<Frame> expectedPlayerRolls{{'1', '2'},
+                                           {'3', '4'},
+                                           {'5', '6'},
+                                           {'7', '8'},
+                                           {'9', '9'},
+                                           {'X', ' '},
+                                           {'0', '-'},
+                                           {'5', '/'},
+                                           {'5', '4'},
+                                           {'X', ' '},
+                                           {'4', '4'}};
+    file << "Name:12|34|56|78|99|X|0-|5/|54|X||44\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
+}
