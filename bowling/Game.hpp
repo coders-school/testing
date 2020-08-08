@@ -18,10 +18,6 @@ struct PlayerData {
 class Game {
     std::vector<PlayerData> players;
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
-    bool lineEnds(const std::string& text);
-    void putBackCharacters(std::ifstream& file, int count);
-    bool spare(const std::vector<Frame>& playerRolls);
-    bool lastFrame(const std::vector<Frame>& playerRolls);
 
    public:
     Game(){};
