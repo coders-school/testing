@@ -42,11 +42,11 @@ endif()
 set (SRC_FILES Game.cpp)
 add_library(src STATIC ${SRC_FILES})
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} src)
+target_link_libraries(${PROJECT_NAME} src stdc++fs)
 
 enable_testing()
 add_executable(${PROJECT_NAME}-ut tests/bowling_tests_gt.cpp)
-target_link_libraries(${PROJECT_NAME}-ut gtest_main src)
+target_link_libraries(${PROJECT_NAME}-ut gtest_main src stdc++fs)
 target_include_directories(${PROJECT_NAME}-ut PRIVATE .)
 add_test(NAME bowlingTests COMMAND ${PROJECT_NAME}-ut)
 
