@@ -65,3 +65,11 @@ TEST_F(GameTests, loadFromFileShouldNotLoadAnyPlayerFromEmptyFile) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getPlayers().size(), 0);
 }
+
+TEST_F(GameTests, loadFromFileShouldLoadPlayerRolls) {
+    std::vector<Frame> expectedPlayerRolls{{'6', '3'}, {'1', '8'}, {'X', ' '}, {'4', '/'}};
+    file << "Name:63|18|X|4/\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
+}
