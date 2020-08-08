@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -12,6 +13,12 @@ struct Frame {
         return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll;
     }
 };
+
+inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
+    os << "{" << frame.firstRoll << ", " << frame.secondRoll << "}";
+    return os;
+}
+
 
 
 struct PlayerData {
