@@ -19,3 +19,5 @@ main should take 2 parameters:
     `./bowling inputDirectory results.txt`
 - 7A - help for main 
     - after typing `-h` or `--help` application should show manual
+
+
