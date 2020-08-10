@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cstring>
+#include <iostream>
 
 void printHelp() {
     std::cout << "******   BOWLING GAME    ******\n";
@@ -16,12 +16,12 @@ int main(int argc, char* argv[]) {
     std::string inputDirectoryName = argv[1];
     std::string resultOutputFileName;
 
-    if(argc == 3){
+    if (argc == 3) {
         resultOutputFileName = argv[2];
     }
 
     std::cout << inputDirectoryName << '\n';
-    if(!resultOutputFileName.empty()) {
+    if (!resultOutputFileName.empty()) {
         std::cout << resultOutputFileName << '\n';
     }
 

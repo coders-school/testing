@@ -17,7 +17,5 @@ main should take 2 parameters:
     second is optional output file where should be saved game results
     example of use:
     `./bowling inputDirectory results.txt`
-- 7A - help for main 
+- 7A - help for main
     - after typing `-h` or `--help` application should show manual
-
-
