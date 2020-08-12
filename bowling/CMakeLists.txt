@@ -38,10 +38,16 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
-enable_testing()
+
+set (SRC_FILES Game.cpp)
+add_library(src STATIC ${SRC_FILES})
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut bowling_tests_gt.cpp)
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+target_link_libraries(${PROJECT_NAME} src)
+
+enable_testing()
+add_executable(${PROJECT_NAME}-ut tests/bowling_tests_gt.cpp)
+target_link_libraries(${PROJECT_NAME}-ut gtest_main src)
+target_include_directories(${PROJECT_NAME}-ut PRIVATE .)
 add_test(NAME bowlingTests COMMAND ${PROJECT_NAME}-ut)
 
 set (FLAGS -Wall -Wextra -Werror -Wconversion -pedantic)
