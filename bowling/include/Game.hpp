@@ -1,11 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <numeric>
 class Game {
     public:
 
     int getScore() const {
-        return 0;
+        return std::accumulate(rolls_.begin(), rolls_.end(), 0);
     }
 
     void roll(int point){
