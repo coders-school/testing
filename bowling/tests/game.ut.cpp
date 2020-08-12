@@ -1,18 +1,8 @@
 #include <gtest/gtest.h>
+#include "Game.hpp"
 
 
-// TEST(SortTestV4Fixture, GivenAVector3214WhenVectorIsSortedWithReverseIteratorsThenItIsEqualTo4321) {
-//     // GIVEN
-//     std::vector<int> v {3, 2, 1, 4};
-//     std::vector<int> expected {4, 3, 2, 1};
-
-//     // WHEN
-//     std::sort(v.rbegin(), v.rend());
-
-//     // THEN
-//     ASSERT_EQ(v, expected);
-// }
-
-TEST(FirstTest, ShouldBeTrue){
-    ASSERT_EQ(5, 5);
+TEST(GameScoreTest, GameScoreShouldBe0){
+    Game g;
+    ASSERT_EQ(0, g.getScore());
 }

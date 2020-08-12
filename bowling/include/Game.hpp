@@ -2,8 +2,14 @@
 
 #include <vector>
 class Game {
-        int getScore() const {
+    public:
+
+    int getScore() const {
         return 0;
+    }
+
+    void roll(int point){
+        rolls_.push_back(point);
     }
 
 private:
