@@ -30,3 +30,15 @@ TEST(GameScoreTest, GivenAll2ShouldGiveGameScore40){
 
     ASSERT_EQ(40, g.getScore());
 }
+
+
+TEST(GameScoreTest, GivenFirst10AndRest0ShouldGiveGameScore10){
+    Game g;
+
+    g.roll(10);
+    for(int i = 1 ; i < 20 ; ++i){
+        g.roll(0);
+    }
+
+    ASSERT_EQ(10, g.getScore());
+}
