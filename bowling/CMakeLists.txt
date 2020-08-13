@@ -46,15 +46,15 @@ include_directories(tests)
 
 
 set(HEADERS 
-    include/
+    include/Game.hpp
     )
 
 set(SRC
-    src/
+    src/Game.cpp
     )
 
 set(TESTS
-    tests/
+    tests/game.ut.cpp
     )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
@@ -64,10 +64,10 @@ set(FLAGS -Wall -Wextra -Werror -Wconversion -Wpedantic)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 
 
-#enable_testing()
-#add_executable(${PROJECT_NAME}-ut ${TESTS})
-#target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main)
-#target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
+enable_testing()
+add_executable(${PROJECT_NAME}-ut ${TESTS})
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main)
+target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
 
 
-#add_test(NAME ${PROJECT_NAME}-test COMMAND ${PROJECT_NAME}-ut)
+add_test(NAME ${PROJECT_NAME}-test COMMAND ${PROJECT_NAME}-ut)
