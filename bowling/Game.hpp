@@ -4,12 +4,15 @@
 #include <string>
 #include <vector>
 
-struct Frame {
+class Frame {
     char firstRoll;
     char secondRoll;
+
+   public:
     Frame() : firstRoll(' '), secondRoll(' ') {}
     Frame(char first, char second) : firstRoll(first), secondRoll(second) {}
     bool operator==(const Frame& rhs) const { return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll; }
+    friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
