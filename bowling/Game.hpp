@@ -22,12 +22,11 @@ inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
     return os;
 }
 
-struct PlayerData {
-    std::string name;
-    std::vector<Frame> rolls;
-};
-
 class Game {
+    struct PlayerData {
+        std::string name;
+        std::vector<Frame> rolls;
+    };
     std::vector<PlayerData> players;
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
     bool isLastFrame(int frameCount);
