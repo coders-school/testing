@@ -31,6 +31,6 @@ class Game {
 
    public:
     Game(){};
-    void loadFromFile(const std::string& fileName);
+    void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() { return players; };
 };
