@@ -13,6 +13,8 @@ class Frame {
     Frame(char first, char second) : firstRoll(first), secondRoll(second) {}
     bool operator==(const Frame& rhs) const { return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll; }
     friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
+    char getFirstRoll() { return firstRoll; };
+    char getSecondRoll() { return secondRoll; };
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
