@@ -9,17 +9,13 @@ struct Frame {
     char secondRoll;
     Frame() : firstRoll(' '), secondRoll(' ') {}
     Frame(char first, char second) : firstRoll(first), secondRoll(second) {}
-    bool operator==(const Frame& rhs) const {
-        return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll;
-    }
+    bool operator==(const Frame& rhs) const { return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll; }
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
     os << "{" << frame.firstRoll << ", " << frame.secondRoll << "}";
     return os;
 }
-
-
 
 struct PlayerData {
     std::string name;
@@ -32,7 +28,6 @@ class Game {
     bool isLastFrame(int frameCount);
     bool isStrike(char currentRoll);
     bool isSpare(char nextRoll);
-
 
    public:
     Game(){};
