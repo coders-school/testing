@@ -1,0 +1,42 @@
+@startuml bowling-project
+
+class Frame{
+    -points_ : int
+    -spare_ : bool
+    -strike_ : bool
+    +isStrike()
+    +isSpare()
+}
+
+class Player{
+    -frames_ : vector<Frame>
+    -name_
+    +getScore()
+}
+
+class Lane{
+    -players_ : vector<Player>
+    +getLaneStatus()
+    +getLaneResult()
+}
+
+class Game{
+    lanes_ : vector<Lane>
+}
+
+abstract class Input{
+
+}
+
+class DirectoryInput{
+
+}
+
+Game *-down- Lane
+Lane *- Player
+Player *- Frame
+
+Input <|.. DirectoryInput
+Game -> Input
+
+@enduml
