@@ -25,7 +25,7 @@ int main() {
   for (auto player : players) {
       std::cout << player.name << '\n';
       for (auto frame : player.rolls) {
-          std::cout << frame.firstRoll << ", " << frame.secondRoll << '\n';
+          std::cout << frame.getFirstRoll() << ", " << frame.getSecondRoll() << '\n';
       }
   }
   remove_file(filePath);
