@@ -1,0 +1,82 @@
+@startuml
+BowlingGame *-- ArgumentParser
+BowlingGame *-- DirectoryHandler
+BowlingGame *-- Lane
+Lane *-- SingleGame
+BowlingGame o-- FileHandler
+Lane o-- FileHandler
+
+class BowlingGame{
+-ArgumentParser parser
+-DirectoryHandler directoryHandler
+-std::vector<Lane> lanes
+-std::string outputFileName;
+
+-printHelp()
+-printScoresToScreenOrFile(std::ostream &ostr)
+
++BowlingGame(int argc, char **argv)
++printScores()
+}
+
+class ArgumentParser{
+-std::vector <std::string> parsedArguments;
+
+-parseArguments(int argc, char **argv)
+
++ArgumentParser(int argc, char **argv)
++bool isArgumentExist(const std::string &argument)
++std::string getArgumentData(int argNumber)
+}
+
+class DirectoryHandler{
+-std::vector <std::string> filesInDirectory
+
++DirectoryHandler(std::string &directoryName)
++std::vector<std::string> getFilesInDirectory()
+}
+
+class Lane{
+-std::vector<SingleGame> gamesInLane
+-std::string name
+
+-parseFile(std::string fileName)
+-parseLaneName(std::string &fileName)
+
++Lane(std::string &fileName)
++~Lane()
++std::string getName()
++friend ostream& operator<<(ostream& os, const Lane& lane)
+}
+
+class SingleGame{
+-std::string name
+-std::vector<int> rolls
+-int score
+-bool gameFinished
+
+-parseGameInput(std::string &gameInput)
+-countScore()
+
++SingleGame(std::string &gameInput)
++std::string getName()
++int getScore()
++bool isGameFinished()
++friend ostream& operator<<(ostream& os, const SingleGame& singleGame)
+}
+
+enum FileAccess{
+  INPUT
+  OUTPUT
+}
+
+class FileHandler{
+-std::fstream fileStream
+-std::string fileName
+
++FileHandler(std::string fileName, enum FileAccess fileAccess)
++~FileHandler()
++std::string readLine()
++bool write(std::string)
+}
+@enduml
