@@ -7,61 +7,74 @@ BowlingGame o-- FileHandler
 Lane o-- FileHandler
 
 class BowlingGame{
--ArgumentParser parser
--DirectoryHandler directoryHandler
--std::vector<Lane> lanes
--std::string outputFileName;
+-ArgumentParser parser_
+-std::vector<Lane> lanes_
 
--printHelp()
--printScoresToScreenOrFile(std::ostream &ostr)
+-std::string getOutputFileName()
+-bool isOutputFileGiven()
+-void showScores()
+-void saveScores()
 
 +BowlingGame(int argc, char **argv)
-+printScores()
++void calculateScores()
++void outputScores()
++void printHelp()
++bool isHelpToBePrinted()
 }
 
 class ArgumentParser{
--std::vector <std::string> parsedArguments;
+-std::vector <std::string> parsedArguments_
+-size_t argumentsNumber_
 
--parseArguments(int argc, char **argv)
+-void parseArguments(int argc, char **argv)
 
 +ArgumentParser(int argc, char **argv)
 +bool isArgumentExist(const std::string &argument)
-+std::string getArgumentData(int argNumber)
++std::string getArgument(size_t argNumber)
++size_t getArgumentsNumber_();
 }
 
 class DirectoryHandler{
--std::vector <std::string> filesInDirectory
+-std::vector <std::string> filesInDirectory_
 
 +DirectoryHandler(std::string &directoryName)
 +std::vector<std::string> getFilesInDirectory()
 }
 
 class Lane{
--std::vector<SingleGame> gamesInLane
--std::string name
+-std::vector<SingleGame> gamesInLane_
+-std::string laneName_
 
--parseFile(std::string fileName)
--parseLaneName(std::string &fileName)
+-void parseFile(std::string fileName)
+-void parseLaneName(std::string &fileName)
 
 +Lane(std::string &fileName)
-+~Lane()
-+std::string getName()
++std::string getLaneName()
 +friend ostream& operator<<(ostream& os, const Lane& lane)
 }
 
-class SingleGame{
--std::string name
--std::vector<int> rolls
--int score
--bool gameFinished
+enum GameStatus{
+  FINISHED
+  IN_PROGRESS
+  NOT_STARTED
+}
 
--parseGameInput(std::string &gameInput)
--countScore()
+class SingleGame{
+-std:string gameInput;
+-std::string PlayerName_
+-std::vector<size_t> rolls_
+-size_t score_
+-enum GameStatus gameStatus_
+
+-void parseGameInput()
+-void putScoresToVector()
+-void checkGameStatus_()
+-void countScore()
 
 +SingleGame(std::string &gameInput)
-+std::string getName()
-+int getScore()
-+bool isGameFinished()
++std::string getPlayerName()
++size_t getScore()
++enum GameStatus getGameStatus_()
 +friend ostream& operator<<(ostream& os, const SingleGame& singleGame)
 }
 
@@ -71,8 +84,8 @@ enum FileAccess{
 }
 
 class FileHandler{
--std::fstream fileStream
--std::string fileName
+-std::fstream fileStream_
+-std::string fileName_
 
 +FileHandler(std::string fileName, enum FileAccess fileAccess)
 +~FileHandler()
