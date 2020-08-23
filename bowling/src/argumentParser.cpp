@@ -1,5 +1,33 @@
 #include "argumentParser.hpp"
 
-ArgumentParser::ArgumentParser() {}
+ArgumentParser::ArgumentParser(int argc, const char** argv)
+{
+    parseArguments(argc, argv);
+}
 
-ArgumentParser::~ArgumentParser() {}
+void ArgumentParser::parseArguments(const int argc, const char** argv)
+{
+    if (argv && (argc > 0)) {
+        // Skip the first argument, i.e. program name
+        for (size_t i = 1; i < argc; ++i) {
+            if (argv[i]) {
+                parsedArguments_.push_back(argv[i]);
+            }
+            else {
+                parsedArguments_.clear();
+                return;
+            }
+        }
+        parsedArguments_.shrink_to_fit();
+        argumentsNumber_ = (size_t)(argc - 1);
+    }
+}
+
+std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber)
+{
+    if (static_cast<size_t>(argumentNumber) >= argumentsNumber_) {
+        return {};
+    }
+
+    return parsedArguments_[static_cast<size_t>(argumentNumber)];
+}
