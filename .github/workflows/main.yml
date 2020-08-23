@@ -3,18 +3,18 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
-  Bowling Project:
+  _BowlingProject:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
       uses: actions/checkout@develop
-    - name: mkdir build
-      run: mkdir build
+    - name: mkdir bowling/build
+      run: mkdir bowling/build
     - name: Compile
-      working-directory: build
+      working-directory: bowling/build
       run: |
         cmake ..
         make
     - name: Run tests
-      working-directory: build
+      working-directory: bowling/build
       run: ctest -V
