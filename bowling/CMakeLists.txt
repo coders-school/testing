@@ -8,12 +8,22 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCES
-    src/example.cpp)
+    src/argumentParser.cpp
+    src/bowlingGame.cpp
+    src/directoryHandler.cpp
+    src/fileHandler.cpp
+    src/lane.cpp
+    src/singleGame.cpp)
 
 set(TESTS
-    tests/example-ut.cpp)
+    tests/argumentParser.ut.cpp
+    tests/bowlingGame.ut.cpp
+    tests/directoryHandler.ut.cpp
+    tests/fileHandler.ut.cpp
+    tests/lane.ut.cpp
+    tests/singleGame.ut.cpp)
 
-set(FLAGS -Wall -Wextra -pedantic -Wconversion -Werror)
+set(FLAGS -Wall -Wextra -pedantic -Wconversion -Werror -O3 -std=c++17)
 
 include_directories(inc)
 
