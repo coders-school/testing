@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@bowling/project
+      uses: actions/checkout@develop
     - name: mkdir build
       run: mkdir build
     - name: Compile
