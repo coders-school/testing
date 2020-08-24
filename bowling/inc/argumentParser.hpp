@@ -14,6 +14,7 @@ public:
     ArgumentParser() = delete;
 
     std::string getArgument(const ArgumentNumber argumentNumber);
+    size_t getArgumentsNumber() { return argumentsNumber_; };
 
 private:
     std::vector<std::string> parsedArguments_{};

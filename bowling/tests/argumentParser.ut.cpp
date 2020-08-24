@@ -8,7 +8,7 @@ using Catch::Matchers::Equals;
 
 using ArgNumber = ArgumentParser::ArgumentNumber;
 
-SCENARIO("program arguments should be returned after parsing", "argumentParser")
+SCENARIO("program arguments and their number should be returned after parsing", "argumentParser")
 {
     std::string expectedEmpty{};
 
@@ -16,6 +16,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
     {
         int testArgc = 0;
         const char** testArgv = NULL;
+        size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
                         << " and argv = NULL")
@@ -29,6 +30,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
                                  Equals(expectedEmpty));
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::SECOND_ARGUMENT),
                                  Equals(expectedEmpty));
+                    REQUIRE(testArgParser.getArgumentsNumber() == expectedArgumentsNumber);
                 }
             }
         }
@@ -38,6 +40,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
     {
         int testArgc = 2;
         const char** testArgv = NULL;
+        size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
                         << " and argv = NULL")
@@ -51,6 +54,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
                                  Equals(expectedEmpty));
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::SECOND_ARGUMENT),
                                  Equals(expectedEmpty));
+                    REQUIRE(testArgParser.getArgumentsNumber() == expectedArgumentsNumber);
                 }
             }
         }
@@ -60,6 +64,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
     {
         int testArgc = 1;
         const char* testArgv[] = {"programName", NULL};
+        size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
                         << " and argv = {\""
@@ -71,13 +76,13 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
                 ArgumentParser testArgParser(testArgc, testArgv);
                 THEN("getArgument(FIRST_ARGUMENT) returns \""
                      << (testArgv[1] ? testArgv[1] : "empty string")
-                     << "\" and getArgument(SECOND_ARGUMENT) returns \""
-                     << (testArgv[2] ? testArgv[2] : "empty string") << "\"")
+                     << "\" and getArgument(SECOND_ARGUMENT) returns \"empty string\"")
                 {
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::FIRST_ARGUMENT),
                                  Equals(expectedEmpty));
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::SECOND_ARGUMENT),
                                  Equals(expectedEmpty));
+                    REQUIRE(testArgParser.getArgumentsNumber() == expectedArgumentsNumber);
                 }
             }
         }
@@ -87,6 +92,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
     {
         int testArgc = 2;
         const char* testArgv[] = {"programName", "argument_1", NULL};
+        size_t expectedArgumentsNumber = 1;
 
         GIVEN("argc = " << testArgc
                         << " and argv = {\""
@@ -106,6 +112,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
                                  Equals(testArgv[1]));
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::SECOND_ARGUMENT),
                                  Equals(expectedEmpty));
+                    REQUIRE(testArgParser.getArgumentsNumber() == expectedArgumentsNumber);
                 }
             }
         }
@@ -115,6 +122,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
     {
         int testArgc = 3;
         const char* testArgv[] = {"programName", "argument_1", "argument_2", NULL};
+        size_t expectedArgumentsNumber = 2;
 
         GIVEN("argc = " << testArgc
                         << " and argv = {\""
@@ -134,6 +142,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
                                  Equals(testArgv[1]));
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::SECOND_ARGUMENT),
                                  Equals(testArgv[2]));
+                    REQUIRE(testArgParser.getArgumentsNumber() == expectedArgumentsNumber);
                 }
             }
         }
@@ -143,6 +152,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
     {
         int testArgc = 3;
         const char* testArgv[] = {"programName", NULL, "argument_1", NULL};
+        size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
                         << " and argv = {\""
@@ -162,6 +172,7 @@ SCENARIO("program arguments should be returned after parsing", "argumentParser")
                                  Equals(expectedEmpty));
                     REQUIRE_THAT(testArgParser.getArgument(ArgNumber::SECOND_ARGUMENT),
                                  Equals(expectedEmpty));
+                    REQUIRE(testArgParser.getArgumentsNumber() == expectedArgumentsNumber);
                 }
             }
         }

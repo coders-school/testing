@@ -28,6 +28,5 @@ std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber)
     if (static_cast<size_t>(argumentNumber) >= argumentsNumber_) {
         return {};
     }
-
     return parsedArguments_[static_cast<size_t>(argumentNumber)];
 }
