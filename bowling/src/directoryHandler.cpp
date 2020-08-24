@@ -1,9 +1,5 @@
-#include "directoryHandler.hpp"  
+#include "directoryHandler.hpp"
 
-DirectoryHandler::DirectoryHandler() {
+DirectoryHandler::DirectoryHandler() {}
 
-}
-
-DirectoryHandler::~DirectoryHandler() {
-
-}
+DirectoryHandler::~DirectoryHandler() {}

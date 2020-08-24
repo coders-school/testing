@@ -2,10 +2,7 @@
 
 class DirectoryHandler {
 private:
-
 public:
-
-		DirectoryHandler();
-		~DirectoryHandler();
-
+    DirectoryHandler();
+    ~DirectoryHandler();
 };

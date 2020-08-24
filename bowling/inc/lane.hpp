@@ -2,10 +2,7 @@
 
 class Lane {
 private:
-
 public:
-
-	Lane();
-	~Lane();
-
+    Lane();
+    ~Lane();
 };

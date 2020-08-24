@@ -1,11 +1,8 @@
 #pragma once
 
-class BowlingGame  {
+class BowlingGame {
 private:
-
 public:
-
-	BowlingGame();
-	~BowlingGame();
-
+    BowlingGame();
+    ~BowlingGame();
 };

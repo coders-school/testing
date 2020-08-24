@@ -2,10 +2,7 @@
 
 class ArgumentParser {
 private:
-
 public:
-
-	ArgumentParser();
-	~ArgumentParser();
-
+    ArgumentParser();
+    ~ArgumentParser();
 };

@@ -2,10 +2,7 @@
 
 class FileHandler {
 private:
-
 public:
-
-	FileHandler();
-	~FileHandler();
-
+    FileHandler();
+    ~FileHandler();
 };

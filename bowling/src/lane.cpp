@@ -1,9 +1,5 @@
-#include "lane.hpp"  
+#include "lane.hpp"
 
-Lane::Lane() {
+Lane::Lane() {}
 
-}
-
-Lane::~Lane() {
-
-}
+Lane::~Lane() {}

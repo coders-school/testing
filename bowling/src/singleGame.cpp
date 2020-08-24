@@ -1,9 +1,5 @@
-#include "singleGame.hpp"  
+#include "singleGame.hpp"
 
-SingleGame::SingleGame() {
+SingleGame::SingleGame() {}
 
-}
-
-SingleGame::~SingleGame() {
-
-}
+SingleGame::~SingleGame() {}

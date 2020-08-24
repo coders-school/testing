@@ -2,10 +2,7 @@
 
 class SingleGame {
 private:
-
 public:
-
-	SingleGame();
-	~SingleGame();
-
+    SingleGame();
+    ~SingleGame();
 };

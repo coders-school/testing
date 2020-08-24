@@ -2,6 +2,7 @@
 
 #include "fileHandler.hpp"
 
-TEST_CASE(){
+TEST_CASE()
+{
     REQUIRE(1 == 1);
 }

@@ -1,9 +1,5 @@
-#include "fileHandler.hpp"  
+#include "fileHandler.hpp"
 
-FileHandler::FileHandler() {
+FileHandler::FileHandler() {}
 
-}
-
-FileHandler::~FileHandler() {
-
-}
+FileHandler::~FileHandler() {}
