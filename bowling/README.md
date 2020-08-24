@@ -19,6 +19,7 @@ git rebase origin/develop
 </details>
 and check also if u have a good formatting of your code:
 <details>
+
 <summary>the right format </summary>
 ```
 BasedOnStyle: Chromium
@@ -32,7 +33,7 @@ AccessModifierOffset: -4
 AlignAfterOpenBracket: true
 BreakBeforeBraces: Stroustrup
 ```
-</derails>
+</details>
 
  1. Before start of doing a task, assignee yourself to it.
 
