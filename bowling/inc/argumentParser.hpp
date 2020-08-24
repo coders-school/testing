@@ -15,6 +15,7 @@ public:
 
     std::string getArgument(const ArgumentNumber argumentNumber);
     size_t getArgumentsNumber() { return argumentsNumber_; };
+    bool checkIfArgumentExists(const std::string& argument);
 
 private:
     std::vector<std::string> parsedArguments_{};

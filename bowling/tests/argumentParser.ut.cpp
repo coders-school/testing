@@ -178,3 +178,33 @@ SCENARIO("program arguments and their number should be returned after parsing", 
         }
     }
 }
+
+SCENARIO("program arguments are parsed and it is possible to check if argument was given", "argumentParser")
+{
+    int testArgc = 3;
+    const char* testArgv[] = {"programName", "argument_1", "argument_2", NULL};
+
+    GIVEN("argc = " << testArgc
+                    << " and argv = {\""
+                    << (testArgv[0] ? testArgv[0] : "") << "\", \""
+                    << (testArgv[1] ? testArgv[1] : "") << "\", \""
+                    << (testArgv[2] ? testArgv[2] : "") << "\"}")
+    {
+        WHEN("argumentParser object is created")
+        {
+            ArgumentParser testArgParser(testArgc, testArgv);
+            THEN("checkIfArgumentExists() returns true for existing arguments and false for not existing arguments")
+            {
+                REQUIRE(testArgParser.checkIfArgumentExists(testArgv[1]));
+                REQUIRE(testArgParser.checkIfArgumentExists(testArgv[2]));
+
+                REQUIRE(testArgParser.checkIfArgumentExists("argument_1"));
+                REQUIRE(testArgParser.checkIfArgumentExists("argument_2"));
+
+                REQUIRE_FALSE(testArgParser.checkIfArgumentExists(testArgv[0]));
+                REQUIRE_FALSE(testArgParser.checkIfArgumentExists("dummy"));
+                REQUIRE_FALSE(testArgParser.checkIfArgumentExists(""));
+            }
+        }
+    }
+}

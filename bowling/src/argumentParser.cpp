@@ -1,5 +1,7 @@
 #include "argumentParser.hpp"
 
+#include <algorithm>
+
 ArgumentParser::ArgumentParser(int argc, const char** argv)
 {
     parseArguments(argc, argv);
@@ -29,4 +31,13 @@ std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber)
         return {};
     }
     return parsedArguments_[static_cast<size_t>(argumentNumber)];
+}
+
+bool ArgumentParser::checkIfArgumentExists(const std::string& argument)
+{
+    auto foundIt = std::find(parsedArguments_.begin(), parsedArguments_.end(), argument);
+    if (foundIt != parsedArguments_.end()) {
+        return true;
+    }
+    return false;
 }
