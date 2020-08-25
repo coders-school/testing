@@ -2,6 +2,7 @@
 
 #include "fileHandler.hpp"
 
+#include <cstdio>
 #include <string>
 #include <utility>
 
@@ -25,5 +26,26 @@ SCENARIO("FileHandler object can be created for input", "FileHandler")
                 REQUIRE(testFileHandler.isFileOpened() == expectedIsFileOpened);
             }
         }
+    }
+}
+
+SCENARIO("FileHandler object can be created for output", "FileHandler")
+{
+    auto [testFileName, expectedIsFileOpened] =
+        GENERATE(std::make_pair("testDirectory/testOutputFile.txt", true),
+                 std::make_pair("", false));
+
+    GIVEN("File name: " << testFileName)
+    {
+        WHEN("FileHandler object is created")
+        {
+            FileHandler testFileHandler(testFileName, Access::OUTPUT);
+            THEN("File is opened for write")
+            {
+                REQUIRE(testFileHandler.isFileOpened() == expectedIsFileOpened);
+            }
+        }
+        //cleanup after test
+        std::remove(testFileName);
     }
 }

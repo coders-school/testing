@@ -11,7 +11,6 @@ FileHandler::FileHandler(std::string fileName, FileHandler::FileAccess fileAcces
     else {
         fileStream_.open(fileName_, std::ios::out);
     }
-    std::cout << "is file opened? " << isFileOpened() << '\n';
 }
 
 FileHandler::~FileHandler()
