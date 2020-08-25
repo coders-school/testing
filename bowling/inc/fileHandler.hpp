@@ -15,6 +15,7 @@ public:
     ~FileHandler();
 
     bool isFileOpened() { return fileStream_.is_open(); };
+    std::string readLine();
 
 private:
     std::string fileName_{};

@@ -19,3 +19,19 @@ FileHandler::~FileHandler()
         fileStream_.close();
     }
 }
+
+std::string FileHandler::readLine()
+{
+    if (!isFileOpened() || (fileAccess_ != FileAccess::INPUT)) {
+        return {};
+    }
+
+    std::string lineReadFromFile{};
+    do {
+        if (!std::getline(fileStream_, lineReadFromFile)) {
+            return {};
+        }
+    } while (lineReadFromFile.empty());
+
+    return lineReadFromFile;
+}
