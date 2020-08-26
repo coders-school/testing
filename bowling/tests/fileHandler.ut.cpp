@@ -2,7 +2,7 @@
 
 #include "fileHandler.hpp"
 
-#include <cstdio>
+#include <filesystem>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -64,7 +64,7 @@ SCENARIO("FileHandler object can be created for output", "FileHandler")
             }
         }
         //cleanup after test
-        std::remove(testFileName);
+        std::filesystem::remove(testFileName);
     }
 }
 
@@ -204,27 +204,30 @@ SCENARIO("FileHandler object can be created for output and lines can be write to
     {
         WHEN("FileHandler object is created, with OUTPUT flag")
         {
-            THEN("File is opened for write and lines can be write to file")
+            THEN("File is opened for write and lines can be write to file. Then file can be opened for read and lines can be read.")
             {
-                FileHandler testFileHandler(testFileName, Access::OUTPUT);
-                REQUIRE(testFileHandler.isFileOpened() == expectedIsFileOpened);
+                {
+                    FileHandler testFileHandlerOut(testFileName, Access::OUTPUT);
+                    REQUIRE(testFileHandlerOut.isFileOpened() == expectedIsFileOpened);
 
-                for (auto el : expectedLinesToWrite) {
-                    REQUIRE(testFileHandler.write(el + '\n'));
+                    for (auto el : expectedLinesToWrite) {
+                        REQUIRE(testFileHandlerOut.write(el + '\n'));
+                    }
+                }
+                {
+                    FileHandler testFileHandlerIn(testFileName, Access::INPUT);
+                    REQUIRE(testFileHandlerIn.isFileOpened() == expectedIsFileOpened);
+
+                    REQUIRE_THAT(testFileHandlerIn.readLine(), Equals(expectedLinesToWrite[0]));
+                    REQUIRE_THAT(testFileHandlerIn.readLine(), Equals(expectedLinesToWrite[1]));
+                    REQUIRE_THAT(testFileHandlerIn.readLine(), Equals(expectedLinesToWrite[2]));
+                    REQUIRE_THAT(testFileHandlerIn.readLine(), Equals(expectedEmpty));
+                    REQUIRE_THAT(testFileHandlerIn.readLine(), Equals(expectedEmpty));
+                    REQUIRE_THAT(testFileHandlerIn.readLine(), Equals(expectedEmpty));
                 }
             }
-            AND_THEN("File is opened for read and lines can be read from this file")
-            {
-                FileHandler testFileHandler(testFileName, Access::INPUT);
-                REQUIRE(testFileHandler.isFileOpened() == expectedIsFileOpened);
-
-                REQUIRE_THAT(testFileHandler.readLine(), Equals(expectedLinesToWrite[0]));
-                REQUIRE_THAT(testFileHandler.readLine(), Equals(expectedLinesToWrite[1]));
-                REQUIRE_THAT(testFileHandler.readLine(), Equals(expectedLinesToWrite[2]));
-                REQUIRE_THAT(testFileHandler.readLine(), Equals(expectedEmpty));
-                REQUIRE_THAT(testFileHandler.readLine(), Equals(expectedEmpty));
-                REQUIRE_THAT(testFileHandler.readLine(), Equals(expectedEmpty));
-            }
+            //cleanup after test
+            std::filesystem::remove(testFileName);
         }
     }
 }

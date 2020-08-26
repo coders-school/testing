@@ -1,7 +1,5 @@
 #include "fileHandler.hpp"
 
-#include <iostream>
-
 FileHandler::FileHandler(std::string fileName, FileHandler::FileAccess fileAccess)
     : fileName_(fileName), fileAccess_(fileAccess)
 {
