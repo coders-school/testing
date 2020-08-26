@@ -5,11 +5,7 @@
 #include <algorithm>
 
 using Catch::Matchers::Equals;
-
-bool isStringInVector(const std::vector<std::string>& vec, const std::string& input)
-{
-    return (std::find(vec.begin(), vec.end(), input) != vec.end());
-}
+using Catch::Matchers::VectorContains;
 
 // This scenario may fail under github CI, because it is not possible to commit empty directory
 // in git. Scenario marked with tag: [!mayfail]
@@ -67,8 +63,7 @@ SCENARIO("DirectoryHandler object created for directory containing three files",
                 REQUIRE(testDirectoryHandler.getFilesInDirectory().size() == 3);
 
                 for (auto& el : expectedFilesInDirectory) {
-                    REQUIRE(isStringInVector(testDirectoryHandler.getFilesInDirectory(),
-                                             el));
+                    REQUIRE_THAT(testDirectoryHandler.getFilesInDirectory(), VectorContains(el));
                 }
             }
         }
