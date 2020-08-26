@@ -13,9 +13,9 @@ public:
     ArgumentParser(int argc, const char** argv);
     ArgumentParser() = delete;
 
-    std::string getArgument(const ArgumentNumber argumentNumber);
-    size_t getArgumentsNumber() { return argumentsNumber_; };
-    bool checkIfArgumentExists(const std::string& argument);
+    std::string getArgument(const ArgumentNumber argumentNumber) const;
+    size_t getArgumentsNumber() const { return argumentsNumber_; };
+    bool checkIfArgumentExists(const std::string& argument) const;
 
 private:
     std::vector<std::string> parsedArguments_{};
