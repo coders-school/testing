@@ -10,7 +10,7 @@ private:
     std::string playerName_{};
     std::vector<size_t> rolls_{};
     size_t score_{};
-    
+
     enum class GameStatus {
         FINISHED,
         IN_PROGRESS,
@@ -26,11 +26,14 @@ private:
     void countScore();
 
 public:
-    SingleGame(std::string& gameInput);
+    SingleGame(std::string gameInput);
     ~SingleGame();
+
+    void setPlayerName(std::string playerName);
 
     std::string getPlayerName() const;
     size_t getScore() const;
+    std::string getGameInput() const;
     enum GameStatus getGameStatus() const;
     friend std::ostream& operator<<(std::ostream& os, const SingleGame& singleGame);
 };
