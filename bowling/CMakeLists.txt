@@ -23,7 +23,7 @@ set(TESTS
     tests/lane.ut.cpp
     tests/singleGame.ut.cpp)
 
-set(FLAGS -Wall -Wextra -pedantic -Wconversion -Werror -O3 -std=c++17 -lstdc++fs)
+set(FLAGS -Wall -Wextra -pedantic -Wconversion -Werror -O3 -std=c++17)
 
 include_directories(inc)
 
