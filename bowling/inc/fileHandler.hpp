@@ -14,7 +14,7 @@ public:
     FileHandler() = delete;
     ~FileHandler();
 
-    bool isFileOpened() { return fileStream_.is_open(); };
+    bool isFileOpened() const { return fileStream_.is_open(); };
     std::string readLine();
     bool write(std::string dataToWrite);
 
