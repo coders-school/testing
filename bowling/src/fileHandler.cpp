@@ -35,3 +35,13 @@ std::string FileHandler::readLine()
 
     return lineReadFromFile;
 }
+
+bool FileHandler::write(std::string dataToWrite)
+{
+    if (!isFileOpened() || (fileAccess_ != FileAccess::OUTPUT)) {
+        return false;
+    }
+
+    fileStream_ << dataToWrite;
+    return true;
+}

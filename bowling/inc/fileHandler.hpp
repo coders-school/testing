@@ -16,6 +16,7 @@ public:
 
     bool isFileOpened() { return fileStream_.is_open(); };
     std::string readLine();
+    bool write(std::string dataToWrite);
 
 private:
     std::string fileName_{};
