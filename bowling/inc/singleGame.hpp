@@ -33,6 +33,7 @@ public:
     void setRolls(std::size_t point);
     void setPlayerName(std::string playerName);
     void setBowlingSigns(std::string bowlingSigns);
+    void makePointsFromSigns();
 
     std::string getPlayerName() const;
     std::string getBowlingSings() const;

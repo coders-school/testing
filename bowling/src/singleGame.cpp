@@ -38,26 +38,7 @@ void SingleGame::putScoresToVector()
         setBowlingSigns(getGameInput().substr(++foundIndexAfterName));
     }
 
-    const size_t MAXPOINT = 10;
-    const size_t NOPOINT = 0;
-
-    for (auto sign : getBowlingSings()) {
-        if (sign == '|') {
-            continue;
-        }
-        if (sign == 'X') {
-            setRolls(MAXPOINT);
-        }
-        if (sign == '/') {
-            setRolls(MAXPOINT - (getRolls().back()));
-        }
-        if (sign == '-') {
-            setRolls(NOPOINT);
-        }
-        if (std::isdigit(sign)) {
-            setRolls(sign - '0');
-        }
-    }
+    makePointsFromSigns();
 }
 
 void SingleGame::checkGameStatus() {}
@@ -82,6 +63,30 @@ std::string SingleGame::getPlayerName() const
 void SingleGame::setBowlingSigns(std::string bowlingSigns)
 {
     this->bowlingSigns_ = bowlingSigns;
+}
+
+void SingleGame::makePointsFromSigns()
+{
+    const size_t MAXPOINT = 10;
+    const size_t NOPOINT = 0;
+
+    for (auto sign : getBowlingSings()) {
+        if (sign == '|') {
+            continue;
+        }
+        if (sign == 'X') {
+            setRolls(MAXPOINT);
+        }
+        if (sign == '/') {
+            setRolls(MAXPOINT - (getRolls().back()));
+        }
+        if (sign == '-') {
+            setRolls(NOPOINT);
+        }
+        if (std::isdigit(sign)) {
+            setRolls(sign - '0');
+        }
+    }
 }
 
 std::string SingleGame::getBowlingSings() const
