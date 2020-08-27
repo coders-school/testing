@@ -30,6 +30,7 @@ public:
     SingleGame(std::string gameInput);
     ~SingleGame();
 
+    void setRolls(std::size_t point);
     void setPlayerName(std::string playerName);
     void setBowlingSigns(std::string bowlingSigns);
 

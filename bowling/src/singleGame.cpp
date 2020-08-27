@@ -31,61 +31,43 @@ void SingleGame::readPlayerName()
     }
 }
 
-void SingleGame::putScoresToVector() {
-
+void SingleGame::putScoresToVector()
+{
     auto foundIndexAfterName = getGameInput().find(':');
     if (foundIndexAfterName != std::string::npos) {
         setBowlingSigns(getGameInput().substr(++foundIndexAfterName));
     }
-    std::cout << "BowlingSigns " << getBowlingSings() << "\n";
 
-    for(auto sign : getBowlingSings()) {
-        if(sign == '|'){
+    const size_t MAXPOINT = 10;
+    const size_t NOPOINT = 0;
+
+    for (auto sign : getBowlingSings()) {
+        if (sign == '|') {
             continue;
         }
-        if(sign == 'X'){
-            rolls_.push_back(10);
+        if (sign == 'X') {
+            setRolls(MAXPOINT);
         }
-        if(sign == '/'){
-            rolls_.push_back(10 - (rolls_.back()));
+        if (sign == '/') {
+            setRolls(MAXPOINT - (getRolls().back()));
         }
-        if(sign == '-') {
-            rolls_.push_back(0);
+        if (sign == '-') {
+            setRolls(NOPOINT);
         }
-        if(sign == '1') {
-            rolls_.push_back(1);
-        }
-        if(sign == '2') {
-            rolls_.push_back(2);
-        }
-        if(sign == '3') {
-            rolls_.push_back(3);
-        }
-        if(sign == '4') {
-            rolls_.push_back(4);
-        }
-        if(sign == '5') {
-            rolls_.push_back(5);
-        }
-        if(sign == '6') {
-            rolls_.push_back(6);
-        }
-        if(sign == '7') {
-            rolls_.push_back(7);
-        }
-        if(sign == '8') {
-            rolls_.push_back(8);
-        }
-        if(sign == '9') {
-            rolls_.push_back(9);
+        if (std::isdigit(sign)) {
+            setRolls(sign - '0');
         }
     }
-    
 }
 
 void SingleGame::checkGameStatus() {}
 
 void SingleGame::countScore() {}
+
+void SingleGame::setRolls(std::size_t point)
+{
+    this->rolls_.push_back(point);
+}
 
 void SingleGame::setPlayerName(std::string playerName)
 {
@@ -101,7 +83,6 @@ void SingleGame::setBowlingSigns(std::string bowlingSigns)
 {
     this->bowlingSigns_ = bowlingSigns;
 }
-
 
 std::string SingleGame::getBowlingSings() const
 {
