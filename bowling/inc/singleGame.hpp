@@ -5,18 +5,19 @@
 #include <vector>
 
 class SingleGame {
+public:
+    enum class GameStatus {
+        FINISHED,
+        IN_PROGRESS,
+        NOT_STARTED
+    };
+
 private:
     std::string gameInput_{};
     std::string playerName_{};
     std::string bowlingSigns_{};
     std::vector<size_t> rolls_{};
     size_t score_{};
-
-    enum class GameStatus {
-        FINISHED,
-        IN_PROGRESS,
-        NOT_STARTED
-    };
 
     GameStatus gameStatus_{};
 
@@ -25,6 +26,8 @@ private:
     void putScoresToVector();
     void checkGameStatus();
     void countScore();
+    bool isGameFinished();
+    bool isGameNotStarted();
 
 public:
     SingleGame(std::string gameInput);
@@ -40,6 +43,6 @@ public:
     std::vector<std::size_t> getRolls() const;
     std::size_t getScore() const;
     std::string getGameInput() const;
-    enum GameStatus getGameStatus() const;
+    GameStatus getGameStatus() const { return gameStatus_; };
     friend std::ostream& operator<<(std::ostream& os, const SingleGame& singleGame);
 };

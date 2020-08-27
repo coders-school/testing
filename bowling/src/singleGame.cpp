@@ -41,7 +41,53 @@ void SingleGame::putScoresToVector()
     makePointsFromSigns();
 }
 
-void SingleGame::checkGameStatus() {}
+bool SingleGame::isGameFinished()
+{
+    const auto foundIndexOfBonus = getBowlingSings().find("||");
+    if (foundIndexOfBonus == std::string::npos) {
+        return false;
+    }
+    else {
+        const auto rollsBeforeBonus = getBowlingSings().substr(0, foundIndexOfBonus);
+        const auto foundIndexOfLastFrameStart = rollsBeforeBonus.rfind('|');
+        const auto lengthOfLastFrame = foundIndexOfBonus - foundIndexOfLastFrameStart - 1;
+        const auto rollsInLastFrame = getBowlingSings().substr(foundIndexOfLastFrameStart + 1, lengthOfLastFrame);
+        const auto numberOfBonusPoints = getBowlingSings().length() - (foundIndexOfBonus + 2);
+
+        if (rollsInLastFrame[0] == 'X' &&
+            numberOfBonusPoints == 2) {
+            return true;
+        }
+        else if (rollsInLastFrame[1] == '/' &&
+                 numberOfBonusPoints == 1) {
+            return true;
+        }
+        else if (rollsInLastFrame[0] != 'X' &&
+                 rollsInLastFrame[1] != '/' &&
+                 numberOfBonusPoints == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool SingleGame::isGameNotStarted()
+{
+    return getBowlingSings().empty();
+}
+
+void SingleGame::checkGameStatus()
+{
+    if (isGameNotStarted()) {
+        gameStatus_ = SingleGame::GameStatus::NOT_STARTED;
+    }
+    else if (isGameFinished()) {
+        gameStatus_ = SingleGame::GameStatus::FINISHED;
+    }
+    else {
+        gameStatus_ = SingleGame::GameStatus::IN_PROGRESS;
+    }
+}
 
 void SingleGame::countScore() {}
 
@@ -107,9 +153,4 @@ std::size_t SingleGame::getScore() const
 std::string SingleGame::getGameInput() const
 {
     return gameInput_;
-}
-
-enum SingleGame::GameStatus SingleGame::getGameStatus() const
-{
-    return gameStatus_;
 }
