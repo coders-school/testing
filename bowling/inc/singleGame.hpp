@@ -26,6 +26,9 @@ private:
     void putScoresToVector();
     void checkGameStatus();
     void countScore();
+    bool isBowlingGameInput();
+    void eraseSpaces();
+    bool isNotAllowedChar();
     bool isGameFinished();
     bool isGameNotStarted();
 
@@ -35,11 +38,12 @@ public:
 
     void setRolls(std::size_t point);
     void setPlayerName(std::string playerName);
+    void setGameInput (std::string gameInput);
     void setBowlingSigns(std::string bowlingSigns);
     void makePointsFromSigns();
 
     std::string getPlayerName() const;
-    std::string getBowlingSings() const;
+    std::string getBowlingSigns() const;
     std::vector<std::size_t> getRolls() const;
     std::size_t getScore() const;
     std::string getGameInput() const;
