@@ -35,7 +35,7 @@ bool SingleGame::isBowlingGameInput()
         return false;
     }
 
-    if (!isNotAllowedChar()) {
+    if (isNotAllowedChar()) {
         return false;
     }
 
@@ -59,16 +59,16 @@ bool SingleGame::isNotAllowedChar()
     auto foundIndexAfterName = gameInput.find(':');
 
      if (getGameInput() == ":") {
-         return false;
+         return true;
      }
 
     if (foundIndexAfterName != std::string::npos) {
         auto foundNotAllowedCharacter = gameInput.find_first_not_of(ALLOWEDCHARACTERS, ++foundIndexAfterName);
         if (foundNotAllowedCharacter != std::string::npos) {
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 void SingleGame::readPlayerName()
