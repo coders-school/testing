@@ -35,6 +35,9 @@ private:
 
     bool isStrike(size_t firstInFrame);
     bool isSpare(size_t firstInFrame);
+    size_t getBonusPointsForStrike(size_t firstInFrame);
+    size_t getBonusPointsForSpare(size_t firstInFrame);
+    size_t getPointsForRegularGame(size_t firstInFrame);
 
 public:
     SingleGame(std::string gameInput);

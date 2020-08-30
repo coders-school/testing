@@ -149,9 +149,47 @@ bool SingleGame::isSpare(size_t firstInFrame)
     if (((firstInFrame + 1) < rolls_.size())) {
         return ((rolls_[firstInFrame] + rolls_[firstInFrame + 1]) == 10);
     }
-    else {
-        return false;
+
+    return false;
+}
+
+size_t SingleGame::getBonusPointsForStrike(size_t firstInFrame)
+{
+    const auto numberOfRollsInGame = rolls_.size();
+    size_t bonusPoints{};
+
+    if ((firstInFrame + 1) < numberOfRollsInGame) {
+        bonusPoints += rolls_[firstInFrame + 1];
     }
+    if ((firstInFrame + 2) < numberOfRollsInGame) {
+        bonusPoints += rolls_[firstInFrame + 2];
+    }
+
+    return bonusPoints;
+}
+
+size_t SingleGame::getBonusPointsForSpare(size_t firstInFrame)
+{
+    const auto numberOfRollsInGame = rolls_.size();
+    size_t bonusPoints{};
+
+    if ((firstInFrame + 2) < numberOfRollsInGame) {
+        bonusPoints += rolls_[firstInFrame + 2];
+    }
+    return bonusPoints;
+}
+
+size_t SingleGame::getPointsForRegularGame(size_t firstInFrame)
+{
+    const auto numberOfRollsInGame = rolls_.size();
+    size_t bonusPoints{};
+
+    bonusPoints += rolls_[firstInFrame];
+    if ((firstInFrame + 1) < numberOfRollsInGame) {
+        bonusPoints += rolls_[firstInFrame + 1];
+    }
+
+    return bonusPoints;
 }
 
 void SingleGame::countScore()
@@ -162,27 +200,15 @@ void SingleGame::countScore()
 
     for (size_t i = 0; i < 10 && firstInFrame < numberOfRollsInGame; ++i) {
         if (isStrike(firstInFrame)) {
-            score += 10;
-            if ((firstInFrame + 1) < numberOfRollsInGame) {
-                score += rolls_[firstInFrame + 1];
-            }
-            if ((firstInFrame + 2) < numberOfRollsInGame) {
-                score += rolls_[firstInFrame + 2];
-            }
+            score += 10 + getBonusPointsForStrike(firstInFrame);
             firstInFrame++;
         }
         else if (isSpare(firstInFrame)) {
-            score += 10;
-            if ((firstInFrame + 2) < numberOfRollsInGame) {
-                score += rolls_[firstInFrame + 2];
-            }
+            score += 10 + getBonusPointsForSpare(firstInFrame);
             firstInFrame += 2;
         }
         else {
-            score += rolls_[firstInFrame];
-            if ((firstInFrame + 1) < numberOfRollsInGame) {
-                score += rolls_[firstInFrame + 1];
-            }
+            score += getPointsForRegularGame(firstInFrame);
             firstInFrame += 2;
         }
     }
