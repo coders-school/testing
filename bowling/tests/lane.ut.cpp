@@ -45,16 +45,18 @@ SCENARIO("Lane class should take files and make games", "[creating lane object]"
 {
     GIVEN("Argument as a name of file")
     {
-        std::string n = "lane";
-
+        std::string n = "emptyFile.txt";
+        std::string n2 = "lane1.txt";
         WHEN("Lane object is creating")
         {
             Lane lane(n);
-
+            Lane lane(2);
+            Lane lane(n);
             THEN("Value laneName_ is equal to filename without extension")
             {
                 REQUIRE(1 == 1);
                 std::cout << lane;
+                std::cout << lane2;            
             }
         }
     }
