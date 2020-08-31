@@ -118,3 +118,10 @@ TEST_F(GameTests, getGameStatusShouldReturnInProgressWhenFramesAreNotFull) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::IN_PROGRESS);
 }
+
+TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
+    file << "Robcio:12|27|X|1/|22|11|0-|0-|12|0-|\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
+}
