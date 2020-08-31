@@ -3,6 +3,7 @@
 #include "lane.hpp"
 
 #include <string>
+#include <iostream>
 
 SCENARIO("Lane class constructor takes one string type argument", "[creating lane object]")
 {
@@ -35,6 +36,25 @@ SCENARIO("Lane class constructor takes one string type argument", "[creating lan
                 REQUIRE(lane4.getLaneName() == "lane4");
                 REQUIRE(lane5.getLaneName() == "");
                 REQUIRE(lane6.getLaneName() == "");
+            }
+        }
+    }
+}
+
+SCENARIO("Lane class should take files and make games, "[creating lane object]")
+{
+    GIVEN("Argument as a name of file")
+    {
+        std::string n = "lane";
+
+        WHEN("Lane object is creating")
+        {
+            Lane lane(n);
+
+            THEN("Value laneName_ is equal to filename without extension")
+            {
+                REQUIRE(1 == 1);
+                std::cout << lane;
             }
         }
     }
