@@ -1,5 +1,5 @@
 #include "lane.hpp"
-#include <iostream>
+
 #include <filesystem>
 #include <string>
 
@@ -9,7 +9,6 @@ void Lane::parseFile(std::string fileName) {
     FileHandler file(fileName,Access::INPUT);
     std::string line = file.readLine();
     while(line != "") {
-        std::cout << line <<'n';
         gamesInLine_.emplace_back(SingleGame(line));
         line = file.readLine();
     } 
