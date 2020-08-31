@@ -41,7 +41,7 @@ SCENARIO("Lane class constructor takes one string type argument", "[creating lan
     }
 }
 
-SCENARIO("Lane class should take files and make games, "[creating lane object]")
+SCENARIO("Lane class should take files and make games", "[creating lane object]")
 {
     GIVEN("Argument as a name of file")
     {
