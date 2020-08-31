@@ -107,6 +107,11 @@ TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
     EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
 }
 
+std::ostream& operator<<(std::ostream& os, Game::Status status) {
+    os << static_cast<int>(status);
+    return os;
+}
+
 TEST_F(GameTests, getGameStatusShouldReturnNoGameWhenFileIsEmpty) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::NO_GAME);
@@ -120,7 +125,7 @@ TEST_F(GameTests, getGameStatusShouldReturnInProgressWhenFramesAreNotFull) {
 }
 
 TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
-    file << "Robcio:12|27|X|1/|22|11|0-|0-|12|0-|\n";
+    file << "Robcio:12|27|X|1/|22|11|0-|0-|12|0-||\n";
     file.flush();
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
