@@ -3,6 +3,7 @@
 #include "lane.hpp"
 
 #include <string>
+#include <iostream>
 
 SCENARIO("Lane class constructor takes one string type argument", "[creating lane object]")
 {
