@@ -7,9 +7,11 @@
 
 void Lane::parseFile(std::string fileName) {
     FileHandler file(fileName,Access::INPUT);
-    if(file.readLine() == "") {
-        gamesInLine_.emplace_back(SingleGame(""));
-    }    
+    std::string line;
+    do {
+        line = file.readLine();
+        gamesInLine_.emplace_back(SingleGame(line));
+    } while(line == "");
 }
 
 void Lane::parseLaneName(std::string fileName) {
