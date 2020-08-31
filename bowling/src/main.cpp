@@ -10,8 +10,7 @@
 
 namespace fs = std::filesystem;
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     const fs::path pathToShow{argc >= 2 ? argv[1] : fs::current_path()};
     std::vector<std::string> test{};
 
@@ -19,11 +18,9 @@ int main(int argc, char** argv)
         const auto filenameStr = entry.path().filename().string();
         if (entry.is_directory()) {
             std::cout << "dir:  " << filenameStr << '\n';
-        }
-        else if (entry.is_regular_file()) {
+        } else if (entry.is_regular_file()) {
             std::cout << "file: " << filenameStr << '\n';
-        }
-        else
+        } else
             std::cout << "??    " << filenameStr << '\n';
 
         test.push_back(filenameStr);
@@ -42,6 +39,17 @@ int main(int argc, char** argv)
             std::cout << el << '\n';
         }
         std::cout << "\n\nMy 2 end\n\n";
+    }
+
+    BowlingGame bg(argc, (const char**)argv);
+
+    if (bg.isHelpToBePrinted() == true) {
+        std::cout << bg.printHelp() << "\n";
+    }
+
+    if (argc >= 2) {
+        bg.calculateScores();
+        bg.outputScores();
     }
 
     return 0;
