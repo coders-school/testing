@@ -48,7 +48,7 @@ std::ostream& operator<<(std::ostream& os, const Lane& lane)
         os << "no game";
     } else {
         bool finished = true;
-        for(auto el : gamesInLine_) {
+        for(auto el : lane.gamesInLine_) {
             if(el.getGameStatus() == SingleGame::GameStatus::IN_PROGRESS) {
                 finished = false;
                 playerScore << el;
