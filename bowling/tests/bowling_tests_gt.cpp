@@ -107,6 +107,25 @@ TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
     EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
 }
 
+TEST_F(GameTests, loadFromFileShouldNotAddEmptyFrameWhenThereAreNoExtraRolls) {
+    std::vector<Frame> expectedPlayerRolls{
+        {'1', '2'},
+        {'3', '4'},
+        {'5', '6'},
+        {'7', '8'},
+        {'9', '9'},
+        {'X', ' '},
+        {'0', '-'},
+        {'5', '/'},
+        {'5', '4'},
+        {'X', ' '},
+    };
+    file << "Name:12|34|56|78|99|X|0-|5/|54|X||\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
+}
+
 std::ostream& operator<<(std::ostream& os, Game::Status status) {
     os << static_cast<int>(status);
     return os;
