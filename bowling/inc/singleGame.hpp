@@ -22,13 +22,15 @@ private:
     GameStatus gameStatus_{};
 
     void parseGameInput();
-    void readPlayerName();
     void putScoresToVector();
     void checkGameStatus();
     void countScore();
-    bool isBowlingGameInput();
+    bool isNotPlayerName();
+    bool isNotBowlingSigns();
+    bool isNotBowlingGameInput();
     void eraseSpaces();
     bool isNotAllowedChar();
+    bool isNotBowlingOrder();
 
     bool isGameFinished();
     bool isGameNotStarted();

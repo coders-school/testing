@@ -7,7 +7,7 @@ SingleGame::SingleGame(std::string gameInput)
     setGameInput(gameInput);
     eraseSpaces();
 
-    if (!(this->isBowlingGameInput() || getGameInput().empty())) {
+    if (this->isNotBowlingGameInput()) {
         std::string badInput = "";
         setGameInput(badInput);
     }
@@ -20,27 +20,32 @@ SingleGame::~SingleGame() {}
 
 void SingleGame::parseGameInput()
 {
-    this->readPlayerName();
     this->putScoresToVector();
     this->checkGameStatus();
 }
 
-bool SingleGame::isBowlingGameInput()
+bool SingleGame::isNotBowlingGameInput()
 {
-    auto foundIndexAfterName = getGameInput().find(':');
-
-    if (foundIndexAfterName != std::string::npos) {
-        setBowlingSigns(getGameInput().substr(++foundIndexAfterName));
+    if (getGameInput().empty()) {
+        return true;
     }
-    else {
-        return false;
+
+    if (isNotPlayerName()) {
+        return true;
+    }
+
+    if (isNotBowlingSigns()) {
+        return true;
     }
 
     if (isNotAllowedChar()) {
-        return false;
+        return true;
     }
 
-    return true;
+    if (isNotBowlingOrder()) {
+        return true;
+    }
+    return false;
 }
 
 void SingleGame::eraseSpaces()
@@ -72,7 +77,62 @@ bool SingleGame::isNotAllowedChar()
     return false;
 }
 
-void SingleGame::readPlayerName()
+bool SingleGame::isNotBowlingOrder()
+{
+    std::string bowlingSigns = getBowlingSigns();
+
+    size_t ballThrows = 1;
+    bool expectedPipe = false;
+    bool expectedSecondPipe = false;
+
+    for (auto sign : bowlingSigns) {
+        if (expectedSecondPipe) {
+            expectedSecondPipe = false;
+            expectedPipe = false;
+            continue;
+        }
+
+        if (expectedPipe && (sign == '|')) {
+            if (ballThrows == 21) {
+                expectedSecondPipe = true;
+                expectedPipe = false;
+                continue;
+            }
+            else {
+                expectedPipe = false;
+                continue;
+            }
+            return true;
+        }
+
+        if (ballThrows % 2) {
+            if ((std::isdigit(sign) || sign == 'X' || sign == '-') && (!expectedPipe)) {
+                if (sign == 'X') {
+                    if (ballThrows != 21) {
+                        expectedPipe = true;
+                    }
+                    ballThrows++;
+                }
+                ballThrows++;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            if ((std::isdigit(sign) || sign == '/' || sign == '-') && (!expectedPipe)) {
+                ballThrows++;
+                expectedPipe = true;
+            }
+            else {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool SingleGame::isNotPlayerName()
 {
     auto foundIndexAfterName = getGameInput().find(':');
     if (foundIndexAfterName != std::string::npos) {
@@ -84,6 +144,23 @@ void SingleGame::readPlayerName()
             setPlayerName(anonymousPlayer);
         }
     }
+    else {
+        return true;
+    }
+    return false;
+}
+
+bool SingleGame::isNotBowlingSigns()
+{
+    auto foundIndexAfterName = getGameInput().find(':');
+
+    if (foundIndexAfterName != std::string::npos) {
+        setBowlingSigns(getGameInput().substr(++foundIndexAfterName));
+    }
+    else {
+        return true;
+    }
+    return false;
 }
 
 void SingleGame::putScoresToVector()

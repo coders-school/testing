@@ -188,7 +188,7 @@ SCENARIO("GameInput checker in SingleGame class")
         }
     }
 
-    GIVEN("Input of the game with fobidden signs after player Name")
+    GIVEN("Input of the game with fobidden signs after player name")
     {
         auto [gameInput, expectedInput] =
             GENERATE(
@@ -215,4 +215,35 @@ SCENARIO("GameInput checker in SingleGame class")
             }
         }
     }
+
+    GIVEN("Input of the game with bad bowling order")
+    {
+        auto [gameInput, expectedInput] =
+            GENERATE(
+                std::make_pair("", ""),
+                std::make_pair("Jan:", "Jan:"),
+                std::make_pair("Jan:1", "Jan:1"),
+                std::make_pair("Jan:11|", "Jan:11|"),
+                std::make_pair("Jan:1-|", "Jan:1-|"),
+                std::make_pair("Jan:12|12|12|12|12|12|12|12|12|12||", "Jan:12|12|12|12|12|12|12|12|12|12||"),
+                std::make_pair("Jan:-2|92|12|52|X|12|X|12|X|26||", "Jan:-2|92|12|52|X|12|X|12|X|26||"),
+                std::make_pair("Jan:X|7/|9-|X|-8|8/|-6|X|X|6-||8", "Jan:X|7/|9-|X|-8|8/|-6|X|X|6-||8"),
+                std::make_pair("Jan:X|7/|9-|X|-8|8/|-6|X|X|-4||X", "Jan:X|7/|9-|X|-8|8/|-6|X|X|-4||X"),
+                std::make_pair("Jan:X|X|X|X|X|X|X|X|X|X||XX", "Jan:X|X|X|X|X|X|X|X|X|X||XX"),
+                std::make_pair("Jan:--|6|--|--|--|--|--|--|--|--||", ""),
+                std::make_pair("Jan:--|--|--||--|--|--|--|--|--|--||", ""));
+
+        WHEN("Constructor called isBowlingGameInput() when game input is: " << gameInput)
+        {
+            SingleGame singleGame(gameInput);
+
+            THEN("If input has bad bowling order it shouldn't be initialized")
+
+            {
+                REQUIRE(singleGame.getGameInput() == expectedInput);
+            }
+        }
+    }
+
+    
 }
