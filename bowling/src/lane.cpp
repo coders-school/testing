@@ -8,10 +8,10 @@
 void Lane::parseFile(std::string fileName) {
     FileHandler file(fileName,Access::INPUT);
     std::string line;
-    do {
+    while(line != "") {
         line = file.readLine();
         gamesInLine_.emplace_back(SingleGame(line));
-    } while(line != "");
+    } 
 }
 
 void Lane::parseLaneName(std::string fileName) {
@@ -39,3 +39,13 @@ std::string Lane::getLaneName()
 {
     return laneName_;
 }
+
+std::ostream& operator<<(std::ostream& os, const Lane& lane)
+{
+    os << "### " << lane.getLaneName() <<": ";
+    if(lane.gamesInLine_.empty()) {
+        os << "no game";
+    }
+    return os;
+}
+
