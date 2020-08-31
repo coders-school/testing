@@ -1,5 +1,6 @@
 #include "Game.hpp"
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -60,5 +61,13 @@ bool Game::isSpare(char nextRoll) {
 }
 
 Game::Status Game::getGameStatus() {
-    return Game::Status::NO_GAME;
+    if (players.size() == 0) {
+        return Game::Status::NO_GAME;
+    }
+    if (std::any_of(players.begin(), players.end(), [](PlayerData& player) {
+            return player.rolls.size() != 10 || player.rolls.size() != 11;
+        })) {
+        return Game::Status::IN_PROGRESS;
+    }
+    return Game::Status::FINISHED;
 }
