@@ -32,3 +32,10 @@ std::string Lane::getLaneName()
 {
     return this->laneName_;
 }
+
+std::ostream& operator<<(std::ostream& os, const Lane& lane)
+{
+    (void)lane;
+    os << "test";
+    return os;
+}

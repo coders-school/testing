@@ -14,7 +14,8 @@ bool BowlingGame::isHelpToBePrinted()
 {
     const std::vector<std::string> printHelpParams{"-h", "--help"};
 
-    return std::any_of(printHelpParams.cbegin(), printHelpParams.cend(),
+    return (parser_.getArgumentsNumber() == 1) &&
+           std::any_of(printHelpParams.cbegin(), printHelpParams.cend(),
                        [this](auto& helpParam) {
                            return parser_.checkIfArgumentExists(helpParam);
                        });
@@ -22,7 +23,12 @@ bool BowlingGame::isHelpToBePrinted()
 
 namespace {
 std::string helpMessage =
-    "Search for help in documentation of our repository, have fun!!";
+    "BowlingGame <input directory> <output file>\n\
+This program can be used to calculate scores of the bowling game. It program takes two arguments :\n\
+\t<input directory> - input directory containing files with the games states on lanes\n\
+\t<output file> - optional, output file where scores can be stored. By default scores are printed on the screen.\n\n\
+BowlingGame -h or BowlingGame --help\n\
+\tprints this help\n\n";
 }
 
 std::string& BowlingGame::printHelp() const
@@ -73,7 +79,7 @@ bool BowlingGame::isInputDirectoryGiven()
 void BowlingGame::showScores()
 {
     for (auto& lane : lanes_) {
-        std::cout << lane;
+        std::cout << lane << '\n';
     }
 }
 
