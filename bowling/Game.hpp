@@ -45,4 +45,5 @@ class Game {
     Game(){};
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() { return players; };
+    Status getGameStatus();
 };

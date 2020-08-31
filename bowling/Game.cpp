@@ -58,3 +58,7 @@ bool Game::isStrike(char currentRoll) {
 bool Game::isSpare(char nextRoll) {
     return nextRoll == '/';
 }
+
+Game::Status Game::getGameStatus() {
+    return Game::Status::NO_GAME;
+}
