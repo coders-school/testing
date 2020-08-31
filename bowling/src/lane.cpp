@@ -11,7 +11,7 @@ void Lane::parseFile(std::string fileName) {
     do {
         line = file.readLine();
         gamesInLine_.emplace_back(SingleGame(line));
-    } while(line == "");
+    } while(line != "");
 }
 
 void Lane::parseLaneName(std::string fileName) {
