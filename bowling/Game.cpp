@@ -65,9 +65,14 @@ Game::Status Game::getGameStatus() {
         return Game::Status::NO_GAME;
     }
     if (std::any_of(players.begin(), players.end(), [](PlayerData& player) {
-            return player.rolls.size() != 10 || player.rolls.size() != 11;
+            return !(player.rolls.size() == 10 || player.rolls.size() == 11);
         })) {
         return Game::Status::IN_PROGRESS;
     }
-    return Game::Status::FINISHED;
+    if (std::all_of(players.begin(), players.end(), [](PlayerData& player) {
+            return player.rolls.size() == 10 || player.rolls.size() == 11;
+        })) {
+        return Game::Status::FINISHED;
+    }
+    return Game::Status::NO_GAME;
 }
