@@ -12,7 +12,7 @@ public:
     BowlingGame() = delete;
 
     bool isHelpToBePrinted();
-    void printHelp();
+    std::string& printHelp() const;
 
     void calculateScores();
     void outputScores();
