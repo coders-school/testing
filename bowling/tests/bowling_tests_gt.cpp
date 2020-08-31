@@ -108,6 +108,13 @@ TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
 }
 
 TEST_F(GameTests, getGameStatusShouldReturnNoGameWhenFileIsEmpty) {
+    game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::NO_GAME);
+}
 
+TEST_F(GameTests, getGameStatusShouldReturnInProgressWhenFramesAreNotFull) {
+    file << "Robcio:12|27|X\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::IN_PROGRESS);
 }
