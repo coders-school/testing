@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+using Access = FileHandler::FileAccess;
+
 class Lane {
 private:
     std::vector<SingleGame> gamesInLine_{};
