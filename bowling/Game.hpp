@@ -23,6 +23,14 @@ inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
 }
 
 class Game {
+   public:
+    enum class Status {
+        NO_GAME,
+        IN_PROGRESS,
+        FINISHED,
+    };
+
+   private:
     struct PlayerData {
         std::string name;
         std::vector<Frame> rolls;
