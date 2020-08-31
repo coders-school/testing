@@ -9,7 +9,7 @@ void Lane::parseFile(std::string fileName)
 
 }
 
-void Lane::parseLaneName(std::string laneName) {
+void Lane::parseLaneName(std::string fileName) {
     std::string fileExtension = std::filesystem::path(fileName).extension();
     std::size_t foundExtensionIndex = fileName.find(fileExtension);
 
