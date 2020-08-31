@@ -6,8 +6,7 @@
 BowlingGame::BowlingGame(int argc, const char** argv)
     : parser_(argc, argv) {}
 
-bool BowlingGame::isHelpToBePrinted()
-{
+bool BowlingGame::isHelpToBePrinted() {
     const std::vector<std::string> printHelpParams{"-h", "--help"};
 
     return std::any_of(printHelpParams.cbegin(), printHelpParams.cend(),
@@ -18,36 +17,29 @@ bool BowlingGame::isHelpToBePrinted()
 
 namespace {
 std::string helpMessage =
-    "HELP!\nHELP line2\n";
+    "Search for help in documentation of our repository, have fun!!";
 }
 
-std::string& BowlingGame::printHelp() const
-{
+std::string& BowlingGame::printHelp() const {
     return helpMessage;
 }
 
-void BowlingGame::calculateScores()
-{
+void BowlingGame::calculateScores() {
 }
 
-void BowlingGame::outputScores()
-{
+void BowlingGame::outputScores() {
 }
 
-std::string getOutputFileName()
-{
+std::string getOutputFileName() {
     return {};
 }
 
-bool isOutputFileGiven()
-{
+bool isOutputFileGiven() {
     return true;
 }
 
-void showScores()
-{
+void showScores() {
 }
 
-void saveScores()
-{
+void saveScores() {
 }
