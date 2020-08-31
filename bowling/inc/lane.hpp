@@ -22,6 +22,6 @@ public:
     Lane() = delete;
     ~Lane();
 
-    std::string getLaneName();
+    std::string getLaneName() const { return laneName_; };
     friend std::ostream& operator<<(std::ostream& os, const Lane& lane);
 };

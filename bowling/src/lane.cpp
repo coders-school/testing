@@ -35,14 +35,14 @@ Lane::Lane(std::string fileName)
 
 Lane::~Lane() {}
 
-std::string Lane::getLaneName()
+/*std::string Lane::getLaneName()
 {
     return laneName_;
-}
+}*/
 
 std::ostream& operator<<(std::ostream& os, const Lane& lane)
 {
-    os << "### " << lane.getLaneName() <<": ";
+    os << "### " << lane.getLaneName() << ": ";
     if(lane.gamesInLine_.empty()) {
         os << "no game";
     }
