@@ -1,15 +1,29 @@
 #include "bowlingGame.hpp"
 
+#include <algorithm>
+#include <iostream>
+
 BowlingGame::BowlingGame(int argc, const char** argv)
     : parser_(argc, argv) {}
 
 bool BowlingGame::isHelpToBePrinted()
 {
-    return true;
+    const std::vector<std::string> printHelpParams{"-h", "--help"};
+
+    return std::any_of(printHelpParams.cbegin(), printHelpParams.cend(),
+                       [this](auto& helpParam) {
+                           return parser_.checkIfArgumentExists(helpParam);
+                       });
 }
 
-void BowlingGame::printHelp()
+namespace {
+std::string helpMessage =
+    "HELP!\nHELP line2\n";
+}
+
+std::string& BowlingGame::printHelp() const
 {
+    return helpMessage;
 }
 
 void BowlingGame::calculateScores()
