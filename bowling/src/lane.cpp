@@ -4,9 +4,10 @@
 
 // private
 
-void Lane::parseFile(std::string fileName)
-{
-
+void Lane::parseFile(std::string fileName) {
+    /*vector <string> tokens;
+    stringstream check1(fileName);*/
+    FileHandler file(fileName,Access::INPUT);
 }
 
 void Lane::parseLaneName(std::string fileName) {
