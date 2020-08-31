@@ -13,7 +13,7 @@ void Lane::parseFile(std::string fileName)
         fileName.erase(foundExtensionIndex);
     }
 
-    this->laneName_ = fileName;
+    laneName_ = fileName;
 }
 
 void Lane::parseLaneName(std::string laneName) {}
@@ -22,13 +22,13 @@ void Lane::parseLaneName(std::string laneName) {}
 
 Lane::Lane(std::string fileName)
 {
-    this->parseFile(fileName);
-    this->parseLaneName(fileName);
+    parseFile(fileName);
+    parseLaneName(fileName);
 }
 
 Lane::~Lane() {}
 
 std::string Lane::getLaneName()
 {
-    return this->laneName_;
+    return laneName_;
 }
