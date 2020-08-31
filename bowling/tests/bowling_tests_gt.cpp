@@ -106,3 +106,8 @@ TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
 }
+
+TEST_F(GameTests, getGameStatusShouldReturnNoGameWhenFileIsEmpty) {
+    EXPECT_EQ(game.getGameStatus(), Game::Status)
+
+}
