@@ -1,15 +1,13 @@
 #include "lane.hpp"
 
 #include <filesystem>
-#include <sstream>
 #include <string>
 
 // private
 
 void Lane::parseFile(std::string fileName) {
     FileHandler file(fileName,Access::INPUT);
-    std::string line;
-    while (std::getline(fileName, line)) {
+    while (std::getline(file.readLine(), line)) {
         gamesInLine_.emplace_back(SingleGame(line));
     }
 }
