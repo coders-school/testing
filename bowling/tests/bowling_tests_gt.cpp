@@ -108,6 +108,6 @@ TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
 }
 
 TEST_F(GameTests, getGameStatusShouldReturnNoGameWhenFileIsEmpty) {
-    EXPECT_EQ(game.getGameStatus(), Game::Status)
+    EXPECT_EQ(game.getGameStatus(), Game::Status::NO_GAME);
 
 }
