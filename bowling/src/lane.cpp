@@ -43,7 +43,7 @@ Lane::~Lane() {}
 std::ostream& operator<<(std::ostream& os, const Lane& lane)
 {
     os << "### " << lane.getLaneName() << ": ";
-    std::ostream playerScore;
+    std::string playerScore;
     if(lane.gamesInLine_.empty()) {
         os << "no game";
     } else {
