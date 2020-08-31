@@ -35,11 +35,6 @@ Lane::Lane(std::string fileName)
 
 Lane::~Lane() {}
 
-/*std::string Lane::getLaneName()
-{
-    return laneName_;
-}*/
-
 std::ostream& operator<<(std::ostream& os, const Lane& lane)
 {
     os << "### " << lane.getLaneName() << ": ";
