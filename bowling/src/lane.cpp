@@ -43,24 +43,24 @@ Lane::~Lane() {}
 std::ostream& operator<<(std::ostream& os, const Lane& lane)
 {
     os << "### " << lane.getLaneName() << ": ";
-    std::string playerScore;
     if(lane.gamesInLine_.empty()) {
-        os << "no game";
+        os << "no game ###\n";
     } else {
         bool finished = true;
         for(auto el : lane.gamesInLine_) {
             if(el.getGameStatus() == SingleGame::GameStatus::IN_PROGRESS) {
                 finished = false;
-                playerScore << el;
             }
         }
         if(finished) {
-            os << "game finished";
+            os << "game finished ###\n";
         } else {
-            os << "game in progress";
+            os << "game in progress ###\n";
+        }
+       for(auto el : lane.gamesInLine_) {
+            os << el;
         }
     }
-    os << " ###\n" << playerScore;
     return os;
 }
 
