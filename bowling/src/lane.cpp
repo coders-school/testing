@@ -58,4 +58,3 @@ std::ostream& operator<<(std::ostream& os, const Lane& lane)
     }
     return os;
 }
-
