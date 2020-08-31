@@ -358,5 +358,6 @@ std::string SingleGame::getGameInput() const
 
 std::ostream& operator<<(std::ostream& os, const SingleGame& singleGame)
 {
-    print << singleGame.getPlayerName() << " " << singleGame.getScore() << '\n';
+    os << singleGame.getPlayerName() << " " << singleGame.getScore() << '\n';
+    return os;
 }
