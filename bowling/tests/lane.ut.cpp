@@ -50,8 +50,7 @@ SCENARIO("Lane class should take files and make games", "[creating lane object]"
         WHEN("Lane object is creating")
         {
             Lane lane(n);
-            Lane lane(2);
-            Lane lane(n);
+            Lane lane2(n2);
             THEN("Value laneName_ is equal to filename without extension")
             {
                 REQUIRE(1 == 1);
