@@ -7,7 +7,7 @@ SingleGame::SingleGame(std::string gameInput)
     setGameInput(gameInput);
     eraseSpaces();
 
-    if (this->isNotBowlingGameInput()) {
+    if (isNotBowlingGameInput()) {
         std::string badInput = "";
         setGameInput(badInput);
     }
@@ -20,8 +20,8 @@ SingleGame::~SingleGame() {}
 
 void SingleGame::parseGameInput()
 {
-    this->putScoresToVector();
-    this->checkGameStatus();
+    putScoresToVector();
+    checkGameStatus();
 }
 
 bool SingleGame::isNotBowlingGameInput()
@@ -294,22 +294,7 @@ void SingleGame::countScore()
 
 void SingleGame::setRolls(std::size_t point)
 {
-    this->rolls_.push_back(point);
-}
-
-void SingleGame::setPlayerName(std::string playerName)
-{
-    this->playerName_ = playerName;
-}
-
-std::string SingleGame::getPlayerName() const
-{
-    return this->playerName_;
-}
-
-void SingleGame::setBowlingSigns(std::string bowlingSigns)
-{
-    this->bowlingSigns_ = bowlingSigns;
+    rolls_.push_back(point);
 }
 
 void SingleGame::makePointsFromSigns()
@@ -334,26 +319,6 @@ void SingleGame::makePointsFromSigns()
             setRolls(sign - '0');
         }
     }
-}
-
-std::string SingleGame::getBowlingSigns() const
-{
-    return this->bowlingSigns_;
-}
-
-std::vector<std::size_t> SingleGame::getRolls() const
-{
-    return this->rolls_;
-}
-
-void SingleGame::setGameInput(std::string gameInput)
-{
-    this->gameInput_ = gameInput;
-}
-
-std::string SingleGame::getGameInput() const
-{
-    return gameInput_;
 }
 
 std::ostream& operator<<(std::ostream& os, const SingleGame& singleGame)
