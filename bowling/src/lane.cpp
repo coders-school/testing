@@ -9,7 +9,7 @@ void Lane::parseFile(std::string fileName)
 {
     FileHandler file(fileName, Access::INPUT);
     std::string line = file.readLine();
-    while (line != "") {
+    while (!line.empty()) {
         gamesInLine_.emplace_back(SingleGame(line));
         line = file.readLine();
     }
@@ -17,14 +17,7 @@ void Lane::parseFile(std::string fileName)
 
 void Lane::parseLaneName(std::string fileName)
 {
-    std::string fileExtension = std::filesystem::path(fileName).extension();
-    std::size_t foundExtensionIndex = fileName.find(fileExtension);
-
-    if (foundExtensionIndex != std::string::npos) {
-        fileName.erase(foundExtensionIndex);
-    }
-
-    laneName_ = fileName;
+    laneName_ = std::filesystem::path(fileName).filename().stem();
 }
 
 // public
