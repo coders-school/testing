@@ -5,16 +5,18 @@
 
 // private
 
-void Lane::parseFile(std::string fileName) {
-    FileHandler file(fileName,Access::INPUT);
+void Lane::parseFile(std::string fileName)
+{
+    FileHandler file(fileName, Access::INPUT);
     std::string line = file.readLine();
-    while(line != "") {
+    while (line != "") {
         gamesInLine_.emplace_back(SingleGame(line));
         line = file.readLine();
-    } 
+    }
 }
 
-void Lane::parseLaneName(std::string fileName) {
+void Lane::parseLaneName(std::string fileName)
+{
     std::string fileExtension = std::filesystem::path(fileName).extension();
     std::size_t foundExtensionIndex = fileName.find(fileExtension);
 
@@ -38,21 +40,23 @@ Lane::~Lane() {}
 std::ostream& operator<<(std::ostream& os, const Lane& lane)
 {
     os << "### " << lane.getLaneName() << ": ";
-    if(lane.gamesInLine_.empty()) {
+    if (lane.gamesInLine_.empty()) {
         os << "no game ###\n";
-    } else {
+    }
+    else {
         bool finished = true;
-        for(auto el : lane.gamesInLine_) {
-            if(el.getGameStatus() == SingleGame::GameStatus::IN_PROGRESS) {
+        for (auto el : lane.gamesInLine_) {
+            if (el.getGameStatus() == SingleGame::GameStatus::IN_PROGRESS) {
                 finished = false;
             }
         }
-        if(finished) {
+        if (finished) {
             os << "game finished ###\n";
-        } else {
+        }
+        else {
             os << "game in progress ###\n";
         }
-       for(auto el : lane.gamesInLine_) {
+        for (auto el : lane.gamesInLine_) {
             os << el;
         }
     }
