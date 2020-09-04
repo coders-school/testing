@@ -1,5 +1,6 @@
 #include "Game.hpp"
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -57,4 +58,21 @@ bool Game::isStrike(char currentRoll) {
 
 bool Game::isSpare(char nextRoll) {
     return nextRoll == '/';
+}
+
+Game::Status Game::getGameStatus() {
+    if (players.size() == 0) {
+        return Game::Status::NO_GAME;
+    }
+    if (std::any_of(players.begin(), players.end(), [](PlayerData& player) {
+            return !(player.rolls.size() == 10 || player.rolls.size() == 11);
+        })) {
+        return Game::Status::IN_PROGRESS;
+    }
+    if (std::all_of(players.begin(), players.end(), [](PlayerData& player) {
+            return player.rolls.size() == 10 || player.rolls.size() == 11;
+        })) {
+        return Game::Status::FINISHED;
+    }
+    return Game::Status::NO_GAME;
 }

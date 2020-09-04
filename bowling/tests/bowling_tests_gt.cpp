@@ -106,3 +106,44 @@ TEST_F(GameTests, loadFromFileShouldLoadExtraRolls) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
 }
+
+TEST_F(GameTests, loadFromFileShouldNotAddEmptyFrameWhenThereAreNoExtraRolls) {
+    std::vector<Frame> expectedPlayerRolls{{'1', '2'},
+                                           {'3', '4'},
+                                           {'5', '6'},
+                                           {'7', '8'},
+                                           {'9', '9'},
+                                           {'X', ' '},
+                                           {'0', '-'},
+                                           {'5', '/'},
+                                           {'5', '4'},
+                                           {'X', ' '}};
+    file << "Name:12|34|56|78|99|X|0-|5/|54|X||\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getPlayers()[0].rolls, expectedPlayerRolls);
+}
+
+std::ostream& operator<<(std::ostream& os, Game::Status status) {
+    os << static_cast<int>(status);
+    return os;
+}
+
+TEST_F(GameTests, getGameStatusShouldReturnNoGameWhenFileIsEmpty) {
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::NO_GAME);
+}
+
+TEST_F(GameTests, getGameStatusShouldReturnInProgressWhenFramesAreNotFull) {
+    file << "Robcio:12|27|X\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::IN_PROGRESS);
+}
+
+TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
+    file << "Robcio:12|27|X|1/|22|11|0-|0-|12|0-||\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
+}
