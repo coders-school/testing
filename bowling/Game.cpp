@@ -76,3 +76,7 @@ Game::Status Game::getGameStatus() {
     }
     return Game::Status::NO_GAME;
 }
+
+size_t Game::pointsCounting(PlayerData& data) {
+    return 1;
+}
