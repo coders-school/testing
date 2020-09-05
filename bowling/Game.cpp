@@ -79,12 +79,27 @@ Game::Status Game::getGameStatus() {
 
 size_t Game::countPoints(const std::vector<Frame>& rolls) {
     size_t totalPoints = 0;
+    bool wasStrike = false;
+    bool wasSpare = false;
+
     for (auto el : rolls) {
-        if (!isSpare(el.getSecondRoll())) {
-            if (!isStrike(el.getFirstRoll())) {
-                totalPoints += (el.getFirstRoll() + el.getSecondRoll());
-            }
+        if (wasStrike) {
+            totalPoints += (2 * el.getFirstRoll() + 2 * el.getSecondRoll());
+            wasStrike = false;
         }
+        if (wasSpare) {
+            totalPoints += (2 * el.getFirstRoll() + el.getSecondRoll());
+            wasStrike = false;
+        }
+        if (isStrike(el.getFirstRoll())) {
+            totalPoints += 10;
+            wasStrike = true;
+        }
+        if (isSpare(el.getSecondRoll())) {
+            totalPoints += 10;
+            wasSpare = true;
+        }
+        totalPoints += (el.getFirstRoll() + el.getSecondRoll());
     }
     return totalPoints;
 }
