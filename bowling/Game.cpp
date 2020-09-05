@@ -77,6 +77,14 @@ Game::Status Game::getGameStatus() {
     return Game::Status::NO_GAME;
 }
 
-size_t Game::pointsCounting(PlayerData& data) {
-    return 1;
+size_t Game::countPoints(const std::vector<Frame>& rolls) {
+    size_t totalPoints = 0;
+    for (auto el : rolls) {
+        if (!isSpare(el.getSecondRoll())) {
+            if (!isStrike(el.getFirstRoll())) {
+                totalPoints += (el.getFirstRoll() + el.getSecondRoll());
+            }
+        }
+    }
+    return totalPoints;
 }
