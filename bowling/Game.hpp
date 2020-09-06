@@ -40,11 +40,11 @@ class Game {
     bool isLastFrame(int frameCount);
     bool isStrike(char currentRoll);
     bool isSpare(char nextRoll);
-    size_t countPoints(const std::vector<Frame>& rolls);
 
    public:
     Game(){};
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() { return players; };
     Status getGameStatus();
+    size_t countPoints(std::vector<Frame>& rolls);
 };

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <iterator>
 
 void Game::loadFromFile(const std::string& filePath) {
     std::ifstream file(filePath, std::ios_base::in);
@@ -77,29 +78,31 @@ Game::Status Game::getGameStatus() {
     return Game::Status::NO_GAME;
 }
 
-size_t Game::countPoints(const std::vector<Frame>& rolls) {
+size_t Game::countPoints(std::vector<Frame>& rolls) {
     size_t totalPoints = 0;
-    bool wasStrike = false;
-    bool wasSpare = false;
 
-    for (auto el : rolls) {
-        if (wasStrike) {
-            totalPoints += (2 * el.getFirstRoll() + 2 * el.getSecondRoll());
-            wasStrike = false;
-        }
-        if (wasSpare) {
-            totalPoints += (2 * el.getFirstRoll() + el.getSecondRoll());
-            wasStrike = false;
-        }
-        if (isStrike(el.getFirstRoll())) {
+    for (size_t i = 0; i < rolls.size(); i++) {
+        if (isStrike(rolls[i].getFirstRoll())) {
             totalPoints += 10;
-            wasStrike = true;
+            if (isStrike(rolls.at(i + 1).getFirstRoll())) {
+                totalPoints += 10;
+            } else if (isSpare(rolls.at(i + 1).getSecondRoll())) {
+                totalPoints += 10;
+            } else {
+                totalPoints += (rolls[i + 1].getFirstRoll() + rolls[i + 1].getSecondRoll());
+            }
         }
-        if (isSpare(el.getSecondRoll())) {
+        if (isSpare(rolls[i].getSecondRoll())) {
             totalPoints += 10;
-            wasSpare = true;
+            if (isStrike(rolls.at(i + 1).getFirstRoll())) {
+                totalPoints += 10;
+            } else {
+                totalPoints += rolls[i + 1].getFirstRoll();
+            }
         }
-        totalPoints += (el.getFirstRoll() + el.getSecondRoll());
+        if (!isStrike(rolls[i].getFirstRoll()) && !isSpare(rolls[i].getSecondRoll())) {
+            totalPoints += (rolls[i].getFirstRoll() + rolls[i].getSecondRoll());
+        }
     }
     return totalPoints;
 }
