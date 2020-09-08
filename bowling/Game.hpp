@@ -40,10 +40,12 @@ class Game {
     bool isLastFrame(int frameCount);
     bool isStrike(char currentRoll);
     bool isSpare(char nextRoll);
+    std::string getOutputString();
 
    public:
     Game(){};
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() { return players; };
-    Status getGameStatus();
+    Status getGameStatus() const;
+    void printOutput(std::ostream& os, int laneNumber);
 };
