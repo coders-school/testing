@@ -154,3 +154,7 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
 }
+
+TEST_F(GameTests, GameOutputCanBePrintedOnScreen) {
+    game.printOutput();
+}
