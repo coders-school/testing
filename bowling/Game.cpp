@@ -48,15 +48,15 @@ void Game::loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls)
     }
 }
 
-bool Game::isLastFrame(int frameCount) {
+bool Game::isLastFrame(int frameCount) const {
     return frameCount == 10;
 }
 
-bool Game::isStrike(char currentRoll) {
+bool Game::isStrike(char currentRoll) const {
     return currentRoll == 'X';
 }
 
-bool Game::isSpare(char nextRoll) {
+bool Game::isSpare(char nextRoll) const {
     return nextRoll == '/';
 }
 
@@ -77,7 +77,7 @@ Game::Status Game::getGameStatus() const {
     return Game::Status::NO_GAME;
 }
 
-std::string Game::getOutputString(int laneNumber) {
+std::string Game::getOutputString(int laneNumber) const {
     std::string output{"### Lane " + std::to_string(laneNumber) + ": "};
     switch(getGameStatus()) {
         case Status::FINISHED:
@@ -96,10 +96,10 @@ std::string Game::getOutputString(int laneNumber) {
     return output;
 }
 
-int Game::getPlayerScore(const PlayerData& player) {
+int Game::getPlayerScore(const PlayerData& player) const {
     return -1;
 }
 
-void Game::printOutput(std::ostream& os, int laneNumber) {
+void Game::printOutput(std::ostream& os, int laneNumber) const {
     os << getOutputString(laneNumber);
 }
