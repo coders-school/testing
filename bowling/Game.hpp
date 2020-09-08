@@ -40,7 +40,9 @@ class Game {
     bool isLastFrame(int frameCount);
     bool isStrike(char currentRoll);
     bool isSpare(char nextRoll);
-    std::string getOutputString();
+    std::string getOutputString(int laneNumber);
+    int getPlayerScore(const PlayerData& player);
+    
 
    public:
     Game(){};

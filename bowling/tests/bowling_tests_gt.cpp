@@ -156,5 +156,5 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
 }
 
 TEST_F(GameTests, GameOutputCanBePrintedOnScreen) {
-    game.printOutput();
+    game.printOutput(std::cout, 1);
 }
