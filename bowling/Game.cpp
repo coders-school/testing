@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <iterator>
 
 void Game::loadFromFile(const std::string& filePath) {
     std::ifstream file(filePath, std::ios_base::in);
