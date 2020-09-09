@@ -162,3 +162,14 @@ TEST_F(GameTests, countPointsFromVectorOfIntWithSpareWithoutStrike) {
     std::vector<Frame> playerRolls{{2, '/'}, {4, 5}};
     EXPECT_EQ(game.countPoints(playerRolls), 23);
 }
+
+TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
+    file << "Robcio:12|27|X|1/|22|11|0-|0-|12|X||17\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
+}
+
+TEST_F(GameTests, GameOutputCanBePrintedOnScreen) {
+    game.printOutput(std::cout, 1);
+}

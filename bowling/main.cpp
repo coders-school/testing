@@ -21,12 +21,8 @@ int main() {
   std::string filePath = std::filesystem::current_path().string() + "/franek.txt";
   make_file(filePath);
   game.loadFromFile(filePath);
-  auto players = game.getPlayers();
-  for (auto player : players) {
-      std::cout << player.name << '\n';
-      for (auto frame : player.rolls) {
-          std::cout << frame.getFirstRoll() << ", " << frame.getSecondRoll() << '\n';
-      }
-  }
+  std::ofstream file("test.txt");
+  game.printOutput(file, 1);
+  file.close();
   remove_file(filePath);
 }
