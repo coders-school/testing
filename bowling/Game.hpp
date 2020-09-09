@@ -13,8 +13,8 @@ class Frame {
     Frame(char first, char second) : firstRoll(first), secondRoll(second) {}
     bool operator==(const Frame& rhs) const { return firstRoll == rhs.firstRoll && secondRoll == rhs.secondRoll; }
     friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
-    char getFirstRoll() { return firstRoll; };
-    char getSecondRoll() { return secondRoll; };
+    char getFirstRoll() const { return firstRoll; };
+    char getSecondRoll() const { return secondRoll; };
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Frame& frame) {
@@ -37,13 +37,17 @@ class Game {
     };
     std::vector<PlayerData> players;
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
-    bool isLastFrame(int frameCount);
-    bool isStrike(char currentRoll);
-    bool isSpare(char nextRoll);
+    bool isLastFrame(int frameCount) const;
+    bool isStrike(char currentRoll) const;
+    bool isSpare(char nextRoll) const;
+    std::string getOutputString(int laneNumber) const;
+    int getPlayerScore(const PlayerData& player) const;
+    
 
    public:
     Game(){};
     void loadFromFile(const std::string& filePath);
-    const std::vector<PlayerData>& getPlayers() { return players; };
-    Status getGameStatus();
+    const std::vector<PlayerData>& getPlayers() const { return players; };
+    Status getGameStatus() const;
+    void printOutput(std::ostream& os, int laneNumber) const;
 };

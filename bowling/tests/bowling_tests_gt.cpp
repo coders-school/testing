@@ -147,3 +147,14 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
 }
+
+TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
+    file << "Robcio:12|27|X|1/|22|11|0-|0-|12|X||17\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
+}
+
+TEST_F(GameTests, GameOutputCanBePrintedOnScreen) {
+    game.printOutput(std::cout, 1);
+}
