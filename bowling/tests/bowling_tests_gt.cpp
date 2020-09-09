@@ -157,3 +157,8 @@ TEST_F(GameTests, countPointsFromVectorOfIntWithStrikeWithoutSpare) {
     std::vector<Frame> playerRolls{{'X', ' '}, {4, 5}};
     EXPECT_EQ(game.countPoints(playerRolls), 28);
 }
+
+TEST_F(GameTests, countPointsFromVectorOfIntWithSpareWithoutStrike) {
+    std::vector<Frame> playerRolls{{2, '/'}, {4, 5}};
+    EXPECT_EQ(game.countPoints(playerRolls), 23);
+}

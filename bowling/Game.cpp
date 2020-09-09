@@ -105,9 +105,27 @@ size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) {
     return totalOnlyStrikePoints;
 }
 
+size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) {
+    size_t totalOnlySparePoints = 0;
+    for (size_t i = 0; i < rolls.size(); i++) {
+        if (isSpare(rolls[i].getSecondRoll())) {
+            totalOnlySparePoints += 10;
+            if ((i + 1) != rolls.size()) {
+                if (isStrike(rolls.at(i + 1).getFirstRoll()) || isSpare(rolls.at(i + 1).getSecondRoll())) {
+                    totalOnlySparePoints += 10;
+                } else {
+                    totalOnlySparePoints += rolls[i + 1].getFirstRoll();
+                }
+            }
+        }
+    }
+    return totalOnlySparePoints;
+}
+
 size_t Game::countPoints(std::vector<Frame>& rolls) {
     size_t totalPoints = 0;
     totalPoints += countFramesWithoutStrikeOrSpare(rolls);
     totalPoints += countOnlyStrikeFrames(rolls);
+    totalPoints += countOnlySpareFrames(rolls);
     return totalPoints;
 }
