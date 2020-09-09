@@ -40,6 +40,7 @@ class Game {
     bool isLastFrame(int frameCount);
     bool isStrike(char currentRoll);
     bool isSpare(char nextRoll);
+    size_t countWithoutStrikeNorSpare(std::vector<Frame>& rolls);
 
    public:
     Game(){};

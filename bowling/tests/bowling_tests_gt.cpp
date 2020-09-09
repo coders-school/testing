@@ -148,7 +148,7 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
     EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
 }
 
-TEST_F(GameTests, countPointsFromVector) {
+TEST_F(GameTests, countPointsFromVectorOfInt) {
     std::vector<Frame> playerRolls{{1, 2}, {4, 5}};
     EXPECT_EQ(game.countPoints(playerRolls), 12);
 }
