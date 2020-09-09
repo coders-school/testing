@@ -83,33 +83,31 @@ size_t Game::countWithoutStrikeNorSpare(std::vector<Frame>& rolls) {
     for (size_t i = 0; i < rolls.size(); i++) {
         if (!isStrike(rolls[i].getFirstRoll()) && !isSpare(rolls[i].getSecondRoll())) {
             totalPointsWithoutStrikeNorSpare += (rolls[i].getFirstRoll() + rolls[i].getSecondRoll());
-        }
+        } 
     }
     return totalPointsWithoutStrikeNorSpare;
 }
 
-size_t Game::countPoints(std::vector<Frame>& rolls) {
-    size_t totalPoints = 0;
+size_t Game::countOnlyStrikePoints(std::vector<Frame>& rolls) {
+    size_t totalOnlyStrikePoints = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (isStrike(rolls[i].getFirstRoll())) {
-            totalPoints += 10;
-            if (isStrike(rolls.at(i + 1).getFirstRoll())) {
-                totalPoints += 10;
-            } else if (isSpare(rolls.at(i + 1).getSecondRoll())) {
-                totalPoints += 10;
-            } else {
-                totalPoints += (rolls[i + 1].getFirstRoll() + rolls[i + 1].getSecondRoll());
-            }
-        }
-        if (isSpare(rolls[i].getSecondRoll())) {
-            totalPoints += 10;
-            if (isStrike(rolls.at(i + 1).getFirstRoll())) {
-                totalPoints += 10;
-            } else {
-                totalPoints += rolls[i + 1].getFirstRoll();
+            totalOnlyStrikePoints += 10;
+            if ((i + 1) != rolls.size()) {
+                if (isStrike(rolls.at(i + 1).getFirstRoll()) || isSpare(rolls.at(i + 1).getSecondRoll())) {
+                    totalOnlyStrikePoints += 10;
+                } else {
+                    totalOnlyStrikePoints += (rolls[i + 1].getFirstRoll() + rolls[i + 1].getSecondRoll());
+                }
             }
         }
     }
+    return totalOnlyStrikePoints;
+}
+
+size_t Game::countPoints(std::vector<Frame>& rolls) {
+    size_t totalPoints = 0;
     totalPoints += countWithoutStrikeNorSpare(rolls);
+    totalPoints += countOnlyStrikePoints(rolls);
     return totalPoints;
 }
