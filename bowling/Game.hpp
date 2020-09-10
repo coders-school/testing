@@ -39,6 +39,7 @@ class Game {
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
     bool isLastFrame(int frameCount) const;
     bool isStrike(char currentRoll) const;
+    bool isStrike(Frame& frame) const;
     bool isSpare(char nextRoll) const;
     size_t countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls);
     size_t countOnlyStrikeFrames(std::vector<Frame>& rolls);
