@@ -149,18 +149,18 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
 }
 
 TEST_F(GameTests, countPointsFromVectorOfIntWithoutStrikeNorSpare) {
-    std::vector<Frame> playerRolls{{1, 2}, {4, 5}};
-    EXPECT_EQ(game.countPoints(playerRolls), 12);
+    std::vector<Frame> playerRolls{{1, 2}, {4, 5}, {2, 2}, {7, 0};
+    EXPECT_EQ(game.countPoints(playerRolls), 23);
 }
 
 TEST_F(GameTests, countPointsFromVectorOfIntWithStrikeWithoutSpare) {
-    std::vector<Frame> playerRolls{{'X', ' '}, {4, 5}};
-    EXPECT_EQ(game.countPoints(playerRolls), 28);
+    std::vector<Frame> playerRolls{{'X', ' '}, {4, 5}, {'X', ' '}, {'X', ' '}, {1, 1}, {'X', ' '}};
+    EXPECT_EQ(game.countPoints(playerRolls), 72);
 }
 
 TEST_F(GameTests, countPointsFromVectorOfIntWithSpareWithoutStrike) {
-    std::vector<Frame> playerRolls{{2, '/'}, {4, 5}};
-    EXPECT_EQ(game.countPoints(playerRolls), 23);
+    std::vector<Frame> playerRolls{{2, '/'}, {4, 5}, {3, '/'}, {2, '/'}, {0, '/'}};
+    EXPECT_EQ(game.countPoints(playerRolls), 55);
 }
 
 TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
