@@ -89,7 +89,7 @@ Game::Status Game::getGameStatus() const {
 size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) {
     size_t totalPointsWithoutStrikeNorSpare = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
-        if (!isStrike(rolls[i]) && !isSpare(rolls[i].getSecondRoll())) {
+        if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
             totalPointsWithoutStrikeNorSpare += (rolls[i].getFirstRoll() + rolls[i].getSecondRoll());
         } 
     }
@@ -102,7 +102,7 @@ size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) {
         if (isStrike(rolls[i])) {
             totalOnlyStrikePoints += 10;
             if ((i + 1) != rolls.size()) {
-                if (isStrike(rolls.at(i + 1)) || isSpare(rolls.at(i + 1).getSecondRoll())) {
+                if (isStrike(rolls.at(i + 1)) || isSpare(rolls.at(i + 1))) {
                     totalOnlyStrikePoints += 10;
                 } else {
                     totalOnlyStrikePoints += (rolls[i + 1].getFirstRoll() + rolls[i + 1].getSecondRoll());
@@ -116,7 +116,7 @@ size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) {
 size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) {
     size_t totalOnlySparePoints = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
-        if (isSpare(rolls[i].getSecondRoll())) {
+        if (isSpare(rolls[i])) {
             totalOnlySparePoints += 10;
             if ((i + 1) != rolls.size()) {
                 if (isStrike(rolls.at(i + 1))) {
