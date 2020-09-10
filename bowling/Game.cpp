@@ -92,15 +92,16 @@ std::vector<Frame> Game::conversionCharNumbersToInt(std::vector <Frame>& rolls) 
     char conversionNumber = '0';
 
     for (size_t i = 0; i < rolls.size(); i++) {
-        currentFrame = (Frame(rolls[i].getFirstRoll(), rolls[i].getSecondRoll()));
+        size_t firstRoll = rolls[i].getFirstRoll();
+        size_t secondRoll = rolls[i].getSecondRoll();
         if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
-            size_t firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
-            size_t secondRoll = (rolls[i].getSecondRoll() - conversionNumber);
-            currentFrame = (Frame(firstRoll, secondRoll));
+            firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
+            secondRoll = (rolls[i].getSecondRoll() - conversionNumber);
         } 
         if (isSpare(rolls[i])) {
-            currentFrame = (Frame(rolls[i].getFirstRoll() - conversionNumber, rolls[i].getSecondRoll()));
+            firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
         }
+        currentFrame = (Frame(firstRoll, secondRoll));
         convertedRolls.push_back(currentFrame);
     }
     return convertedRolls;
