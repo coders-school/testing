@@ -86,7 +86,7 @@ Game::Status Game::getGameStatus() const {
     return Game::Status::NO_GAME;
 }
 
-size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) {
+size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) const {
     size_t totalPointsWithoutStrikeNorSpare = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
@@ -96,7 +96,7 @@ size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) {
     return totalPointsWithoutStrikeNorSpare;
 }
 
-size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) {
+size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) const {
     size_t totalOnlyStrikePoints = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (isStrike(rolls[i])) {
@@ -113,7 +113,7 @@ size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) {
     return totalOnlyStrikePoints;
 }
 
-size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) {
+size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) const {
     size_t totalOnlySparePoints = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (isSpare(rolls[i])) {
@@ -130,7 +130,7 @@ size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) {
     return totalOnlySparePoints;
 }
 
-size_t Game::countPoints(std::vector<Frame>& rolls) {
+size_t Game::countPoints(std::vector<Frame>& rolls) const {
     size_t totalPoints = 0;
     totalPoints += countFramesWithoutStrikeOrSpare(rolls);
     totalPoints += countOnlyStrikeFrames(rolls);

@@ -42,9 +42,9 @@ class Game {
     bool isStrike(Frame& frame) const;
     bool isSpare(char nextRoll) const;
     bool isSpare(Frame& frame) const;
-    size_t countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls);
-    size_t countOnlyStrikeFrames(std::vector<Frame>& rolls);
-    size_t countOnlySpareFrames(std::vector<Frame>& rolls);
+    size_t countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) const;
+    size_t countOnlyStrikeFrames(std::vector<Frame>& rolls) const;
+    size_t countOnlySpareFrames(std::vector<Frame>& rolls) const;
     std::string getOutputString(int laneNumber) const;
     int getPlayerScore(const PlayerData& player) const;
     
@@ -53,7 +53,7 @@ class Game {
     Game(){};
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() const { return players; };
-    size_t countPoints(std::vector<Frame>& rolls);
+    size_t countPoints(std::vector<Frame>& rolls) const;
     Status getGameStatus() const;
     void printOutput(std::ostream& os, int laneNumber) const;
 };
