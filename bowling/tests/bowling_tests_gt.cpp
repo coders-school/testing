@@ -164,7 +164,8 @@ TEST_F(GameTests, countPointsFromVectorOfFramesWithSpareWithoutStrikeIncompleteG
 }
 
 TEST_F(GameTests, countPointsFromVectorOfFramesCompleteGameWithStrikeSpareAndExtraFrame) {
-    std::vector<Frame> playerRolls{{'X', ' '}, {'4', '5'}, {'X', ' '}, {'X', ' '}, {'1', '1'}, {'X', ' '}, {'5', '/'}, {'X', ' '}, {'1', '8'}, {'X', ' '}, {'5', '1'}};
+    std::vector<Frame> playerRolls{{'X', ' '}, {'4', '5'}, {'X', ' '}, {'X', ' '}, {'1', '1'},
+                                   {'X', ' '}, {'5', '/'}, {'X', ' '}, {'1', '8'}, {'X', ' '}, {'5', '1'}};
     EXPECT_EQ(game.countPoints(playerRolls), 152);
 }
 
