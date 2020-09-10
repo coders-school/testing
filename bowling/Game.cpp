@@ -86,6 +86,22 @@ Game::Status Game::getGameStatus() const {
     return Game::Status::NO_GAME;
 }
 
+std::vector<Frame> Game::conversionCharNumbersToInt(std::vector <Frame>& rolls) const {
+    std::vector<Frame> convertedRolls {rolls.size()};
+    Frame currentFrame {};
+    char conversionNumber = '0';
+
+    for (size_t i = 0; i < rolls.size(); i++) {
+        currentFrame = (Frame(rolls[i].getFirstRoll(), rolls[i].getSecondRoll()));
+        if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
+            currentFrame = (Frame(rolls[i].getFirstRoll() - conversionNumber,
+                                  rolls[i].getSecondRoll() - conversionNumber));
+        } 
+        convertedRolls.push_back(currentFrame);
+    }
+    return convertedRolls;
+}
+
 size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) const {
     size_t totalPointsWithoutStrikeNorSpare = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
