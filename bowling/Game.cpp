@@ -87,16 +87,20 @@ Game::Status Game::getGameStatus() const {
 }
 
 std::vector<Frame> Game::conversionCharNumbersToInt(std::vector <Frame>& rolls) const {
-    std::vector<Frame> convertedRolls {rolls.size()};
+    std::vector<Frame> convertedRolls {};
     Frame currentFrame {};
     char conversionNumber = '0';
 
     for (size_t i = 0; i < rolls.size(); i++) {
         currentFrame = (Frame(rolls[i].getFirstRoll(), rolls[i].getSecondRoll()));
         if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
-            currentFrame = (Frame(rolls[i].getFirstRoll() - conversionNumber,
-                                  rolls[i].getSecondRoll() - conversionNumber));
+            size_t firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
+            size_t secondRoll = (rolls[i].getSecondRoll() - conversionNumber);
+            currentFrame = (Frame(firstRoll, secondRoll));
         } 
+        if (isSpare(rolls[i])) {
+            currentFrame = (Frame(rolls[i].getFirstRoll() - conversionNumber, rolls[i].getSecondRoll()));
+        }
         convertedRolls.push_back(currentFrame);
     }
     return convertedRolls;
@@ -148,9 +152,10 @@ size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) const {
 
 size_t Game::countPoints(std::vector<Frame>& rolls) const {
     size_t totalPoints = 0;
-    totalPoints += countFramesWithoutStrikeOrSpare(rolls);
-    totalPoints += countOnlyStrikeFrames(rolls);
-    totalPoints += countOnlySpareFrames(rolls);
+    auto convertedRolls = conversionCharNumbersToInt(rolls);
+    totalPoints += countFramesWithoutStrikeOrSpare(convertedRolls);
+    totalPoints += countOnlyStrikeFrames(convertedRolls);
+    totalPoints += countOnlySpareFrames(convertedRolls);
     return totalPoints;
 }
 
