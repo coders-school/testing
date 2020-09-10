@@ -149,7 +149,7 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenFramesAreFull) {
 }
 
 TEST_F(GameTests, countPointsFromVectorOfIntWithoutStrikeNorSpare) {
-    std::vector<Frame> playerRolls{{1, 2}, {4, 5}, {2, 2}, {7, 0};
+    std::vector<Frame> playerRolls{{1, 2}, {4, 5}, {2, 2}, {7, 0}};
     EXPECT_EQ(game.countPoints(playerRolls), 23);
 }
 
