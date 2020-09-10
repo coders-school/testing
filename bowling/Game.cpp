@@ -110,7 +110,7 @@ size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) {
         if (isSpare(rolls[i].getSecondRoll())) {
             totalOnlySparePoints += 10;
             if ((i + 1) != rolls.size()) {
-                if (isStrike(rolls.at(i + 1).getFirstRoll()) || isSpare(rolls.at(i + 1).getSecondRoll())) {
+                if (isStrike(rolls.at(i + 1).getFirstRoll())) {
                     totalOnlySparePoints += 10;
                 } else {
                     totalOnlySparePoints += rolls[i + 1].getFirstRoll();
