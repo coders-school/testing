@@ -64,6 +64,11 @@ bool Game::isSpare(char nextRoll) const {
     return nextRoll == '/';
 }
 
+bool Game::isSpare(Frame& frame) const {
+    return frame.getSecondRoll() == '/' ? true : false;
+}
+
+
 Game::Status Game::getGameStatus() const {
     if (players.size() == 0) {
         return Game::Status::NO_GAME;

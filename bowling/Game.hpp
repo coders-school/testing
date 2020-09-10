@@ -41,6 +41,7 @@ class Game {
     bool isStrike(char currentRoll) const;
     bool isStrike(Frame& frame) const;
     bool isSpare(char nextRoll) const;
+    bool isSpare(Frame& frame) const;
     size_t countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls);
     size_t countOnlyStrikeFrames(std::vector<Frame>& rolls);
     size_t countOnlySpareFrames(std::vector<Frame>& rolls);
