@@ -165,7 +165,7 @@ TEST_F(GameTests, countPointsFromVectorOfIntWithSpareWithoutStrikeIncompleteGame
 
 TEST_F(GameTests, countPointsFromVectorOfIntCompleteGameWithStrikeSpareAndExtraFrame) {
     std::vector<Frame> playerRolls{{'X', ' '}, {4, 5}, {'X', ' '}, {'X', ' '}, {1, 1}, {'X', ' '}, {5, '/'}, {'X', ' '}, {1, 8}, {'X', ' '}, {5, 1}};
-    EXPECT_EQ(game.countPoints(playerRolls), 146);
+    EXPECT_EQ(game.countPoints(playerRolls), 152);
 }
 
 TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
