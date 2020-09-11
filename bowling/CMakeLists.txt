@@ -45,7 +45,7 @@ add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} src)
 
 enable_testing()
-add_executable(${PROJECT_NAME}-ut tests/bowling_tests_gt.cpp)
+add_executable(${PROJECT_NAME}-ut tests/bowling_tests_gt.cpp tests/bowling_alley_tests_gt.cpp)
 target_link_libraries(${PROJECT_NAME}-ut gtest_main src)
 target_include_directories(${PROJECT_NAME}-ut PRIVATE .)
 add_test(NAME bowlingTests COMMAND ${PROJECT_NAME}-ut)
