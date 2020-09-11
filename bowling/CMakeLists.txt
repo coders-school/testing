@@ -46,15 +46,25 @@ include_directories(tests)
 
 
 set(HEADERS 
+    include/BowlingLane.hpp
+    include/DirectoryHandler.hpp
     include/Game.hpp
+    include/Player.hpp
     )
 
 set(SRC
+    src/BowlingLane.cpp
+    src/DirectoryHandler.cpp
     src/Game.cpp
+    src/Player.cpp
     )
 
 set(TESTS
-    tests/game.ut.cpp
+    tests/BowlingLane.ut.cpp
+    tests/DirectoryHandler.ut.cpp
+    tests/Game.ut.cpp
+    tests/Player.ut.cpp
+
     )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})

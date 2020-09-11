@@ -3,7 +3,7 @@
 ## Project requirements
 
 - 1A calculate patrial points for incomplete frames
-- 2A calculating points for whole game 
+- 2A calculating points for whole game
   - calculate points for whole game by using rules for bowling game
 - 3A input validation for uncomplete frames for many players
   - it should notify that game is in progress
