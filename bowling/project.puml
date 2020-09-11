@@ -1,0 +1,37 @@
+@startuml bowling-project
+
+class Player{
+    -frames_ : vector<int>
+    -name_
+    +getScore()
+    +isStrike()
+    +isSpare()
+}
+
+class bowlingLane{
+    -laneNumber_ : int
+    -players_ : vector<Player>
+    +getLaneData()
+    +getLaneStatus()
+}
+
+class Game{
+    -rawLanes_ : vector<pair<name,vector<string>>
+    -lanes_ : vector<bowlingLane>
+    +printData()
+    +saveDataToFile()
+}
+
+
+class DirectoryHandler{
+    -directoryName
+    +getDirectoryData()
+}
+
+Game *-down- bowlingLane
+bowlingLane *- Player
+
+
+Game -left-> DirectoryHandler
+
+@enduml
