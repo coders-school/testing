@@ -56,9 +56,18 @@ bool Game::isStrike(char currentRoll) const {
     return currentRoll == 'X';
 }
 
+bool Game::isStrike(Frame& frame) const {
+    return frame.getFirstRoll() == 'X' ? true : false;
+}
+
 bool Game::isSpare(char nextRoll) const {
     return nextRoll == '/';
 }
+
+bool Game::isSpare(Frame& frame) const {
+    return frame.getSecondRoll() == '/' ? true : false;
+}
+
 
 Game::Status Game::getGameStatus() const {
     if (players.size() == 0) {
@@ -75,6 +84,80 @@ Game::Status Game::getGameStatus() const {
         return Game::Status::FINISHED;
     }
     return Game::Status::NO_GAME;
+}
+
+std::vector<Frame> Game::conversionCharNumbersToInt(std::vector <Frame>& rolls) const {
+    std::vector<Frame> convertedRolls {};
+    Frame currentFrame {};
+    char conversionNumber = '0';
+
+    for (size_t i = 0; i < rolls.size(); i++) {
+        size_t firstRoll = rolls[i].getFirstRoll();
+        size_t secondRoll = rolls[i].getSecondRoll();
+        if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
+            firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
+            secondRoll = (rolls[i].getSecondRoll() - conversionNumber);
+        } 
+        if (isSpare(rolls[i])) {
+            firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
+        }
+        currentFrame = (Frame(firstRoll, secondRoll));
+        convertedRolls.push_back(currentFrame);
+    }
+    return convertedRolls;
+}
+
+size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) const {
+    size_t totalPointsWithoutStrikeNorSpare = 0;
+    for (size_t i = 0; i < rolls.size(); i++) {
+        if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
+            totalPointsWithoutStrikeNorSpare += (rolls[i].getFirstRoll() + rolls[i].getSecondRoll());
+        } 
+    }
+    return totalPointsWithoutStrikeNorSpare;
+}
+
+size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) const {
+    size_t totalOnlyStrikePoints = 0;
+    for (size_t i = 0; i < rolls.size(); i++) {
+        if (isStrike(rolls[i])) {
+            totalOnlyStrikePoints += 10;
+            if ((i + 1) != rolls.size()) {
+                if (isStrike(rolls.at(i + 1)) || isSpare(rolls.at(i + 1))) {
+                    totalOnlyStrikePoints += 10;
+                } else {
+                    totalOnlyStrikePoints += (rolls[i + 1].getFirstRoll() + rolls[i + 1].getSecondRoll());
+                }
+            }
+        }
+    }
+    return totalOnlyStrikePoints;
+}
+
+size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) const {
+    size_t totalOnlySparePoints = 0;
+    for (size_t i = 0; i < rolls.size(); i++) {
+        if (isSpare(rolls[i])) {
+            totalOnlySparePoints += 10;
+            if ((i + 1) != rolls.size()) {
+                if (isStrike(rolls.at(i + 1))) {
+                    totalOnlySparePoints += 10;
+                } else {
+                    totalOnlySparePoints += rolls[i + 1].getFirstRoll();
+                }
+            }
+        }
+    }
+    return totalOnlySparePoints;
+}
+
+size_t Game::countPoints(std::vector<Frame>& rolls) const {
+    size_t totalPoints = 0;
+    auto convertedRolls = conversionCharNumbersToInt(rolls);
+    totalPoints += countFramesWithoutStrikeOrSpare(convertedRolls);
+    totalPoints += countOnlyStrikeFrames(convertedRolls);
+    totalPoints += countOnlySpareFrames(convertedRolls);
+    return totalPoints;
 }
 
 std::string Game::getOutputString(int laneNumber) const {
