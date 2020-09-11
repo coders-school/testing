@@ -1,42 +1,37 @@
 @startuml bowling-project
 
-class Frame{
-    -points_ : int
-    -spare_ : bool
-    -strike_ : bool
+class Player{
+    -frames_ : vector<int>
+    -name_
+    +getScore()
     +isStrike()
     +isSpare()
 }
 
-class Player{
-    -frames_ : vector<Frame>
-    -name_
-    +getScore()
-}
-
-class Lane{
+class bowlingLane{
+    -laneNumber_ : int
     -players_ : vector<Player>
+    +getLaneData()
     +getLaneStatus()
-    +getLaneResult()
 }
 
 class Game{
-    lanes_ : vector<Lane>
+    -rawLanes_ : vector<pair<name,vector<string>>
+    -lanes_ : vector<bowlingLane>
+    +printData()
+    +saveDataToFile()
 }
 
-abstract class Input{
 
+class DirectoryHandler{
+    -directoryName
+    +getDirectoryData()
 }
 
-class DirectoryInput{
+Game *-down- bowlingLane
+bowlingLane *- Player
 
-}
 
-Game *-down- Lane
-Lane *- Player
-Player *- Frame
-
-Input <|.. DirectoryInput
-Game -> Input
+Game -left-> DirectoryHandler
 
 @enduml
