@@ -56,7 +56,7 @@ bool Game::isStrike(char currentRoll) const {
     return currentRoll == 'X';
 }
 
-bool Game::isStrike(Frame& frame) const {
+bool Game::isStrike(const Frame& frame) const {
     return frame.getFirstRoll() == 'X' ? true : false;
 }
 
@@ -64,7 +64,7 @@ bool Game::isSpare(char nextRoll) const {
     return nextRoll == '/';
 }
 
-bool Game::isSpare(Frame& frame) const {
+bool Game::isSpare(const Frame& frame) const {
     return frame.getSecondRoll() == '/' ? true : false;
 }
 
@@ -86,7 +86,7 @@ Game::Status Game::getGameStatus() const {
     return Game::Status::NO_GAME;
 }
 
-std::vector<Frame> Game::conversionCharNumbersToInt(std::vector <Frame>& rolls) const {
+std::vector<Frame> Game::conversionCharNumbersToInt(const std::vector <Frame>& rolls) const {
     std::vector<Frame> convertedRolls {};
     Frame currentFrame {};
     char conversionNumber = '0';
@@ -107,7 +107,7 @@ std::vector<Frame> Game::conversionCharNumbersToInt(std::vector <Frame>& rolls) 
     return convertedRolls;
 }
 
-size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) const {
+size_t Game::countFramesWithoutStrikeOrSpare(const std::vector<Frame>& rolls) const {
     size_t totalPointsWithoutStrikeNorSpare = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
@@ -117,7 +117,7 @@ size_t Game::countFramesWithoutStrikeOrSpare(std::vector<Frame>& rolls) const {
     return totalPointsWithoutStrikeNorSpare;
 }
 
-size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) const {
+size_t Game::countOnlyStrikeFrames(const std::vector<Frame>& rolls) const {
     size_t totalOnlyStrikePoints = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (isStrike(rolls[i])) {
@@ -134,7 +134,7 @@ size_t Game::countOnlyStrikeFrames(std::vector<Frame>& rolls) const {
     return totalOnlyStrikePoints;
 }
 
-size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) const {
+size_t Game::countOnlySpareFrames(const std::vector<Frame>& rolls) const {
     size_t totalOnlySparePoints = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (isSpare(rolls[i])) {
@@ -151,7 +151,7 @@ size_t Game::countOnlySpareFrames(std::vector<Frame>& rolls) const {
     return totalOnlySparePoints;
 }
 
-size_t Game::countPoints(std::vector<Frame>& rolls) const {
+size_t Game::countPoints(const std::vector<Frame>& rolls) const {
     size_t totalPoints = 0;
     auto convertedRolls = conversionCharNumbersToInt(rolls);
     totalPoints += countFramesWithoutStrikeOrSpare(convertedRolls);
@@ -174,13 +174,9 @@ std::string Game::getOutputString(int laneNumber) const {
     }
     output += " ###\n";
     for (auto& player : players) {
-        output += player.name + " " + std::to_string(getPlayerScore(player)) + "\n";
+        output += player.name + " " + std::to_string(countPoints(player.rolls)) + "\n";
     }
     return output;
-}
-
-int Game::getPlayerScore(const PlayerData& player) const {
-    return -1;
 }
 
 void Game::printOutput(std::ostream& os, int laneNumber) const {
