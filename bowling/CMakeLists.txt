@@ -39,7 +39,7 @@ endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
 
-set (SRC_FILES Game.cpp)
+set (SRC_FILES Game.cpp BowlingAlley.cpp)
 add_library(src STATIC ${SRC_FILES})
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} src)
