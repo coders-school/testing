@@ -5,6 +5,6 @@ BowlingAlley::BowlingAlley(fs::path path)
     : path_(path) 
     {}
 
-void BowlingAlley::showCurrentPath(fs::path path) {
+void BowlingAlley::showCurrentPath() {
     std::cout << "Your current path is: " << fs::current_path() << 'n';
 }
