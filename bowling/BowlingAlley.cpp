@@ -1,10 +1,10 @@
 #include "BowlingAlley.hpp"
 #include <iostream>
 
-BowlingAlley::BowlingAlley(std::filesystem::path path)
+BowlingAlley::BowlingAlley(fs::path path)
     : path_(path) 
     {}
 
-void BowlingAlley::showCurrentPath(std::filesystem::path path) {
-    std::cout << "Your current path is: " << std::filesystem::current_path() << 'n';
+void BowlingAlley::showCurrentPath(fs::path path) {
+    std::cout << "Your current path is: " << fs::current_path() << 'n';
 }

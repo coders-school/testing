@@ -3,11 +3,13 @@
 #include "Game.hpp"
 #include <filesystem>
 
+namespace fs = std::filesystem;
+
 class BowlingAlley : public Game {
 public:
-    BowlingAlley(std::filesystem::path path);
-    void showCurrentPath(std::filesystem::path path);
+    BowlingAlley(fs::path path);
+    void showCurrentPath(fs::path path);
 
 private:
-    std::filesystem::path path_;
+    fs::path path_;
 };
