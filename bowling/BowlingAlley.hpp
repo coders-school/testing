@@ -8,6 +8,7 @@ namespace fs = std::filesystem;
 class BowlingAlley : public Game {
 public:
     BowlingAlley(fs::path path);
+    fs::path getCurrentPath() const;
     void showCurrentPath();
 
 private:
