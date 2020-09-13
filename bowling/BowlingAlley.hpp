@@ -10,6 +10,7 @@ public:
     BowlingAlley(fs::path path);
     fs::path getCurrentPath() const;
     void showCurrentPath();
+    size_t countFiles();
 
 private:
     fs::path path_;

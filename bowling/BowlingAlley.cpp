@@ -1,4 +1,5 @@
 #include "BowlingAlley.hpp"
+#include <algorithm>
 #include <iostream>
 
 namespace fs = std::filesystem;
@@ -12,5 +13,11 @@ fs::path BowlingAlley::getCurrentPath() const {
 }
 
 void BowlingAlley::showCurrentPath() {
-    std::cout << "Your current path is: " << fs::current_path() << 'n';
+    std::cout << "Your current path is: " << path_ << 'n';
+}
+
+size_t BowlingAlley::countFiles() {
+    size_t fileCounter = 0;
+    fileCounter = std::distance(fs::directory_iterator(path_), fs::directory_iterator{});
+    return fileCounter;
 }
