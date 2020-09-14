@@ -6,11 +6,7 @@
 
 class BowlingAlleyTests : public ::testing::Test {
 protected:
-    std::filesystem::path path = "/home/marcinati/Github/testing/bowling/tests";
+    std::filesystem::path path = "/tests";
     BowlingAlley bowlingAlley{path};
 
 };
-
-TEST_F(BowlingAlleyTests, ConstructedBowlingAlleyShouldHaveACurrentPathTheSameAsTheConstructorHad) {
-    EXPECT_EQ(bowlingAlley.getCurrentPath(), path);
-}
