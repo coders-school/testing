@@ -23,7 +23,8 @@ TEST(DirectoryHandlerTest, CheckIfFirstLaneDataWasLoaded) {
 
     std::vector<std::string> lane1{"Name1:X|4-|3",
                                    "Name2:34|X|0-",
-                                   ":X|22|33"};
+                                   ":X|22|33"
+                                   ,""};
 
     auto isContainsLine1 = std::all_of(handlerDataFirstLane.begin(), handlerDataFirstLane.end(), [lane1](const auto& el) {
         return std::find(lane1.begin(), lane1.end(), el) != lane1.end();
