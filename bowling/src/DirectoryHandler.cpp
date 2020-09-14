@@ -34,7 +34,9 @@ void DirectoryHandler::processData() {
 
             std::ifstream ifs{recentFile};
             for (std::string line; std::getline(ifs, line);) {
-                temporaryLanesData.push_back(line);
+                if (!line.empty()) {
+                    temporaryLanesData.push_back(line);
+                }
             }
         }
 
