@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
 
 class BowlingAlley : public Game {
 public:
-    BowlingAlley(fs::path path);
+    explicit BowlingAlley(fs::path path);
     void showCurrentStatus();
 
 private:
