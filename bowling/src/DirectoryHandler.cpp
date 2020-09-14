@@ -23,15 +23,15 @@ void DirectoryHandler::processData() {
     for (auto& p : fs::directory_iterator(directoryName_)) {
         std::string recentFile = p.path().string();
 
-        std::smatch matches;
         int lineNumber;
-
-        if (std::regex_search(recentFile, matches, pattern)) {
-            lineNumber = std::stoi(matches[3]);
-        }
-
         std::vector<std::string> temporaryLanesData;
         if (p.is_regular_file()) {
+            std::smatch matches;
+
+            if (std::regex_search(recentFile, matches, pattern)) {
+                lineNumber = std::stoi(matches[3]);
+            }
+
             std::ifstream ifs{recentFile};
             for (std::string line; std::getline(ifs, line);) {
                 temporaryLanesData.push_back(line);
