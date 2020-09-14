@@ -10,7 +10,7 @@ BowlingAlley::BowlingAlley(fs::path path)
 
 void BowlingAlley::showCurrentStatus() {
     std::cout << "Your current path is: " << path_ << '\n'
-              << "I found " << countFiles() << " file(s) here. \n".;
+              << "I found " << countFiles() << " file(s) here. \n";
 }
 
 size_t BowlingAlley::countFiles() {
