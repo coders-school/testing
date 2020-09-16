@@ -6,17 +6,6 @@
 #include <regex>
 namespace fs = std::filesystem;
 
-void DirectoryHandler::printData() {
-    //data test purposes
-    for (auto el : rawLanesData_) {
-        std::cout << "Line " << el.first << '\n';
-        for (auto str : el.second) {
-            std::cout << str << '\n';
-        }
-    }
-    std::cout << '\n';
-}
-
 void DirectoryHandler::processData() {
     std::regex pattern(R"((\w+)/([a-zA-Z]+)(\d+).?(\w+)?)");
 
