@@ -40,6 +40,6 @@ void DirectoryHandler::processData() {
             }
         }
 
-        rawLanesData_.push_back({lineNumber, temporaryLanesData});
+        rawLanesData_.insert({lineNumber, temporaryLanesData});
     }
 }

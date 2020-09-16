@@ -10,24 +10,23 @@ TEST(DirectoryHandlerTest, CheckAllLanesBeingProcessed) {
     DirectoryHandler handler{inputDirectoryPath};
     auto handlerData = handler.getDirectoryData();
 
-    auto isContainsAllLines = std::all_of(handlerData.begin(), handlerData.end(), [lanes](const auto& el) {
-        return std::find(lanes.begin(), lanes.end(), el.first) != lanes.end();
+    auto isContainsAllLanes = std::all_of(handlerData.cbegin(), handlerData.cend(), [lanes](const auto& el) {
+        return std::find(lanes.cbegin(), lanes.cend(), el.first) != lanes.cend();
     });
 
-    ASSERT_TRUE(isContainsAllLines);
+    ASSERT_TRUE(isContainsAllLanes);
 }
 
 TEST(DirectoryHandlerTest, CheckIfFirstLaneDataWasLoaded) {
     DirectoryHandler handler{inputDirectoryPath};
-    auto handlerDataFirstLane = handler.getDirectoryData()[0].second;
+    auto handlerDataFirstLane = handler.getDirectoryData()[1];
 
     std::vector<std::string> lane1{"Name1:X|4-|3",
                                    "Name2:34|X|0-",
-                                   ":X|22|33"
-                                   ,""};
+                                   ":X|22|33"};
 
-    auto isContainsLine1 = std::all_of(handlerDataFirstLane.begin(), handlerDataFirstLane.end(), [lane1](const auto& el) {
-        return std::find(lane1.begin(), lane1.end(), el) != lane1.end();
+    auto isContainsLine1 = std::all_of(handlerDataFirstLane.cbegin(), handlerDataFirstLane.cend(), [lane1](const auto& el) {
+        return std::find(lane1.cbegin(), lane1.cend(), el) != lane1.cend();
     });
 
     ASSERT_TRUE(isContainsLine1);
