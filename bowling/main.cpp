@@ -28,6 +28,12 @@ int main() {
     // }
 
     DirectoryHandler handler{"../input"};
-    handler.printData();
+    auto data = handler.getDirectoryData();
+    for (auto lane : data) {
+        std::cout << "Lane " << lane.first << '\n';
+        for (auto player : lane.second) {
+            std::cout << player << '\n';
+        }
+    }
     return 0;
 }
