@@ -3,8 +3,8 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
-  shm:
-    runs-on: ubuntu-latest
+  bowling:
+    runs-on: ubuntu-20.04
     steps:
     - name: Check out code
       uses: actions/checkout@master
