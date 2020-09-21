@@ -1,6 +1,7 @@
 #include <cstring>
 #include <iostream>
-#include "DirectoryHandler.hpp"
+#include "Game.hpp"
+
 
 void printHelp() {
     std::cout << "******   BOWLING GAME    ******\n";
@@ -27,13 +28,7 @@ int main() {
     //     std::cout << resultOutputFileName << '\n';
     // }
 
-    DirectoryHandler handler{"../input"};
-    auto data = handler.getDirectoryData();
-    for (auto lane : data) {
-        std::cout << "Lane " << lane.first << '\n';
-        for (auto player : lane.second) {
-            std::cout << player << '\n';
-        }
-    }
+    Game game{"../input"};
+    game.printInputData();
     return 0;
 }
