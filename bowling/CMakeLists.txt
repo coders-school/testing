@@ -50,6 +50,7 @@ set(HEADERS
     include/DirectoryHandler.hpp
     include/Game.hpp
     include/Player.hpp
+    include/DataParser.hpp
     )
 
 set(SRC
@@ -57,6 +58,7 @@ set(SRC
     src/DirectoryHandler.cpp
     src/Game.cpp
     src/Player.cpp
+    src/DataParser.cpp
     )
 
 set(TESTS
@@ -64,7 +66,7 @@ set(TESTS
     tests/DirectoryHandler.ut.cpp
     tests/Game.ut.cpp
     tests/Player.ut.cpp
-
+    tests/DataParser.ut.cpp
     )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})

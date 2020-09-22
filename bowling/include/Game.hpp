@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+#include "DataParser.hpp"
 #include "DirectoryHandler.hpp"
 
 class BowlingLane;
@@ -25,5 +26,6 @@ public:
 
 private:
     DirectoryHandler directoryHandler_;
+    DataParser dataParser_;
     //std::vector<BowlingLane> lanes_;
 };

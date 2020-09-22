@@ -1,0 +1,73 @@
+#include "DataParser.hpp"
+
+#include <algorithm>
+
+std::string DataParser::stringPreparing(std::string& playerResults) {
+    const char addToEndOfString = '|';
+    playerResults.push_back(addToEndOfString);
+
+    return playerResults;
+}
+
+std::vector<std::string> DataParser::stringSplitting(std::string& preparedStringWithPlayerResults) {
+    const std::string delimiter = "|";
+    size_t position = 0;
+    std::string token;
+    std::vector<std::string> vectorWithResultsForEachLine{};
+    while ((position = preparedStringWithPlayerResults.find(delimiter)) != std::string::npos) {
+        token = preparedStringWithPlayerResults.substr(0, position);
+        vectorWithResultsForEachLine.push_back(token);
+        preparedStringWithPlayerResults.erase(0, position + delimiter.length());
+    }
+
+    return vectorWithResultsForEachLine;
+}
+
+std::vector<int> DataParser::stringProcessing(std::vector<std::string>& vectorWithResultsForEachLine) {
+    std::vector<int> vectorWithResults{};
+
+    std::find_if(vectorWithResultsForEachLine.cbegin(), vectorWithResultsForEachLine.cend(),
+                 [&vectorWithResults](std::string bowlingLineString) {
+                     std::find_if(bowlingLineString.cbegin(), bowlingLineString.cend(),
+                                  [&vectorWithResults, &bowlingLineString](const char charackter) {
+                                      if (charackter == isStrike) {
+                                          vectorWithResults.push_back(strike);
+                                          vectorWithResults.push_back(zeroPoints);
+                                      }
+
+                                      if (charackter == isMiss) {
+                                          vectorWithResults.push_back(zeroPoints);
+                                      }
+
+                                      if (isdigit(charackter)) {
+                                          if (bowlingLineString[1] == isSpare) {
+                                              uint8_t firstThrow = *bowlingLineString.begin() - convertCharToInt;
+                                              uint8_t secondThrow = strike - firstThrow;
+                                              vectorWithResults.push_back(firstThrow);
+                                              vectorWithResults.push_back(secondThrow);
+                                              return true;
+                                          }
+                                          uint8_t charackterToInteger = charackter - convertCharToInt;
+                                          vectorWithResults.push_back(charackterToInteger);
+                                      }
+
+                                      return false;
+                                  });
+
+                     return false;
+                 });
+
+    return vectorWithResults;
+}
+
+std::pair<std::string, std::vector<int>> DataParser::dataParsing(std::string& processingString) {
+    auto delimiterPosition = processingString.find_first_of(':');
+    std::string playerName = processingString.substr(0, delimiterPosition);
+
+    std::string playerResults = processingString.substr(++delimiterPosition);
+    std::string preparedStringWithPlayerResults = stringPreparing(playerResults);
+    std::vector<std::string> vectorWithResultsForEachLine = stringSplitting(preparedStringWithPlayerResults);
+    std::vector<int> playerResult = stringProcessing(vectorWithResultsForEachLine);
+
+    return std::make_pair(playerName, playerResult);
+}
