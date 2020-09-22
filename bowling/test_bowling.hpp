@@ -30,9 +30,9 @@ SCENARIO("Conversion to Roman and to Arabic", "[toRoman][fromRoman]") {
 Each game, or "line" of bowling, includes ten turns,
 or "frames" for the bowler.
 
-GIVEN Player with all frames played
-WHEN  Player tries play ball
-THEN  Error
+GIVEN Player with 10 frames played and there is no strike in last frame
+WHEN  Player tries play ball and hits xxx points
+THEN  
 
 
 
@@ -95,6 +95,12 @@ Given 2 pilki zagrane
  2) troche stracone ale w drugim rzucie
  3) troche stracone ale tylko w pierwszym rzucie
 
+
+
+Given  Player played 10 frames wit all mises 
+
+
+
 //ten pins standing the score for that frame is simply
 //the total number of pins knocked down in those two balls.
 //
@@ -113,6 +119,10 @@ Given 2 pilki zagrane
 //If a bonus ball knocks down all the pins, the process
 //does not repeat. The bonus balls are only used to
 //calculate the score of the final frame.
+//
+//
+//
+
 //
 //The game score is the total of all frame scores.
 //
