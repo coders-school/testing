@@ -25,6 +25,17 @@ public:
         }
     }
 
+    void printResults() {
+        for (auto el : lanes_) {
+            el->printData();
+        }
+    }
+
+private:
+    DirectoryHandler directoryHandler_;
+    DataParser dataParser_;
+    std::vector<std::shared_ptr<BowlingLane>> lanes_;
+
     void processData() {
         auto parser = std::make_shared<DataParser>();
         std::map<int, std::vector<std::string>> rawLanes = directoryHandler_.getDirectoryData();
@@ -38,9 +49,4 @@ public:
             lanes_.emplace_back(std::make_shared<BowlingLane>(laneNumber, players));
         }
     }
-
-private:
-    DirectoryHandler directoryHandler_;
-    DataParser dataParser_;
-    std::vector<std::shared_ptr<BowlingLane>> lanes_;
 };

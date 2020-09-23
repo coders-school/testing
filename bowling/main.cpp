@@ -30,5 +30,6 @@ int main() {
 
     Game game{"../input"};
     game.printInputData();
+    game.printResults();
     return 0;
 }

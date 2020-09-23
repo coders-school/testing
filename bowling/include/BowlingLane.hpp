@@ -12,10 +12,10 @@ public:
         : laneNumber_(laneNumber), players_(players) {}
 
     void printData() {
-        std::cout << laneNumber_ << '\n';
-        // for (const auto& el : players_) {
-        //     //std::cout << el << '\n';
-        // }
+        std::cout <<"Lane number "<< laneNumber_ << '\n';
+        for (const auto& el : players_) {
+            std::cout << el->getName() << "\t" << el->getScore() << '\n';
+        }
     }
 
 private:
