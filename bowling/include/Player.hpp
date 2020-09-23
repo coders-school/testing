@@ -1,11 +1,11 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
 class Player {
 public:
-
     Player(const std::string& name, const std::vector<int>& points)
         : name_{name}, points_{points} {}
 
