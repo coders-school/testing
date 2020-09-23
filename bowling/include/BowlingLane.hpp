@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Player.hpp"
-
 #include <iostream>
+#include <memory>
 #include <vector>
 
-class Player;
+#include "Player.hpp"
 
-class BowlingLine {
+class BowlingLane {
 public:
-    BowlingLine(const int laneNumber, const std::vector<std::shared_ptr<Player>>& players)
+    BowlingLane(const int laneNumber, const std::vector<std::shared_ptr<Player>>& players)
         : laneNumber_(laneNumber), players_(players) {}
 
     void printData() {

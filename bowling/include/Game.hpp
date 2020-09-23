@@ -5,8 +5,7 @@
 
 #include "DataParser.hpp"
 #include "DirectoryHandler.hpp"
-
-class BowlingLane;
+#include "BowlingLane.hpp"
 
 class Game {
 public:
@@ -27,5 +26,5 @@ public:
 private:
     DirectoryHandler directoryHandler_;
     DataParser dataParser_;
-    //std::vector<BowlingLane> lanes_;
+    std::vector<std::shared_ptr<BowlingLane>> lanes_;
 };
