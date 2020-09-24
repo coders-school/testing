@@ -1,10 +1,7 @@
 #include "../include/Player.hpp"
 #include <iostream>
 
-void Player::setScore(int score) {
-    score_ = score;
-}
-void Player::countScore(std::vector<int> points) {
+int Player::countScore(std::vector<int> points) {
     int score = 0;
     std::vector<std::pair<int, int>> twoThrows;
 
@@ -12,7 +9,7 @@ void Player::countScore(std::vector<int> points) {
         twoThrows.push_back(std::make_pair(points[i], points[i + 1]));
     }
     int extraBall = twoThrows.size();
-    int throwBalls = 10 < twoThrows.size() ? 10 : twoThrows.size();
+    int throwBalls = 9 < twoThrows.size() ? 9 : twoThrows.size();
     /*
         for (const auto& oneThrow : twoThrows) {
             std::cout << oneThrow.first << " - " << oneThrow.second << "\n";
@@ -31,9 +28,8 @@ void Player::countScore(std::vector<int> points) {
         }
     }
 
-    if (throwBalls < extraBall) {
-        score += twoThrows[extraBall].first + twoThrows[extraBall].second;
+    for (int i = throwBalls; i < extraBall; i++) {
+        score += twoThrows[i].first + twoThrows[i].second;
     }
-
-    Player::setScore(score);
+    return score;
 }
