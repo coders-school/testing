@@ -20,6 +20,8 @@ INSTANTIATE_TEST_CASE_P(
     ::testing::Values(
         dataParsingTuple{{"Michael:X|7/|9-|X|-8|8/|-6|X|X|X||81"},
                          {{"Michael"}, {10, 0, 7, 3, 9, 0, 10, 0, 0, 8, 8, 2, 0, 6, 10, 0, 10, 0, 10, 0, 8, 1}}},
+        dataParsingTuple{{"ImSpecialCase:X|7/|9-|X|-8|8/|-6|X|X|X||XX5"},
+                         {{"ImSpecialCase"}, {10, 0, 7, 3, 9, 0, 10, 0, 0, 8, 8, 2, 0, 6, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 5, 0}}},
         dataParsingTuple{{"Radek:9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||"},
                          {{"Radek"}, {9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0}}},
         dataParsingTuple{{"Waleczny_Ziobro_69_PL:X|X|X|X|X|X|X|X|X|X||XX"},

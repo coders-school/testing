@@ -6,6 +6,7 @@
 namespace {
 constexpr uint8_t strike = 10;
 constexpr uint8_t zeroPoints = 0;
+constexpr uint8_t addZeroPointsToVectorEndForThisSize = 25;
 constexpr char isStrike = 'X';
 constexpr char isMiss = '-';
 constexpr char isSpare = '/';

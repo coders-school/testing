@@ -16,7 +16,7 @@ std::vector<std::string> DataParser::stringSplitting(std::string& preparedString
     std::vector<std::string> vectorWithResultsForEachLine{};
     while ((position = preparedStringWithPlayerResults.find(delimiter)) != std::string::npos) {
         token = preparedStringWithPlayerResults.substr(0, position);
-        vectorWithResultsForEachLine.push_back(token);
+        vectorWithResultsForEachLine.emplace_back(token);
         preparedStringWithPlayerResults.erase(0, position + delimiter.length());
     }
 
@@ -31,24 +31,24 @@ std::vector<int> DataParser::stringProcessing(std::vector<std::string>& vectorWi
                      std::find_if(bowlingLineString.cbegin(), bowlingLineString.cend(),
                                   [&vectorWithResults, &bowlingLineString](const char charackter) {
                                       if (charackter == isStrike) {
-                                          vectorWithResults.push_back(strike);
-                                          vectorWithResults.push_back(zeroPoints);
+                                          vectorWithResults.emplace_back(strike);
+                                          vectorWithResults.emplace_back(zeroPoints);
                                       }
 
                                       if (charackter == isMiss) {
-                                          vectorWithResults.push_back(zeroPoints);
+                                          vectorWithResults.emplace_back(zeroPoints);
                                       }
 
                                       if (isdigit(charackter)) {
                                           if (bowlingLineString[1] == isSpare) {
                                               uint8_t firstThrow = *bowlingLineString.begin() - convertCharToInt;
                                               uint8_t secondThrow = strike - firstThrow;
-                                              vectorWithResults.push_back(firstThrow);
-                                              vectorWithResults.push_back(secondThrow);
+                                              vectorWithResults.emplace_back(firstThrow);
+                                              vectorWithResults.emplace_back(secondThrow);
                                               return true;
                                           }
                                           uint8_t charackterToInteger = charackter - convertCharToInt;
-                                          vectorWithResults.push_back(charackterToInteger);
+                                          vectorWithResults.emplace_back(charackterToInteger);
                                       }
 
                                       return false;
@@ -56,6 +56,10 @@ std::vector<int> DataParser::stringProcessing(std::vector<std::string>& vectorWi
 
                      return false;
                  });
+
+    if (vectorWithResults.size() == addZeroPointsToVectorEndForThisSize) {
+        vectorWithResults.emplace_back(zeroPoints);
+    }
 
     return vectorWithResults;
 }
