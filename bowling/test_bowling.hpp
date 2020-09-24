@@ -43,7 +43,7 @@ GIVEN("First ball in first frame knocks down 10 pins, first fame is over.") {
 
 // endigs
 GIVEN("9 frames are played. First ball in last frame is not played.") {
-  WHEN("First ball in 10th frameknocks down 10 pins") {
+  WHEN("First ball in 10th frame knocks down 10 pins") {
     THEN(
         "Last frame is over. Two bonus balls are added, game is not finished") {
 
@@ -82,7 +82,7 @@ GIVEN("First extra ball is played and knock down 3 pins") {
 }
 
 // interruption scenarios
-SCENARIO("Playig agains the rules") {
+SCENARIO("Playing against the rules") {
   GIVEN("Player with 2 balls played in 10-th frame and hits 3 points in last "
         "frame") {
     WHEN("Player tries play ball and hits all points (strike)") {
