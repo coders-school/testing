@@ -11,7 +11,7 @@ public:
     Player() {}
     std::string getName() const { return name_; }
 
-    int countScore(std::vector<int> points);
+    int getScore();
 
 private:
     std::string name_;
