@@ -1,21 +1,17 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
 
 class Player {
 public:
-    Player(const std::string& name, const std::vector<int>& points)
-        : name_{name}, points_{points} {}
+    Player(const std::string& name, const std::vector<int>& points) : name_{name}, points_{points} {}
+    Player() {}
+    std::string getName() const { return name_; }
 
-    std::string getName() const {
-        return name_;
-    }
-
-    int getScore() {
-        return 0;
-    }
+    int getScore();
 
 private:
     std::string name_;
