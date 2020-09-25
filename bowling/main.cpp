@@ -14,6 +14,11 @@ void printHelp() {
 int main(int argc, char* argv[]) {
     std::string inputDirectoryName;
     std::string resultOutputFileName;
+    if (argc == 1) {
+        std::cout << "No arguments provided!\n";
+        exit(1);
+    }
+
     try {
         if ((argc == 2 && strcmp(argv[1], "--help") == 0) || strcmp(argv[1], "-h") == 0) {
             printHelp();
