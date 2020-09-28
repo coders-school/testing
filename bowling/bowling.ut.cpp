@@ -19,6 +19,23 @@ SCENARIO("Miss in every game", "[points]") {
     }
 }
 
+SCENARIO("Getting 1 points in every game", "[points]") {
+    GIVEN("Ten turns of game") {
+        std::vector<int> game;
+        for (size_t i = 0; i < 10; i++) {
+            game.emplace_back(1);
+            game.emplace_back(0);
+        }
+
+        WHEN("Missing in every turn") {
+            int gameScore = score(20);
+            THEN("Score should be 0 points") {
+                REQUIRE(gameScore == 20);
+            }
+        }
+    }
+}
+
 SCENARIO("Ten strikes - perfect game", "[points]") {
     GIVEN("Ten turns of game") {
         std::vector<int> game(10, 10);
@@ -31,7 +48,7 @@ SCENARIO("Ten strikes - perfect game", "[points]") {
     }
 }
 
-SCENARIO("Strike in last turn") {
+SCENARIO("Strike in last turn", "[game]") {
     GIVEN("Ten turns of game") {
         std::vector<int> game(9, 0);
         game.push_back(10);
@@ -48,7 +65,7 @@ SCENARIO("Strike in last turn") {
     }
 }
 
-SCENARIO("Spare in last turn") {
+SCENARIO("Spare in last turn", "[game]") {
     GIVEN("Ten turns of game") {
         std::vector<int> game(9, 0);
         game.push_back(10);
@@ -64,7 +81,7 @@ SCENARIO("Spare in last turn") {
     }
 }
 
-SCENARIO("First ball - 9, Second - 0") {
+SCENARIO("First ball - 9, Second - 0", "[points]") {
     GIVEN("Ten turns of game") {
         std::vector<int> game(10, 9);
 
@@ -78,7 +95,7 @@ SCENARIO("First ball - 9, Second - 0") {
     }
 }
 
-SCENARIO("Spare every turn") {
+SCENARIO("Spare every turn", "[points]") {
     GIVEN("Ten turns of game") {
         std::vector<int> game(20, 5);
 
@@ -92,7 +109,7 @@ SCENARIO("Spare every turn") {
     }
 }
 
-SCENARIO("Spare") {
+SCENARIO("Spare", "[points]") {
     GIVEN("Two turns") {
         int firstShot = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
         int secondTurn = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -108,7 +125,7 @@ SCENARIO("Spare") {
     }
 }
 
-SCENARIO("Strike") {
+SCENARIO("Strike", "[points]") {
     GIVEN("Two turns") {
         int secondTurn = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
@@ -118,6 +135,19 @@ SCENARIO("Strike") {
 
             THEN("Strike") {
                 REQUIRE(firstTurnScore == 10 + secondTurn + 1);
+            }
+        }
+    }
+}
+
+SCENARIO("Regular game without strike and spare", "[points]") {
+    GIVEN("Regular game without strike and spare") {
+        std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 4, 2};
+        WHEN("Count score for game") {
+            auto gameScore = score(167);
+            
+            THEN("Should be equal to") {
+                REQUIRE(gameScore == 167);
             }
         }
     }
