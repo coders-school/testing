@@ -12,6 +12,12 @@ public:
     std::string getName() const { return name_; }
 
     int getScore();
+    std::vector<int> getPoints() const { return points_; }
+
+    friend std::ostream& operator<<(std::ostream& os, Player player){
+        os << player.name_ << " " << std::to_string(player.getScore()) << '\n';
+        return os;
+    }
 
 private:
     std::string name_;

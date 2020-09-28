@@ -26,8 +26,8 @@ public:
     }
 
     void printResults() {
-        for (auto el : lanes_) {
-            el->printData();
+        for(const auto& lane : lanes_){
+            std::cout << *lane;
         }
     }
 
