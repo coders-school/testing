@@ -1,2 +1,0 @@
-/usr/bin/ar qc libbowling-lib.a  CMakeFiles/bowling-lib.dir/src/BowlingLane.cpp.o CMakeFiles/bowling-lib.dir/src/DirectoryHandler.cpp.o CMakeFiles/bowling-lib.dir/src/Game.cpp.o CMakeFiles/bowling-lib.dir/src/Player.cpp.o CMakeFiles/bowling-lib.dir/src/DataParser.cpp.o
-/usr/bin/ranlib libbowling-lib.a
