@@ -26,7 +26,8 @@ int main(int argc, char* argv[]) {
             inputDirectoryName = argv[1];
             Game game{inputDirectoryName};
 //            game.printInputData();
-            game.printResults();
+            game.printResult();
+            game.saveDataToFile();
         } else if (argc == 3) {
             inputDirectoryName = argv[1];
             resultOutputFileName = argv[2];

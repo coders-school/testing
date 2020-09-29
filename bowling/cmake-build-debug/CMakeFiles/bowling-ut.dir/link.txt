@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/bowling-ut.dir/tests/BowlingLane.ut.cpp.o CMakeFiles/bowling-ut.dir/tests/DirectoryHandler.ut.cpp.o CMakeFiles/bowling-ut.dir/tests/Game.ut.cpp.o CMakeFiles/bowling-ut.dir/tests/Player.ut.cpp.o CMakeFiles/bowling-ut.dir/tests/DataParser.ut.cpp.o  -o bowling-ut  libbowling-lib.a lib/libgtest_maind.a lib/libgtestd.a -lpthread 

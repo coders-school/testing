@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/bowling.dir/main.cpp.o  -o bowling  libbowling-lib.a 

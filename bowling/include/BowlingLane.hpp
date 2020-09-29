@@ -15,6 +15,9 @@ public:
         NO_GAME
     };
 
+    std::vector<std::shared_ptr<Player>> getPlayers() const { return players_; }
+    int getLaneNumber() const { return laneNumber_; }
+
     BowlingLane(const int laneNumber, const std::vector<std::shared_ptr<Player>>& players)
         : laneNumber_(laneNumber), players_(players) {}
 
@@ -30,7 +33,6 @@ private:
 //            {GameState::IN_PROGRESS, "game in progress"},
 //            {GameState::NO_GAME,     "no game"}
 //    };
-    GameState gameState_;
     int laneNumber_;
     std::vector<std::shared_ptr<Player>> players_;
 };
