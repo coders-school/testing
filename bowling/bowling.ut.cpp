@@ -1,4 +1,6 @@
 #define CATCH_CONFIG_MAIN
+#include <algorithm>
+#include <exception>
 #include <vector>
 
 #include "catch.hpp"
@@ -144,10 +146,92 @@ SCENARIO("Regular game without strike and spare", "[points]") {
     GIVEN("Regular game without strike and spare") {
         std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 4, 2};
         WHEN("Count score for game") {
-            auto gameScore = score(167);
-            
+            auto gameScore = score(74);
+
             THEN("Should be equal to") {
-                REQUIRE(gameScore == 167);
+                REQUIRE(gameScore == 74);
+            }
+        }
+    }
+}
+
+SCENARIO("Game with an extra throw", "[points]") {
+    GIVEN("Game with an extra throw") {
+        std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 10, 10, 5};
+        WHEN("Count score for game") {
+            auto gameScore = score(93);
+
+            THEN("Should be equal to") {
+                REQUIRE(gameScore == 93);
+            }
+        }
+    }
+}
+
+SCENARIO("Game with too few rounds", "[game]") {
+    GIVEN("Game with too few rounds") {
+        std::vector<int> game{1, 2};
+        auto throwsNumber = game.size();
+        const int minimumThrowsNumber = 20;
+        WHEN("Too few rounds") {
+            game.size() < minimumThrowsNumber;
+            THEN("Too few rounds, should throw an exception") {
+                throw std::logic_error("Too few rounds!");
+            }
+        }
+    }
+}
+
+SCENARIO("Game with too many rounds", "[game]") {
+    GIVEN("Game with too many rounds") {
+        std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 10, 10, 5, 10};
+        auto throwsNumber = game.size();
+        const int maximumThrowsNumber = 21;
+        WHEN("Too many rounds") {
+            game.size() > maximumThrowsNumber;
+            THEN("Too many rounds, should throw an exception") {
+                throw std::logic_error("Too many rounds!");
+            }
+        }
+    }
+}
+
+SCENARIO("Game vector should have only positive values", "[game]") {
+    GIVEN("Vector with all throws") {
+        std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 10, 10, 5};
+
+        WHEN("Check all elements of game vector") {
+            bool elementsArePositive;
+            THEN("All elements of game vector should be positive") {
+                elementsArePositive = std::all_of(game.cbegin(), game.cend(), [](int throwPoints) { return (throwPoints >= 0) ? true : false; });
+            }
+            REQUIRE(elementsArePositive);
+        }
+    }
+}
+
+SCENARIO("Game vector should be equal or less than 10", "[game]") {
+    GIVEN("Vector with all throws") {
+        std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 10, 10, 5};
+
+        WHEN("Check all elements of game vector") {
+            bool elementsAreEqualOrUnderTen;
+            THEN("All elements of game vector should be equal or less than 10") {
+                elementsAreEqualOrUnderTen = std::all_of(game.cbegin(), game.cend(), [](int throwPoints) { return (throwPoints <= 10) ? true : false; });
+            }
+            REQUIRE(elementsAreEqualOrUnderTen);
+        }
+    }
+}
+
+SCENARIO("It is impossible to get more than 10 pointrs for one throw", "[points]") {
+    GIVEN("Vector with all throws") {
+        std::vector<int> game{5555, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        WHEN("Count score for game") {
+            auto gameScore = score(5555);
+            THEN("One throw cannot score more than 10 points") {
+                throw std::logic_error("One throw cannot score more than 10 points!");
             }
         }
     }
