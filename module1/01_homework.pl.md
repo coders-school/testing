@@ -13,7 +13,7 @@ ___
 ## SHM - zadanie grupowe
 
 * Napisz testy do SHM (0 punktów)
-  * nie zgłaszajcie nam PR ;) możecie się pochwalić testami lub zapytać o nie na Discordzie.
+  * nie zgłaszajcie nam PR 😉 możecie się pochwalić testami lub zapytać o nie na Discordzie.
 
 ___
 
