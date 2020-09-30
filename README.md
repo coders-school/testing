@@ -16,6 +16,16 @@
 
 ### [Zadanie domowe](module2/01_homework.pl.md)
 
+## [Moduł 3](module3/)
+
+### [Wstrzykiwanie zależności](module3/00_dependency_injection.pl.md)
+
+### [Atrapy](module3/01_test_doubles.pl.md)
+
+### [`GMock`](module3/02_gmock.pl.md)
+
+### [Praca domowa](module3/03_homework.pl.md)
+
 ___
 
 # Testing
@@ -31,3 +41,13 @@ ___
 ### [`GTest` framework](module2/00_gtest.en.md)
 
 ### [Homework](module2/01_homework.en.md)
+
+## [Module 3](module3/)
+
+### [Dependency injection](module3/00_dependency_injection.en.md)
+
+### [Test doubles](module3/01_test_doubles.en.md)
+
+### [`GMock`](module3/02_gmock.en.md)
+
+### [Homework](module3/03_homework.en.md)

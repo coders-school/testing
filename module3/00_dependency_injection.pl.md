@@ -51,7 +51,7 @@ Response sendQuery(Query q);
 
 ___
 
-## Problem 3 - funkcja z timeoutem
+## Problem #3 - funkcja z timeoutem
 
 Jak przetestować funkcję, która czeka na wykonanie zdalnej procedury przez określony czas, po czym zgłasza błąd?
 
