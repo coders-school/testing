@@ -38,7 +38,7 @@ public:
         if(result.is_open()){
             for(const auto& lane : lanes_){
                 auto laneNumber = lane->getLaneNumber();
-                auto gamesState = lane->convertGameState(lane->checkGameState(lane->getPlayers()));
+                auto gamesState = lane->convertGameState(lane->checkGameState());
 
                 result << "### Lane: " << laneNumber << ": " << gamesState << " ###\n";
                 for(const auto& player : lane->getPlayers()){
