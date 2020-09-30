@@ -23,8 +23,7 @@ std::ostream& operator<<(std::ostream& os, BowlingLane bowlingLane) {
     auto gameState = bowlingLane.checkGameState();
     os << "### Lane " << bowlingLane.laneNumber_ << ": " << bowlingLane.convertGameState(gameState) << " ###\n";
     for (const auto& player : bowlingLane.players_) {
-        std::cout << *player;
+        os << *player;
     }
-    std::cout << '\n';
     return os;
 }
