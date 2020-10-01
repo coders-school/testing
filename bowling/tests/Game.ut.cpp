@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Game.hpp"
 
-constexpr char inputDirectoryPath[] = "../tests";
+constexpr char inputDirectoryPath[] = "../input/";
 constexpr char resultOutput[] = "../tests/resultTest.txt";
 
 TEST(GameTest, ResultShouldBeEqualToInitialFile) {
