@@ -9,6 +9,10 @@ int score(int number) {
     return number;
 }
 
+void throwError(const std::string& errorMessage) {
+    throw std::logic_error(errorMessage);
+}
+
 SCENARIO("Miss in every game", "[points]") {
     GIVEN("Ten turns of game") {
         std::vector<int> game(20, 0);
@@ -153,7 +157,9 @@ SCENARIO("Game with too few rounds", "[game]") {
         const int minimumThrowsNumber = 20;
         WHEN("Too few rounds") {
             game.size() < minimumThrowsNumber;
-            THEN("Too few rounds, should throw an exception") { throw std::logic_error("Too few rounds!"); }
+            THEN("Too few rounds, should throw an exception") {
+                CHECK_THROWS_AS(throwError("Too few rounds!"), std::exception);
+            }
         }
     }
 }
@@ -165,7 +171,9 @@ SCENARIO("Game with too many rounds", "[game]") {
         const int maximumThrowsNumber = 21;
         WHEN("Too many rounds") {
             game.size() > maximumThrowsNumber;
-            THEN("Too many rounds, should throw an exception") { throw std::logic_error("Too many rounds!"); }
+            THEN("Too many rounds, should throw an exception") {
+                CHECK_THROWS_AS(throwError("Too many rounds!"), std::exception);
+            }
         }
     }
 }
@@ -207,7 +215,7 @@ SCENARIO("It is impossible to get more than 10 pointrs for one throw", "[points]
         WHEN("Count score for game") {
             auto gameScore = score(5555);
             THEN("One throw cannot score more than 10 points") {
-                throw std::logic_error("One throw cannot score more than 10 points!");
+                CHECK_THROWS_AS(throwError("One throw cannot score more than 10 points!"), std::exception);
             }
         }
     }
