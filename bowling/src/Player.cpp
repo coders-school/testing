@@ -29,3 +29,8 @@ int Player::getScore() {
     }
     return score;
 }
+
+std::ostream& operator<<(std::ostream& os, Player player) {
+    os << player.name_ << " " << std::to_string(player.getScore()) << '\n';
+    return os;
+}
