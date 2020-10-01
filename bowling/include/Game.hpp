@@ -15,6 +15,8 @@ public:
         processData();
     }
 
+    std::vector<std::shared_ptr<BowlingLane>> getLanes() const { return lanes_; }
+
     void printResult() {
         for (const auto& lane : lanes_) {
             std::cout << *lane;
@@ -39,7 +41,6 @@ public:
 
 private:
     DirectoryHandler directoryHandler_;
-    DataParser dataParser_;
     std::vector<std::shared_ptr<BowlingLane>> lanes_;
     std::string resultOutput_;
 
