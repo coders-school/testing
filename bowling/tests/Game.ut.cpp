@@ -4,11 +4,10 @@
 constexpr char inputDirectoryPath[] = "../tests";
 constexpr char resultOutput[] = "../tests/resultTest.txt";
 
-TEST(GameTest, ShouldSaveEBEEBEToFile) {
+TEST(GameTest, ResultShouldBeEqualToInitialFile) {
     Game game{inputDirectoryPath, resultOutput};
     game.saveDataToFile();
-    std::string expected = "### Lane 0: no game ###"
-                           "### Lane 1: game in progress ###"
+    std::string expected = "### Lane 1: game in progress ###"
                            "Name1 18"
                            "Name2 17"
                            " 24"
