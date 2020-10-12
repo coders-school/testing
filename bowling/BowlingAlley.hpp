@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include <memory>
 #include <vector>
 
 namespace fs = std::filesystem;
@@ -9,11 +10,11 @@ class BowlingAlley {
 public:
     BowlingAlley() = default;
     explicit BowlingAlley(const fs::path& pathToFolder);
-
+    void loadFromFolder(const fs::path& pathToFolder);
     void showCurrentStatus();
 
 private:
     size_t countFiles();
-    std::vector<Game*> games_{};
+    std::vector<std::shared_ptr<Game>> games_{};
     fs::path path_{};
 };

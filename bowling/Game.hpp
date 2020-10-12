@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -35,7 +36,8 @@ class Game {
         std::string name;
         std::vector<Frame> rolls;
     };
-    std::vector<PlayerData> players;
+    std::vector<PlayerData> players{};
+
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
     bool isLastFrame(int frameCount) const;
     bool isStrike(char currentRoll) const;
@@ -49,7 +51,9 @@ class Game {
     std::string getOutputString(int laneNumber) const;
 
    public:
-    Game(){};
+    Game() = default;
+    Game(const std::string& filePath);
+    Game(const std::filesystem::path& filePath);
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() const { return players; };
     size_t countPoints(const std::vector<Frame>& rolls) const;

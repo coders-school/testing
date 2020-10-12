@@ -4,6 +4,14 @@
 #include <fstream>
 #include <iostream>
 
+Game::Game(const std::string& filePath) {
+    loadFromFile(filePath);
+}
+
+Game::Game(const std::filesystem::path& filePath) {
+    loadFromFile(filePath.string());
+}
+
 void Game::loadFromFile(const std::string& filePath) {
     std::ifstream file(filePath, std::ios_base::in);
     if (!file.good()) {
