@@ -12,17 +12,6 @@ BowlingAlley::BowlingAlley(const fs::path& pathToFolder)
     loadFromFolder(path_);
 }
 
-void BowlingAlley::showCurrentStatus() {
-    std::cout << "Your current path is: " << path_ << '\n'
-              << "I found " << countFiles() << " file(s) here. \n";
-}
-
-size_t BowlingAlley::countFiles() {
-    size_t fileCounter = 0;
-    fileCounter = std::distance(fs::directory_iterator(path_), fs::directory_iterator{});
-    return fileCounter;
-}
-
 void BowlingAlley::loadFromFolder(const fs::path& pathToFolder) {
     if (!fs::is_directory(pathToFolder)) {
         throw std::logic_error{"please enter path to directory!\n"};
