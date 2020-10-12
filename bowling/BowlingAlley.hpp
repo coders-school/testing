@@ -1,13 +1,12 @@
 #pragma once
 
-#include "Game.hpp"
 #include <filesystem>
 
 namespace fs = std::filesystem;
 
-class BowlingAlley : public Game {
+class BowlingAlley {
 public:
-    explicit BowlingAlley(fs::path path);
+    explicit BowlingAlley(const fs::path& pathToFolder);
     void showCurrentStatus();
 
 private:

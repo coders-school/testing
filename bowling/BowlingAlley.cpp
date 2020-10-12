@@ -4,9 +4,11 @@
 
 namespace fs = std::filesystem;
 
-BowlingAlley::BowlingAlley(fs::path path)
-    : path_(path) 
-    {}
+BowlingAlley::BowlingAlley(const fs::path& pathToFolder)
+:path_(pathToFolder)
+{
+    
+}
 
 void BowlingAlley::showCurrentStatus() {
     std::cout << "Your current path is: " << path_ << '\n'
