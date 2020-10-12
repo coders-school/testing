@@ -50,6 +50,6 @@ target_link_libraries(${PROJECT_NAME}-ut gtest_main src)
 target_include_directories(${PROJECT_NAME}-ut PRIVATE .)
 add_test(NAME bowlingTests COMMAND ${PROJECT_NAME}-ut)
 
-set (FLAGS -Wall -Wextra -Werror -Wconversion -pedantic)
+set (FLAGS -Wall -Wextra -Wconversion -pedantic)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})

@@ -1,28 +1,42 @@
-#include <iostream>
-#include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <string>
 
+#include "BowlingAlley.hpp"
 #include "Game.hpp"
+#include <algorithm>
+#include <cstring>
 
-void make_file(const std::string& filePath) {
-  std::ofstream file(filePath, std::ios_base::out);
-  file << "Wojtek:55|21|33|X|21\n";
-  file << "Jadzia:21|17|7/|3-|X|0-|11|18|X|X||11\n";
-  file << "Robert:X|X|X|X|1/|2/|3/|1-|0-|1/||6\n";
-  file.close();
-}
-void remove_file(const std::string& filePath) {
-  std::filesystem::remove(std::filesystem::path(filePath));
+bool isHelpFlag(int argc, const char** argv) {
+  for (int i = 1; i < argc; ++i) {
+    if(strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
-int main() {
-  Game game;
-  std::string filePath = std::filesystem::current_path().string() + "/franek.txt";
-  make_file(filePath);
-  game.loadFromFile(filePath);
-  std::ofstream file("test.txt");
-  game.printOutput(file, 1);
-  file.close();
-  remove_file(filePath);
+void printManual() {
+  std::cout << "program ma przyjmować 2 parametry z linii komend.\n";
+  std::cout << "Pierwszy to katalog, w którym będą pliki txt ze stanami gier na torach,\n";
+  std::cout << "a drugi opcjonalny to plik wyjściowy, w którym mają zostać zapisane przetworzone wyniki.\n";
+  std::cout << "Jeśli drugi parametr nie zostanie podany to wyniki mają zostać wypisane na ekran.\n";
+  std::cout << "Przykład użycia: ./bowling inputDirectory results.txt\n";
+}
+
+int main(int argc, const char** argv) {
+  if (argc <= 1) {
+    return -1;
+  }
+  if (isHelpFlag(argc, argv)) {
+    printManual();
+    return 0;
+  }
+  BowlingAlley alley(argv[1]);
+  if (argc >= 3) {
+    std::ofstream file(argv[2]);
+    alley.printOutputTo(file);
+  } else {
+    alley.printOutputTo(std::cout);
+  }
 }
