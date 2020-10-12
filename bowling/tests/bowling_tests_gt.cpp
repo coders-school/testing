@@ -179,3 +179,22 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
 TEST_F(GameTests, GameOutputCanBePrintedOnScreen) {
     game.printOutput(std::cout, 1);
 }
+
+TEST_F(GameTests, loadFromFileShouldLoadPlayerRollss) {
+    file << "Name1:X|4-|3\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    auto players = game.getPlayers();
+    std::vector<Frame> expectedRolls{{'X', ' '}, {'4', '-'}, {'3', ' '}};
+    EXPECT_EQ(players[0].rolls, expectedRolls);
+}
+
+TEST_F(GameTests, calculateScoreShouldReturnCalculatedScoreForPlayer) {
+    file << "Name1:X|4-|3\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    auto players = game.getPlayers();
+    auto score = game.countPoints(players[0].rolls);
+    auto expectedScore{21};
+    EXPECT_EQ(score, expectedScore);
+}

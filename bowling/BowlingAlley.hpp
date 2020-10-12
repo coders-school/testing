@@ -11,6 +11,7 @@ public:
     BowlingAlley() = default;
     explicit BowlingAlley(const fs::path& pathToFolder);
     void loadFromFolder(const fs::path& pathToFolder);
+    void printOutputTo(std::ostream&);
     void showCurrentStatus();
 
 private:

@@ -4,9 +4,9 @@
 #include <fstream>
 #include <iostream>
 
-Game::Game(const std::string& filePath) {
-    loadFromFile(filePath);
-}
+// Game::Game(const std::string& filePath) {
+//     loadFromFile(filePath);
+// }
 
 Game::Game(const std::filesystem::path& filePath) {
     loadFromFile(filePath.string());
@@ -48,7 +48,11 @@ void Game::loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls)
                 currentRoll++;
             }
         } else {
-            currentFrame = Frame(rolls[currentRoll], rolls[currentRoll + 1]);
+            if (currentRoll == rolls.size() - 1) {
+                currentFrame = Frame(rolls[currentRoll], ' ');
+            } else {
+                currentFrame = Frame(rolls[currentRoll], rolls[currentRoll + 1]);
+            }
             currentRoll += 2;
         }
         frameCount++;
@@ -76,7 +80,6 @@ bool Game::isSpare(const Frame& frame) const {
     return frame.getSecondRoll() == '/' ? true : false;
 }
 
-
 Game::Status Game::getGameStatus() const {
     if (players.size() == 0) {
         return Game::Status::NO_GAME;
@@ -94,20 +97,27 @@ Game::Status Game::getGameStatus() const {
     return Game::Status::NO_GAME;
 }
 
-std::vector<Frame> Game::conversionCharNumbersToInt(const std::vector <Frame>& rolls) const {
-    std::vector<Frame> convertedRolls {};
-    Frame currentFrame {};
+std::vector<Frame> Game::conversionCharNumbersToInt(const std::vector<Frame>& rolls) const {
+    std::vector<Frame> convertedRolls{};
+    Frame currentFrame{};
     char conversionNumber = '0';
-
+    size_t firstRoll{};
+    size_t secondRoll{};
     for (size_t i = 0; i < rolls.size(); i++) {
-        size_t firstRoll = rolls[i].getFirstRoll();
-        size_t secondRoll = rolls[i].getSecondRoll();
+        firstRoll = rolls[i].getFirstRoll();
+        secondRoll = rolls[i].getSecondRoll();
         if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
             firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
             secondRoll = (rolls[i].getSecondRoll() - conversionNumber);
-        } 
+        }
         if (isSpare(rolls[i])) {
             firstRoll = (rolls[i].getFirstRoll() - conversionNumber);
+        }
+        if (isBadCharacter(rolls[i].getFirstRoll())) {
+            firstRoll = 0;
+        }
+        if (isBadCharacter(rolls[i].getSecondRoll())) {
+            secondRoll = 0;
         }
         currentFrame = (Frame(firstRoll, secondRoll));
         convertedRolls.push_back(currentFrame);
@@ -115,12 +125,17 @@ std::vector<Frame> Game::conversionCharNumbersToInt(const std::vector <Frame>& r
     return convertedRolls;
 }
 
+bool Game::isBadCharacter(char roll) const {
+    char badCharacters[]{'-', ' ', '\0'};
+    return std::any_of(std::begin(badCharacters), std::end(badCharacters), [roll](char bad) { return roll == bad; });
+}
+
 size_t Game::countFramesWithoutStrikeOrSpare(const std::vector<Frame>& rolls) const {
     size_t totalPointsWithoutStrikeNorSpare = 0;
     for (size_t i = 0; i < rolls.size(); i++) {
         if (!isStrike(rolls[i]) && !isSpare(rolls[i])) {
             totalPointsWithoutStrikeNorSpare += (rolls[i].getFirstRoll() + rolls[i].getSecondRoll());
-        } 
+        }
     }
     return totalPointsWithoutStrikeNorSpare;
 }
@@ -170,15 +185,15 @@ size_t Game::countPoints(const std::vector<Frame>& rolls) const {
 
 std::string Game::getOutputString(int laneNumber) const {
     std::string output{"### Lane " + std::to_string(laneNumber) + ": "};
-    switch(getGameStatus()) {
+    switch (getGameStatus()) {
         case Status::FINISHED:
-        output += "game finished";
-        break;
+            output += "game finished";
+            break;
         case Status::IN_PROGRESS:
-        output += "game in progress";
-        break;
+            output += "game in progress";
+            break;
         case Status::NO_GAME:
-        output += "no game";
+            output += "no game";
     }
     output += " ###\n";
     for (auto& player : players) {

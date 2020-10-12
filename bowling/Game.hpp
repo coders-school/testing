@@ -44,6 +44,7 @@ class Game {
     bool isStrike(const Frame& frame) const;
     bool isSpare(char nextRoll) const;
     bool isSpare(const Frame& frame) const;
+    bool isBadCharacter(char) const;
     std::vector<Frame> conversionCharNumbersToInt(const std::vector <Frame>& rolls) const;
     size_t countFramesWithoutStrikeOrSpare(const std::vector<Frame>& rolls) const;
     size_t countOnlyStrikeFrames(const std::vector<Frame>& rolls) const;
@@ -52,7 +53,7 @@ class Game {
 
    public:
     Game() = default;
-    Game(const std::string& filePath);
+    // Game(const std::string& filePath);
     Game(const std::filesystem::path& filePath);
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() const { return players; };
