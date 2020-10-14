@@ -4,10 +4,6 @@
 #include <fstream>
 #include <iostream>
 
-// Game::Game(const std::string& filePath) {
-//     loadFromFile(filePath);
-// }
-
 Game::Game(const std::filesystem::path& filePath) {
     loadFromFile(filePath.string());
 }
@@ -126,7 +122,7 @@ std::vector<Frame> Game::conversionCharNumbersToInt(const std::vector<Frame>& ro
 }
 
 bool Game::isBadCharacter(char roll) const {
-    char badCharacters[]{'-', ' ', '\0'};
+    constexpr char badCharacters[]{'-', ' ', '\0'};
     return std::any_of(std::begin(badCharacters), std::end(badCharacters), [roll](char bad) { return roll == bad; });
 }
 
