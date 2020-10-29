@@ -53,7 +53,6 @@ class Game {
 
    public:
     Game() = default;
-    // Game(const std::string& filePath);
     Game(const std::filesystem::path& filePath);
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() const { return players; };
