@@ -73,7 +73,7 @@ bool Game::isSpare(char nextRoll) const {
 }
 
 bool Game::isSpare(const Frame& frame) const {
-    return frame.getSecondRoll() == '/' ? true : false;
+    return frame.getSecondRoll() == '/';
 }
 
 Game::Status Game::getGameStatus() const {
