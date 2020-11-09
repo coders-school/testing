@@ -1,16 +1,15 @@
 #include "BowlingLane.hpp"
 
+#include <algorithm>
+
 BowlingLane::GameState BowlingLane::checkGameState() {
-    for (const auto& player : players_) {
-        if (player->getPoints().size() < 20) {
-            return GameState::IN_PROGRESS;
-        }
-        if (player->getPoints().size() >= 20) {
-            return GameState::FINISHED;
-        }
-        if (player->getPoints().size() <= 0) {
-            return GameState::NO_GAME;
-        }
+    if (std::any_of(players_.begin(), players_.end(),
+                    [](const auto& player) { return player->getGameSize() < 20; })) {
+        return GameState::IN_PROGRESS;
+    }
+    if (std::any_of(players_.begin(), players_.end(),
+                    [](const auto& player) { return player->getGameSize() >= 20; })) {
+        return GameState::FINISHED;
     }
     return GameState::NO_GAME;
 }

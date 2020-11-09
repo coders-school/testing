@@ -15,18 +15,13 @@ public:
         NO_GAME
     };
 
-
     BowlingLane(const int laneNumber, const std::vector<std::shared_ptr<Player>>& players)
         : laneNumber_(laneNumber), players_(players) {}
-        
+
     std::vector<std::shared_ptr<Player>> getPlayers() const { return players_; }
     int getLaneNumber() const { return laneNumber_; }
-
-
     GameState checkGameState();
-
     std::string convertGameState(GameState gameState);
-
     friend std::ostream& operator<<(std::ostream& os, BowlingLane bowlingLane);
 
 private:

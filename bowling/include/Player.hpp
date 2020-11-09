@@ -11,7 +11,7 @@ public:
         : name_{name}, points_{points} {}
     Player() {}
     std::string getName() const { return name_; }
-
+    size_t getGameSize() const { return points_.size(); }
     int getScore();
     std::vector<int> getPoints() const { return points_; }
     friend std::ostream& operator<<(std::ostream& os, Player player);
