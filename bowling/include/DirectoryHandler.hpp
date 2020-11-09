@@ -1,15 +1,13 @@
 #pragma once
 
+#include <iostream>
 #include <map>
 #include <string>
 #include <vector>
 
 class DirectoryHandler {
 public:
-    DirectoryHandler(const std::string directoryName)
-        : directoryName_{directoryName} {
-        processData();
-    }
+    DirectoryHandler(const std::string directoryName);
 
     std::map<int, std::vector<std::string>> getDirectoryData() {
         return rawLanesData_;

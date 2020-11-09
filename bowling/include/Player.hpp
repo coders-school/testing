@@ -7,11 +7,14 @@
 
 class Player {
 public:
-    Player(const std::string& name, const std::vector<int>& points) : name_{name}, points_{points} {}
+    Player(const std::string& name, const std::vector<int>& points)
+        : name_{name}, points_{points} {}
     Player() {}
     std::string getName() const { return name_; }
 
     int getScore();
+    std::vector<int> getPoints() const { return points_; }
+    friend std::ostream& operator<<(std::ostream& os, Player player);
 
 private:
     std::string name_;

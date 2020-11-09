@@ -6,6 +6,16 @@
 #include <regex>
 namespace fs = std::filesystem;
 
+DirectoryHandler::DirectoryHandler(const std::string directoryName)
+    : directoryName_{directoryName} {
+    try {
+        processData();
+    } catch (std::exception& e) {
+        std::cerr << "Cannot process directory data!\n";
+        throw;
+    }
+}
+
 void DirectoryHandler::processData() {
     std::regex pattern(R"((\w+)/([a-zA-Z]+)(\d+).?(\w+)?)");
 

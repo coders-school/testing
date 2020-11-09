@@ -11,11 +11,11 @@ class BowlingLane {
 public:
     enum class GameState { FINISHED = 1, IN_PROGRESS, NO_GAME };
 
-    std::vector<std::shared_ptr<Player>> getPlayers() const { return players_; }
-    int getLaneNumber() const { return laneNumber_; }
-
     BowlingLane(const int laneNumber, const std::vector<std::shared_ptr<Player>>& players)
         : laneNumber_(laneNumber), players_(players) {}
+
+    std::vector<std::shared_ptr<Player>> getPlayers() const { return players_; }
+    int getLaneNumber() const { return laneNumber_; }
 
     GameState checkGameState();
 
