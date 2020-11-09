@@ -16,6 +16,7 @@ public:
     }
 
     std::vector<std::shared_ptr<BowlingLane>> getLanes() const { return lanes_; }
+    std::string getGameResult();
     void printResult();
     void saveDataToFile();
 

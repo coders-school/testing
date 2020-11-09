@@ -1,18 +1,24 @@
 #include "Game.hpp"
 
-void Game::printResult() {
+#include <sstream>
+
+std::string Game::getGameResult() {
+    std::stringstream gameResult;
     for (const auto& lane : lanes_) {
-        std::cout << *lane;
+        gameResult << *lane;
     }
+    return gameResult.str();
+}
+
+void Game::printResult() {
+    std::cout << getGameResult();
 }
 
 void Game::saveDataToFile() {
     if (resultOutput_ != "") {
         std::ofstream result(resultOutput_, std::ios_base::out);
         if (result.is_open()) {
-            for (const auto& lane : lanes_) {
-                result << *lane;
-            }
+            result << getGameResult();
             result.close();
         } else {
             std::cout << "Cannot open file\n";
