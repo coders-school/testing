@@ -1,19 +1,19 @@
 #include <gtest/gtest.h>
 #include "Game.hpp"
 
-constexpr char inputEmptyDirectoryDirectoryPath[] = "../input/empty-dir";
 constexpr char inputOneFileDirectoryPath[] = "../input/one-file";
 constexpr char inputManyFilesDirectoryPath[] = "../input/many-files";
 constexpr char inputEmptyFileDirectoryPath[] = "../input/empty-file";
+[[maybe_unused]]constexpr char inputEmptyDirectoryDirectoryPath[] = "../input/empty-dir";
 
 
-constexpr char emptyDirectoryResultOutput[] = "../tests/results/resultEmptyFiles.txt";
 constexpr char oneFileResultOutput[] = "../tests/results/resultOneFile.txt";
 constexpr char manyFilesResultOutput[] = "../tests/results/resultManyFiles.txt";
 constexpr char emptyFileResultOutput[] = "../tests/results/resultEmptyFile.txt";
+[[maybe_unused]]constexpr char emptyDirectoryResultOutput[] = "../tests/results/resultEmptyDirectory.txt";
 
 
-constexpr char expectedEmptyDirectory[] = "";
+[[maybe_unused]]constexpr char expectedEmptyDirectory[] = "";
 constexpr char expectedOneFile[] =
     "### Lane 1: game in progress ###\n"
     "Name1 18\n"
@@ -30,28 +30,6 @@ constexpr char expectedManyFiles[] =
     "Radek 90\n";
 constexpr char expectedEmptyFile[] = "### Lane 1: no game ###\n";
 
-TEST(GameTest, GameResultStringFromEmptyDirectoryShouldBeEqualToExpectedEmptyDirectory) {
-    Game game{inputEmptyDirectoryDirectoryPath};
-    ASSERT_EQ(game.getGameResult(), expectedEmptyDirectory);
-}
-
-TEST(GameTest, GameResultFromEmptyDirectoryFilesSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyDirectory) {
-    Game game{inputEmptyDirectoryDirectoryPath, emptyDirectoryResultOutput};
-    game.saveDataToFile();
-
-    std::ifstream testFile(emptyDirectoryResultOutput, std::ios_base::in);
-    std::stringstream os;
-    std::string line;
-    if (testFile.is_open()) {
-        while (getline(testFile, line)) {
-            os << line << '\n';
-        }
-        testFile.close();
-    } else {
-        FAIL() << "Cannot open file\n";
-    }
-    ASSERT_EQ(os.str(), expectedEmptyDirectory);
-}
 
 TEST(GameTest, GameResultStringFromDirectoryWithOneFileShouldBeEqualToExpectedOneFile) {
     Game game{inputOneFileDirectoryPath};
@@ -99,17 +77,39 @@ TEST(GameTest, GameResultFromDirectoryWithManyFilesSavedToFileAndOpenedFromItSho
     ASSERT_EQ(os.str(), expectedManyFiles);
 }
 
+TEST(GameTest, GameResultStringFromDirectoryWithEmptyFileShouldBeEqualToExpectedEmptyFile) {
+    Game game{inputEmptyFileDirectoryPath};
+    ASSERT_EQ(game.getGameResult(), expectedEmptyFile);
+}
 
-// Test intentionally commented out to pass CI - The reason is that we can't crete empty directory on github repo
-// TEST(GameTest, GameResultStringFromDirectoryWithEmptyFileShouldBeEqualToExpectedEmptyFile) {
-//     Game game{inputEmptyFileDirectoryPath};
-//     ASSERT_EQ(game.getGameResult(), expectedEmptyFile);
+TEST(GameTest, GameResultFromDirectoryWithEmptyFileSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyFile) {
+    Game game{inputEmptyFileDirectoryPath, emptyFileResultOutput};
+    game.saveDataToFile();
+    std::ifstream testFile(emptyFileResultOutput, std::ios_base::in);
+    std::stringstream os;
+    std::string line;
+    if (testFile.is_open()) {
+        while (getline(testFile, line)) {
+            os << line << '\n';
+        }
+        testFile.close();
+    } else {
+        FAIL() << "Cannot open file\n";
+    }
+    ASSERT_EQ(os.str(), expectedEmptyFile);
+}
+
+//Test intentionally commented out to pass CI - The reason is that we can't crete empty directory on github repo
+// TEST(GameTest, GameResultStringFromEmptyDirectoryShouldBeEqualToExpectedEmptyDirectory) {
+//     Game game{inputEmptyDirectoryDirectoryPath};
+//     ASSERT_EQ(game.getGameResult(), expectedEmptyDirectory);
 // }
 
-// TEST(GameTest, GameResultFromDirectoryWithEmptyFileSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyFile) {
-//     Game game{inputEmptyFileDirectoryPath, emptyFileResultOutput};
+// TEST(GameTest, GameResultFromEmptyDirectoryFilesSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyDirectory) {
+//     Game game{inputEmptyDirectoryDirectoryPath, emptyDirectoryResultOutput};
 //     game.saveDataToFile();
-//     std::ifstream testFile(emptyFileResultOutput, std::ios_base::in);
+
+//     std::ifstream testFile(emptyDirectoryResultOutput, std::ios_base::in);
 //     std::stringstream os;
 //     std::string line;
 //     if (testFile.is_open()) {
@@ -120,5 +120,5 @@ TEST(GameTest, GameResultFromDirectoryWithManyFilesSavedToFileAndOpenedFromItSho
 //     } else {
 //         FAIL() << "Cannot open file\n";
 //     }
-//     ASSERT_EQ(os.str(), expectedEmptyFile);
-// }
+//     ASSERT_EQ(os.str(), expectedEmptyDirectory);
+//}
