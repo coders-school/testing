@@ -28,8 +28,7 @@ SCENARIO("DirectoryHandler object created for empty directory", "FileDirectory [
 SCENARIO("DirectoryHandler object created for directory containing one file", "FileDirectory")
 {
     std::string testDirectoryName{"testDirectory/dirOneFile"};
-    std::vector<std::string> expectedFilesInDirectory{};
-    expectedFilesInDirectory.push_back("testDirectory/dirOneFile/file1.txt");
+    std::vector<std::string> expectedFilesInDirectory{"testDirectory/dirOneFile/file1.txt"};
 
     GIVEN("Directory: " << testDirectoryName << " with one file inside")
     {
