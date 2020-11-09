@@ -65,7 +65,7 @@ bool Game::isStrike(char currentRoll) const {
 }
 
 bool Game::isStrike(const Frame& frame) const {
-    return frame.getFirstRoll() == 'X' ? true : false;
+    return frame.getFirstRoll() == 'X';
 }
 
 bool Game::isSpare(char nextRoll) const {
