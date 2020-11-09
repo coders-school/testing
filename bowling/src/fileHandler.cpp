@@ -21,6 +21,7 @@ FileHandler::~FileHandler()
 std::string FileHandler::readLine()
 {
     if (!isFileOpened() || (fileAccess_ != FileAccess::INPUT)) {
+        //throw WrongInput("File error");
         return {};
     }
 

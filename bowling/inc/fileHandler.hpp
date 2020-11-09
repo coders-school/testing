@@ -3,6 +3,14 @@
 #include <fstream>
 #include <string>
 
+#include <stdexcept>
+
+class WrongInput : public std::logic_error {
+public:
+    WrongInput(const std::string& err)
+        : std::logic_error(err) {}
+};
+
 class FileHandler {
 public:
     enum class FileAccess {
