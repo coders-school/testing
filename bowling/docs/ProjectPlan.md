@@ -1,3 +1,4 @@
+# Full documentation with private methods
 # Bowling - project plan  
 
 ## Project setup
