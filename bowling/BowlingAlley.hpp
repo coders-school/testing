@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 class Game;
 class BowlingAlley {
 public:
-    BowlingAlley() = default;
+    BowlingAlley() = delete;
     explicit BowlingAlley(const fs::path& pathToFolder);
     void loadFromFolder(const fs::path& pathToFolder);
     void printOutputTo(std::ostream&);
