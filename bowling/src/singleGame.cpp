@@ -34,7 +34,7 @@ bool SingleGame::isNotBowlingGameInput()
         return true;
     }
 
-    if (isNotBowlingSigns()) {
+    if (isNotbowlingCharacters()) {
         return true;
     }
 
@@ -79,13 +79,13 @@ bool SingleGame::isNotAllowedChar()
 
 bool SingleGame::isNotBowlingOrder()
 {
-    std::string bowlingSigns = getBowlingSigns();
+    std::string bowlingCharacters = getbowlingCharacters();
 
     size_t ballThrows = 1;
     bool expectedPipe = false;
     bool expectedSecondPipe = false;
 
-    for (auto sign : bowlingSigns) {
+    for (auto sign : bowlingCharacters) {
         if (expectedSecondPipe) {
             expectedSecondPipe = false;
             expectedPipe = false;
@@ -150,12 +150,12 @@ bool SingleGame::isNotPlayerName()
     return false;
 }
 
-bool SingleGame::isNotBowlingSigns()
+bool SingleGame::isNotbowlingCharacters()
 {
     auto foundIndexAfterName = getGameInput().find(':');
 
     if (foundIndexAfterName != std::string::npos) {
-        setBowlingSigns(getGameInput().substr(++foundIndexAfterName));
+        setbowlingCharacters(getGameInput().substr(++foundIndexAfterName));
     }
     else {
         return true;
@@ -170,16 +170,16 @@ void SingleGame::putScoresToVector()
 
 bool SingleGame::isGameFinished()
 {
-    const auto foundIndexOfBonus = getBowlingSigns().find("||");
+    const auto foundIndexOfBonus = getbowlingCharacters().find("||");
     if (foundIndexOfBonus == std::string::npos) {
         return false;
     }
     else {
-        const auto rollsBeforeBonus = getBowlingSigns().substr(0, foundIndexOfBonus);
+        const auto rollsBeforeBonus = getbowlingCharacters().substr(0, foundIndexOfBonus);
         const auto foundIndexOfLastFrameStart = rollsBeforeBonus.rfind('|');
         const auto lengthOfLastFrame = foundIndexOfBonus - foundIndexOfLastFrameStart - 1;
-        const auto rollsInLastFrame = getBowlingSigns().substr(foundIndexOfLastFrameStart + 1, lengthOfLastFrame);
-        const auto numberOfBonusPoints = getBowlingSigns().length() - (foundIndexOfBonus + 2);
+        const auto rollsInLastFrame = getbowlingCharacters().substr(foundIndexOfLastFrameStart + 1, lengthOfLastFrame);
+        const auto numberOfBonusPoints = getbowlingCharacters().length() - (foundIndexOfBonus + 2);
 
         if (rollsInLastFrame[0] == 'X' &&
             numberOfBonusPoints == 2) {
@@ -200,7 +200,7 @@ bool SingleGame::isGameFinished()
 
 bool SingleGame::isGameNotStarted()
 {
-    return getBowlingSigns().empty();
+    return getbowlingCharacters().empty();
 }
 
 void SingleGame::checkGameStatus()
@@ -302,7 +302,7 @@ void SingleGame::makePointsFromSigns()
     const size_t MAXPOINT = 10;
     const size_t NOPOINT = 0;
 
-    for (auto sign : getBowlingSigns()) {
+    for (auto sign : getbowlingCharacters()) {
         if (sign == '|') {
             continue;
         }

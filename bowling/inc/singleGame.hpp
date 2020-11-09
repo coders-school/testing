@@ -25,18 +25,18 @@ public:
 private:
     std::string gameInput_{};
     std::string playerName_{};
-    std::string bowlingSigns_{};
+    std::string bowlingCharacters_{};
     std::vector<size_t> rolls_{};
     size_t score_{};
 
-    std::string getBowlingSigns() const { return bowlingSigns_; };
+    std::string getbowlingCharacters() const { return bowlingCharacters_; };
 
     GameStatus gameStatus_{};
 
     void setRolls(std::size_t point);
     void setPlayerName(std::string playerName) { playerName_ = playerName; };
     void setGameInput(std::string gameInput) { gameInput_ = gameInput; };
-    void setBowlingSigns(std::string bowlingSigns) { bowlingSigns_ = bowlingSigns; };
+    void setbowlingCharacters(std::string bowlingCharacters) { bowlingCharacters_ = bowlingCharacters; };
     void makePointsFromSigns();
 
     void parseGameInput();
@@ -44,7 +44,7 @@ private:
     void checkGameStatus();
     void countScore();
     bool isNotPlayerName();
-    bool isNotBowlingSigns();
+    bool isNotbowlingCharacters();
     bool isNotBowlingGameInput();
     void eraseSpaces();
     bool isNotAllowedChar();
