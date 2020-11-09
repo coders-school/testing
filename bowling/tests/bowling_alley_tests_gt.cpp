@@ -11,10 +11,6 @@ protected:
 
 };
 
-TEST_F(BowlingAlleyTests, bowlingAlleyCanBeDefaultCreated) {
-    BowlingAlley alley;
-}
-
 TEST_F(BowlingAlleyTests, bowlingAlleyCanBeLoadedFromFolder) {
     BowlingAlley alley;
     alley.loadFromFolder(path);
