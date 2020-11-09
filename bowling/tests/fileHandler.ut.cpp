@@ -73,11 +73,7 @@ SCENARIO("FileHandler object created for output, so lines should not be read fro
     std::string testFileName{"testDirectory/testFileWrongOutput.txt"};
     bool expectedIsFileOpened = true;
     std::string expectedEmpty{};
-    std::vector<std::string> expectedLinesInFile{};
-    expectedLinesInFile.push_back("line1");
-    expectedLinesInFile.push_back("line2");
-    expectedLinesInFile.push_back("line3");
-    expectedLinesInFile.push_back("");
+    std::vector<std::string> expectedLinesInFile{"line1", "line2", "line3", ""};
 
     GIVEN("File: " << testFileName << " with lines inside: \n"
                    << vectorToString(expectedLinesInFile))
@@ -127,11 +123,7 @@ SCENARIO("FileHandler object can be created for input and lines from file can be
     std::string testFileName{"testDirectory/testFile1.txt"};
     bool expectedIsFileOpened = true;
     std::string expectedEmpty{};
-    std::vector<std::string> expectedLinesInFile{};
-    expectedLinesInFile.push_back("line1");
-    expectedLinesInFile.push_back("line2");
-    expectedLinesInFile.push_back("line3");
-    expectedLinesInFile.push_back("");
+    std::vector<std::string> expectedLinesInFile{"line1", "line2", "line3", ""};
 
     GIVEN("File: " << testFileName << " with lines inside: \n"
                    << vectorToString(expectedLinesInFile))
@@ -161,12 +153,7 @@ SCENARIO("FileHandler object can be created for input and lines from file can be
 
     bool expectedIsFileOpened = true;
     std::string expectedEmpty{};
-    std::vector<std::string> expectedLinesInFile{};
-    expectedLinesInFile.push_back("line1");
-    expectedLinesInFile.push_back("");
-    expectedLinesInFile.push_back("line2");
-    expectedLinesInFile.push_back("");
-    expectedLinesInFile.push_back("line3");
+    std::vector<std::string> expectedLinesInFile{"line1", "", "line2", "", "line3"};
 
     GIVEN("File: " << testFileName << " with lines inside: \n"
                    << vectorToString(expectedLinesInFile))
@@ -195,10 +182,7 @@ SCENARIO("FileHandler object can be created for output and lines can be write to
 
     bool expectedIsFileOpened = true;
     std::string expectedEmpty{};
-    std::vector<std::string> expectedLinesToWrite{};
-    expectedLinesToWrite.push_back("line1");
-    expectedLinesToWrite.push_back("line2");
-    expectedLinesToWrite.push_back("line3");
+    std::vector<std::string> expectedLinesToWrite{"line1", "line2", "line3", ""};
 
     GIVEN("File: " << testFileName)
     {
@@ -237,10 +221,7 @@ SCENARIO("FileHandler object created for input, so lines should not be write to 
     std::string testFileName{"testDirectory/testFile1.txt"};
     bool expectedIsFileOpened = true;
     std::string expectedEmpty{};
-    std::vector<std::string> expectedLinesInFile{};
-    expectedLinesInFile.push_back("line1");
-    expectedLinesInFile.push_back("line2");
-    expectedLinesInFile.push_back("line3");
+    std::vector<std::string> expectedLinesInFile{"line1", "line2", "line3", ""};
 
     GIVEN("File: " << testFileName << " with lines inside: \n"
                    << vectorToString(expectedLinesInFile))
