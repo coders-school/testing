@@ -52,7 +52,7 @@ class Game {
     std::string getOutputString(int laneNumber) const;
 
    public:
-    Game() = default;
+    Game() = delete;
     Game(const std::filesystem::path& filePath);
     void loadFromFile(const std::string& filePath);
     const std::vector<PlayerData>& getPlayers() const { return players; };
