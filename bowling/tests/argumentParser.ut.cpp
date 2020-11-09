@@ -12,14 +12,14 @@ SCENARIO("program arguments and their number should be returned after parsing", 
 {
     std::string expectedEmpty{};
 
-    SECTION("Test with null arguments list")
+    SECTION("Test with nullptr arguments list")
     {
         int testArgc = 0;
-        const char** testArgv = NULL;
+        const char** testArgv = nullptr;
         size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
-                        << " and argv = NULL")
+                        << " and argv = nullptr")
         {
             WHEN("argumentParser object is created")
             {
@@ -36,14 +36,14 @@ SCENARIO("program arguments and their number should be returned after parsing", 
         }
     }
 
-    SECTION("Test with null arguments list and wrong argc")
+    SECTION("Test with nullptr arguments list and wrong argc")
     {
         int testArgc = 2;
-        const char** testArgv = NULL;
+        const char** testArgv = nullptr;
         size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
-                        << " and argv = NULL")
+                        << " and argv = nullptr")
         {
             WHEN("argumentParser object is created")
             {
@@ -63,7 +63,7 @@ SCENARIO("program arguments and their number should be returned after parsing", 
     SECTION("Test with no arguments")
     {
         int testArgc = 1;
-        const char* testArgv[] = {"programName", NULL};
+        const char* testArgv[] = {"programName", nullptr};
         size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
@@ -91,7 +91,7 @@ SCENARIO("program arguments and their number should be returned after parsing", 
     SECTION("Test with one argument")
     {
         int testArgc = 2;
-        const char* testArgv[] = {"programName", "argument_1", NULL};
+        const char* testArgv[] = {"programName", "argument_1", nullptr};
         size_t expectedArgumentsNumber = 1;
 
         GIVEN("argc = " << testArgc
@@ -121,7 +121,7 @@ SCENARIO("program arguments and their number should be returned after parsing", 
     SECTION("Test with two argument")
     {
         int testArgc = 3;
-        const char* testArgv[] = {"programName", "argument_1", "argument_2", NULL};
+        const char* testArgv[] = {"programName", "argument_1", "argument_2", nullptr};
         size_t expectedArgumentsNumber = 2;
 
         GIVEN("argc = " << testArgc
@@ -148,10 +148,10 @@ SCENARIO("program arguments and their number should be returned after parsing", 
         }
     }
 
-    SECTION("Test with argument list with NULL in the middle")
+    SECTION("Test with argument list with nullptr in the middle")
     {
         int testArgc = 3;
-        const char* testArgv[] = {"programName", NULL, "argument_1", NULL};
+        const char* testArgv[] = {"programName", nullptr, "argument_1", nullptr};
         size_t expectedArgumentsNumber = 0;
 
         GIVEN("argc = " << testArgc
@@ -182,7 +182,7 @@ SCENARIO("program arguments and their number should be returned after parsing", 
 SCENARIO("program arguments are parsed and it is possible to check if argument was given", "argumentParser")
 {
     int testArgc = 3;
-    const char* testArgv[] = {"programName", "argument_1", "argument_2", NULL};
+    const char* testArgv[] = {"programName", "argument_1", "argument_2", nullptr};
 
     GIVEN("argc = " << testArgc
                     << " and argv = {\""
