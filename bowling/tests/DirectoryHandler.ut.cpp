@@ -3,11 +3,11 @@
 #include <gtest/gtest.h>
 #include "DirectoryHandler.hpp"
 
-constexpr char inputDirectoryPath[] = "../input";
+constexpr char inputManyFilesDirectoryPath[] = "../input/many-files";
 
 TEST(DirectoryHandlerTest, CheckAllLanesBeingProcessed) {
     std::vector<int> lanes{1, 2, 3};
-    DirectoryHandler handler{inputDirectoryPath};
+    DirectoryHandler handler{inputManyFilesDirectoryPath};
     auto handlerData = handler.getDirectoryData();
 
     auto isContainsAllLanes = std::all_of(handlerData.cbegin(), handlerData.cend(), [lanes](const auto& el) {
@@ -18,7 +18,7 @@ TEST(DirectoryHandlerTest, CheckAllLanesBeingProcessed) {
 }
 
 TEST(DirectoryHandlerTest, CheckIfFirstLaneDataWasLoaded) {
-    DirectoryHandler handler{inputDirectoryPath};
+    DirectoryHandler handler{inputManyFilesDirectoryPath};
     auto handlerDataFirstLane = handler.getDirectoryData()[1];
 
     std::vector<std::string> lane1{"Name1:X|4-|3",
