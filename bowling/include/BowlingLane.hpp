@@ -15,6 +15,7 @@ public:
         NO_GAME
     };
 
+
     BowlingLane(const int laneNumber, const std::vector<std::shared_ptr<Player>>& players)
         : laneNumber_(laneNumber), players_(players) {}
         

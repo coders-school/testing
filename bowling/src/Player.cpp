@@ -6,10 +6,10 @@ int Player::getScore() {
     std::vector<std::pair<int, int>> twoThrows;
 
     for (auto i = 0; i < points_.size() - 1; i += 2) {
-        twoThrows.push_back(std::make_pair(points_[i], points_[i + 1]));
+        twoThrows.emplace_back(points_[i], points_[i + 1]);
     }
     int extraBall = twoThrows.size();
-    int throwBalls = 9 < twoThrows.size() ? 9 : twoThrows.size();
+    int throwBalls = (9 < twoThrows.size() ? 9 : twoThrows.size());
 
     for (int i = 0; i < throwBalls; i++) {
         if (twoThrows[i].first == 10 && twoThrows[i + 1].first == 10 && twoThrows.size() > i + 2) {

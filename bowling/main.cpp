@@ -1,3 +1,4 @@
+
 #include <cstring>
 #include <iostream>
 #include "Game.hpp"
@@ -39,6 +40,7 @@ int main(int argc, char* argv[]) {
     } catch (std::exception& e) {
         std::cerr << "Error: " << e.what() << '\n';
     }
+
 
     return 0;
 }
