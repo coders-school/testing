@@ -17,7 +17,6 @@ set(SOURCES
     src/singleGame.cpp)
 
 set(TESTS
-    tests/wholeAppTesting.ut.cpp
     tests/argumentParser.ut.cpp
     tests/bowlingGame.ut.cpp
     tests/directoryHandler.ut.cpp
