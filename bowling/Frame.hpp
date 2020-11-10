@@ -13,6 +13,8 @@ class Frame {
     friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
     char getFirstRoll() const;
     char getSecondRoll() const;
+    bool isSpare() const;
+    bool isStrike() const;
 };
 
 

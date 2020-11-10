@@ -15,3 +15,11 @@ std::ostream& operator<<(std::ostream& os, const Frame& frame) {
     os << "{" << frame.firstRoll << ", " << frame.secondRoll << "}";
     return os;
 }
+
+bool Frame::isSpare() const {
+    return secondRoll == '/';
+}
+
+bool Frame::isStrike() const {
+    return firstRoll == 'X';
+}
