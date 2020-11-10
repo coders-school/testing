@@ -24,7 +24,11 @@ void Game::loadFromFile(const std::string& filePath) {
         std::getline(file, playerName, ':');
         loadPlayerRolls(file, playerRolls);
         if (!file.eof()) {
-            players.emplace_back(PlayerData(playerName, playerRolls));
+            if (std::find_if(players.begin(), players.end(), [&](auto& player) {
+                    return player.getName() == playerName && player.getRolls() == playerRolls;
+                }) == players.end()) {
+                players.emplace_back(PlayerData(playerName, playerRolls));
+            }
         }
     }
     file.close();
