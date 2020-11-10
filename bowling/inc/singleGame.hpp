@@ -44,7 +44,7 @@ private:
     void checkGameStatus();
     void countScore();
     bool isNotPlayerName();
-    bool isNotbowlingCharacters();
+    bool isNotBowlingCharacters();
     bool isNotBowlingGameInput();
     void eraseSpaces();
     bool isNotAllowedChar();

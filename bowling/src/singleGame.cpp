@@ -28,7 +28,7 @@ bool SingleGame::isNotBowlingGameInput()
 {
         return (getGameInput().empty() ||
         isNotPlayerName() ||
-        isNotbowlingCharacters() ||
+        isNotBowlingCharacters() ||
         isNotAllowedChar() ||
         isNotBowlingOrder());
 }
@@ -135,7 +135,7 @@ bool SingleGame::isNotPlayerName()
     return false;
 }
 
-bool SingleGame::isNotbowlingCharacters()
+bool SingleGame::isNotBowlingCharacters()
 {
     auto foundIndexAfterName = getGameInput().find(':');
 
