@@ -47,10 +47,10 @@ SCENARIO("DirectoryHandler object created for directory containing one file", "F
 SCENARIO("DirectoryHandler object created for directory containing three files", "FileDirectory")
 {
     std::string testDirectoryName{"testDirectory/dirThreeFiles"};
-    std::vector<std::string> expectedFilesInDirectory{};
-    expectedFilesInDirectory.push_back("testDirectory/dirThreeFiles/file1.txt");
-    expectedFilesInDirectory.push_back("testDirectory/dirThreeFiles/file2.txt");
-    expectedFilesInDirectory.push_back("testDirectory/dirThreeFiles/file3.txt");
+    std::vector<std::string> expectedFilesInDirectory{
+        "testDirectory/dirThreeFiles/file1.txt",
+        "testDirectory/dirThreeFiles/file2.txt",
+        "testDirectory/dirThreeFiles/file3.txt"};
 
     GIVEN("Directory: " << testDirectoryName << " with three file inside")
     {
