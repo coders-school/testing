@@ -35,7 +35,7 @@ void Game::processData() {
         auto laneNumber = lane.first;
         std::vector<std::shared_ptr<Player>> players;
         for (auto player : lane.second) {
-            auto playerData = parser->dataParsing(player);
+            auto playerData = parser->parseData(player);
             players.emplace_back(std::make_shared<Player>(playerData.first, playerData.second));
         }
         lanes_.emplace_back(std::make_shared<BowlingLane>(laneNumber, players));
