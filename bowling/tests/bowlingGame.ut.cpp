@@ -1,6 +1,7 @@
 #include "catch.hpp"
 
 #include "bowlingGame.hpp"
+#include "bowlingGameStub.hpp"
 
 #include <sstream>
 
@@ -57,6 +58,44 @@ SCENARIO("BowlingGame class can check if help is to be printed and trigger print
                     REQUIRE_FALSE(ss.str().empty());
                     REQUIRE_THAT(ss.str(),
                                  StartsWith(expectedHelpBeginning));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("Should save scores in file")
+{
+    GIVEN("Three arguments for start")
+    {
+        const char* userInput[] = {"./bowling", "../tests/testDirectory/goodInput/", "../tests/testDirectory/gameScores/result1.txt"};
+        BowlingGameStub bowlingGameStub(3, userInput);
+        WHEN("Called function save scores")
+        {
+            bowlingGameStub.calculateScores();
+            std::stringstream ss = bowlingGameStub.saveScores();
+            THEN("Should save scores in file")
+            {
+                std::vector<std::string> expectedOutput{
+                    "### lane3 : game in progress###",
+                    "Zuzka 31",
+
+                    "### lane1 : game finished###",
+                    "Matylda 167",
+
+                    "### lane2 : game finished###",
+                    "Pimpek 300"};
+
+                int i = 0;
+                std::string temp{};
+                std::string wholeLine{};
+
+                while (ss >> temp) {
+                    wholeLine.append(temp);
+                    if (temp == "\n") {
+                        REQUIRE(wholeLine == expectedOutput[i++]);
+                        wholeLine.clear();
+                    }
                 }
             }
         }
