@@ -35,10 +35,9 @@ void BowlingGame::outputScores()
 {
     if (isInputDirectoryGiven()) {
         showScores();
-
-        if (isOutputFileGiven()) {
-            saveScores();
-        }
+    }
+    if (isOutputFileGiven()) {
+        saveScores();
     }
 }
 
