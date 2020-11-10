@@ -26,26 +26,11 @@ void SingleGame::parseGameInput()
 
 bool SingleGame::isNotBowlingGameInput()
 {
-    if (getGameInput().empty()) {
-        return true;
-    }
-
-    if (isNotPlayerName()) {
-        return true;
-    }
-
-    if (isNotbowlingCharacters()) {
-        return true;
-    }
-
-    if (isNotAllowedChar()) {
-        return true;
-    }
-
-    if (isNotBowlingOrder()) {
-        return true;
-    }
-    return false;
+        return (getGameInput().empty() ||
+        isNotPlayerName() ||
+        isNotbowlingCharacters() ||
+        isNotAllowedChar() ||
+        isNotBowlingOrder());
 }
 
 void SingleGame::eraseSpaces()
