@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Frame.hpp"
+#include "PlayerData.hpp"
 
 #include <filesystem>
 #include <iostream>
@@ -16,10 +17,6 @@ class Game {
     };
 
    private:
-    struct PlayerData {
-        std::string name;
-        std::vector<Frame> rolls;
-    };
     std::vector<PlayerData> players{};
 
     void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
@@ -42,4 +39,5 @@ class Game {
     size_t countPoints(const std::vector<Frame>& rolls) const;
     Status getGameStatus() const;
     std::string getOutputString(int laneNumber) const;
+    bool operator==(const Game& rhs) const;
 };

@@ -18,7 +18,13 @@ void BowlingAlley::loadFromFolder(const fs::path& pathToFolder) {
     }
     for (auto& entry : fs::directory_iterator(pathToFolder)) {
         if (entry.is_regular_file()) {
-            games_.emplace_back(std::make_shared<Game>(entry.path()));
+            auto game = std::make_shared<Game>(entry.path());
+            if (std::find_if(games_.begin(), games_.end(), [&game](auto& game_ptr)
+            {
+                return *game == *game_ptr;
+            }) == games_.end()) {
+                games_.push_back(game);
+            }
         }
     }
 }

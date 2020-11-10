@@ -204,3 +204,7 @@ std::string Game::getOutputString(int laneNumber) const {
     }
     return stream.str();
 }
+
+bool Game::operator==(const Game& rhs) const {
+    return players == rhs.players;
+}
