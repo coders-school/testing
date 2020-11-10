@@ -11,7 +11,6 @@ public:
     BowlingAlley() = default;
     explicit BowlingAlley(const fs::path& pathToFolder);
     void loadFromFolder(const fs::path& pathToFolder);
-    void printOutputTo(std::ostream&);
 
 private:
     std::vector<std::shared_ptr<Game>> games_{};

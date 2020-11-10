@@ -197,13 +197,33 @@ TEST_F(GameTests, countPointsFromVectorOfFramesWithSpareWithoutStrikeIncompleteG
 }
 
 TEST_F(GameTests, countPointsFromVectorOfFramesCompleteGameWithStrikeSpareAndExtraFrame) {
-    std::vector<Frame> playerRolls{{'X', ' '}, {'4', '5'}, {'X', ' '}, {'X', ' '}, {'1', '1'},
-                                   {'X', ' '}, {'5', '/'}, {'X', ' '}, {'1', '8'}, {'X', ' '}, {'5', '1'}};
+    std::vector<Frame> playerRolls{{'X', ' '},
+                                   {'4', '5'},
+                                   {'X', ' '},
+                                   {'X', ' '},
+                                   {'1', '1'},
+                                   {'X', ' '},
+                                   {'5', '/'},
+                                   {'X', ' '},
+                                   {'1', '8'},
+                                   {'X', ' '},
+                                   {'5', '1'}};
     EXPECT_EQ(game.countPoints(playerRolls), 152);
 }
 
-TEST_F(GameTests, GameOutputCanBePrintedOnScreen) {
-    game.printOutput(std::cout, 1);
+TEST_F(GameTests, gameReturnsOutputStringWithManyPlayers) {
+    file << "Name1:X|41|3\n";
+    file << "Name2:\n";
+    file << ":13|1/|1-\n";
+    file.flush();
+    auto laneNumber{1};
+    auto expectedOutput{
+        "### Lane 1: game in progress ###\n"
+        "Name1 23\n"
+        "Name2 0\n"
+        "16\n"};
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getOutputString(laneNumber), expectedOutput);
 }
 
 TEST_F(GameTests, loadFromFileShouldAddEmptyRollWhenFrameIsNotFinished) {
@@ -215,12 +235,12 @@ TEST_F(GameTests, loadFromFileShouldAddEmptyRollWhenFrameIsNotFinished) {
     EXPECT_EQ(players[0].rolls, expectedRolls);
 }
 
-// TEST_F(GameTests, calculateScoreShouldReturnCalculatedScoreForPlayer) {
-//     file << "Name1:X|4-|3\n";
-//     file.flush();
-//     game.loadFromFile(filePath);
-//     auto players = game.getPlayers();
-//     auto score = game.countPoints(players[0].rolls);
-//     auto expectedScore{21};
-//     EXPECT_EQ(score, expectedScore);
-// }
+TEST_F(GameTests, calculateScoreShouldReturnCalculatedScoreForPlayer) {
+    file << "Name1:X|4-|3\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    auto players = game.getPlayers();
+    auto score = game.countPoints(players[0].rolls);
+    auto expectedScore{21};
+    EXPECT_EQ(score, expectedScore);
+}

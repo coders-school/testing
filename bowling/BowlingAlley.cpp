@@ -23,8 +23,3 @@ void BowlingAlley::loadFromFolder(const fs::path& pathToFolder) {
     }
 }
 
-void BowlingAlley::printOutputTo(std::ostream& os) {
-    for (size_t gameNumber = 0; gameNumber < games_.size(); gameNumber++) {
-        games_[gameNumber]->printOutput(os, gameNumber + 1);
-    }
-}

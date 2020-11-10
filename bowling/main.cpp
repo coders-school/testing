@@ -35,8 +35,8 @@ int main(int argc, const char** argv) {
   BowlingAlley alley(argv[1]);
   if (argc >= 3) {
     std::ofstream file(argv[2]);
-    alley.printOutputTo(file);
+    // alley.printOutputTo(file);
   } else {
-    alley.printOutputTo(std::cout);
+    // alley.printOutputTo(std::cout);
   }
 }

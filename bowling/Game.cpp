@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 Game::Game(const std::filesystem::path& filePath) {
     loadFromFile(filePath.string());
@@ -181,24 +182,25 @@ size_t Game::countPoints(const std::vector<Frame>& rolls) const {
 }
 
 std::string Game::getOutputString(int laneNumber) const {
-    std::string output{"### Lane " + std::to_string(laneNumber) + ": "};
+    std::stringstream stream{};
+    stream << "### Lane " << laneNumber << ": ";
     switch (getGameStatus()) {
         case Status::FINISHED:
-            output += "game finished";
+            stream << "game finished";
             break;
         case Status::IN_PROGRESS:
-            output += "game in progress";
+            stream << "game in progress";
             break;
         case Status::NO_GAME:
-            output += "no game";
+            stream << "no game";
     }
-    output += " ###\n";
+    stream << " ###\n";
     for (auto& player : players) {
-        output += player.name + " " + std::to_string(countPoints(player.rolls)) + "\n";
+        if (player.name != "") {
+            stream << player.name << " " << countPoints(player.rolls) << "\n";
+        } else {
+            stream << countPoints(player.rolls) << "\n";
+        }
     }
-    return output;
-}
-
-void Game::printOutput(std::ostream& os, int laneNumber) const {
-    os << getOutputString(laneNumber);
+    return stream.str();
 }

@@ -33,7 +33,6 @@ class Game {
     size_t countFramesWithoutStrikeOrSpare(const std::vector<Frame>& rolls) const;
     size_t countOnlyStrikeFrames(const std::vector<Frame>& rolls) const;
     size_t countOnlySpareFrames(const std::vector<Frame>& rolls) const;
-    std::string getOutputString(int laneNumber) const;
 
    public:
     Game() = default;
@@ -42,5 +41,5 @@ class Game {
     const std::vector<PlayerData>& getPlayers() const { return players; };
     size_t countPoints(const std::vector<Frame>& rolls) const;
     Status getGameStatus() const;
-    void printOutput(std::ostream& os, int laneNumber) const;
+    std::string getOutputString(int laneNumber) const;
 };
