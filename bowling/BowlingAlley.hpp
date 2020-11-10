@@ -4,16 +4,15 @@
 #include <memory>
 #include <vector>
 
-namespace fs = std::filesystem;
 class Game;
 class BowlingAlley {
 public:
     BowlingAlley() = default;
-    explicit BowlingAlley(const fs::path& pathToFolder);
-    void loadFromFolder(const fs::path& pathToFolder);
+    explicit BowlingAlley(const std::filesystem::path& pathToFolder);
+    void loadFromFolder(const std::filesystem::path& pathToFolder);
     std::string getOutputString();
 
 private:
     std::vector<std::shared_ptr<Game>> games_{};
-    fs::path path_{};
+    std::filesystem::path path_{};
 };

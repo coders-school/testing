@@ -6,7 +6,9 @@
 #include <iostream>
 #include <sstream>
 
-Game::Game(const std::filesystem::path& filePath) {
+namespace fs = std::filesystem;
+
+Game::Game(const fs::path& filePath) {
     loadFromFile(filePath.string());
 }
 
