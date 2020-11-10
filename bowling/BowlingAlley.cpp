@@ -1,14 +1,14 @@
 #include "BowlingAlley.hpp"
+#include "Game.hpp"
+
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
-#include "Game.hpp"
 
 namespace fs = std::filesystem;
 
-BowlingAlley::BowlingAlley(const fs::path& pathToFolder)
-:path_(pathToFolder)
-{
+BowlingAlley::BowlingAlley(const fs::path& pathToFolder) : path_(pathToFolder) {
     loadFromFolder(path_);
 }
 
@@ -23,3 +23,10 @@ void BowlingAlley::loadFromFolder(const fs::path& pathToFolder) {
     }
 }
 
+std::string BowlingAlley::getOutputString() {
+    std::stringstream stream{};
+    for (size_t i = 0; i < games_.size(); ++i) {
+        stream << games_[i]->getOutputString(i + 1);
+    }
+    return stream.str();
+}
