@@ -12,6 +12,5 @@ protected:
 };
 
 TEST_F(BowlingAlleyTests, bowlingAlleyCanBeLoadedFromFolder) {
-    BowlingAlley alley;
-    alley.loadFromFolder(path);
+    bowlingAlley.loadFromFolder(path);
 }
