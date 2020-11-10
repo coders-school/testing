@@ -15,3 +15,8 @@ TEST_F(BowlingAlleyTests, bowlingAlleyCanBeLoadedFromFolder) {
     auto expectedGameCount{3};
     EXPECT_EQ(bowlingAlley.getGames().size(), expectedGameCount);
 }
+
+TEST_F(BowlingAlleyTests, bowlingAlleyThrowsWhenLoadedNotFromAFolder) {
+    std::string notExistingPath{"iDontExist"};
+    EXPECT_THROW(bowlingAlley.loadFromFolder(notExistingPath), std::invalid_argument);
+}

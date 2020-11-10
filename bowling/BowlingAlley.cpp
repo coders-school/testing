@@ -14,7 +14,7 @@ BowlingAlley::BowlingAlley(const fs::path& pathToFolder) : path_(pathToFolder) {
 
 void BowlingAlley::loadFromFolder(const fs::path& pathToFolder) {
     if (!fs::is_directory(pathToFolder)) {
-        throw std::logic_error{"please enter path to directory!\n"};
+        throw std::invalid_argument{"please enter path to directory!\n"};
     }
     for (auto& entry : fs::directory_iterator(pathToFolder)) {
         if (entry.is_regular_file()) {
