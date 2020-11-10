@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 namespace fs = std::filesystem;
 
@@ -15,8 +16,7 @@ Game::Game(const fs::path& filePath) {
 void Game::loadFromFile(const std::string& filePath) {
     std::ifstream file(filePath, std::ios_base::in);
     if (!file.good()) {
-        std::cerr << "file " << filePath << " could not be opened!\n";
-        abort();
+        throw std::invalid_argument("file " + filePath + " could not be opened!\n");
     }
     while (!file.eof()) {
         std::string playerName{};

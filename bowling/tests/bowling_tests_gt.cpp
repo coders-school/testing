@@ -25,13 +25,10 @@ class GameTests : public ::testing::Test {
     }
 };
 
-using GameDeathTests = GameTests;
-
-TEST_F(GameDeathTests, GameCrashesWhenLoadedFromNonExistingFile) {
-    std::string DfileName{"hiashdksjd.txt"};
-    std::string DfilePath = std::filesystem::current_path().string() + DfileName;
-    std::string expectedMessage = "file " + DfilePath + " could not be opened!";
-    EXPECT_DEATH(game.loadFromFile(DfilePath), expectedMessage);
+TEST_F(GameTests, gameThrowsWhenLoadedFromNonExistingFile) {
+    std::string fileName{"hiashdksjd.txt"};
+    std::string filePath = std::filesystem::current_path().string() + fileName;
+    EXPECT_THROW(game.loadFromFile(filePath), std::invalid_argument);
 }
 
 TEST_F(GameTests, loadFromFileShouldLoadPlayerName) {
