@@ -10,6 +10,7 @@ class GameTests : public ::testing::Test {
     Game game;
     std::ofstream file;
     std::string filePath;
+    std::string tenStrikes{"X|X|X|X|X|X|X|X|X|X|"};
 
     void SetUp() override {
         std::string fileName = "/test_file.txt";
@@ -153,6 +154,31 @@ TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenExtraFrames) {
     file.flush();
     game.loadFromFile(filePath);
     EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
+}
+
+TEST_F(GameTests, getGameStatusShouldReturnInProgressWhenAtLeastOnePlayerHasLessThan10Frames) {
+    file << "Robcio:" << tenStrikes << "|35\n";
+    file << "Grzegorz:" << tenStrikes << "\n";
+    file << "Eryk:12|27|X|0-|12|X|\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::IN_PROGRESS);
+}
+
+TEST_F(GameTests, getGameStatusShouldReturnFinishedWhenOnePlayerHas10FramesAndSecondHasExtraBalls) {
+    file << "Robcio:" << tenStrikes << "|35\n";
+    file << "Grzegorz:" << tenStrikes << "\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::FINISHED);
+}
+
+TEST_F(GameTests, getGameStatusShouldReturnInProgressWhenOnePlayerHasLessThan10FramesAndSecondHasExtraBalls) {
+    file << "Robcio:" << tenStrikes << "|35\n";
+    file << "Grzegorz:51|21|X\n";
+    file.flush();
+    game.loadFromFile(filePath);
+    EXPECT_EQ(game.getGameStatus(), Game::Status::IN_PROGRESS);
 }
 
 TEST_F(GameTests, countPointsFromVectorOfFramesWithoutStrikeNorSpareIncompleteGame) {
