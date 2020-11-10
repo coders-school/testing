@@ -26,7 +26,7 @@ public:
 
     std::stringstream showScores();
     std::stringstream saveScores();
-    
+
 private:
     ArgumentParser parser_;
     std::vector<Lane> lanes_;
@@ -67,8 +67,8 @@ void BowlingGameStub::outputScores()
     }
 
     if (isOutputFileGiven()) {
-            saveScores();
-        }
+        saveScores();
+    }
 }
 
 std::string BowlingGameStub::getOutputFileName()

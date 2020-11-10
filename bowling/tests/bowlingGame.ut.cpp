@@ -77,13 +77,13 @@ SCENARIO("Should save scores in file")
             THEN("Should save scores in file")
             {
                 std::vector<std::string> expectedOutput{
-                    "### lane3 : game in progress###",
+                    "### lane3 : game in progress ###",
                     "Zuzka 31",
 
-                    "### lane1 : game finished###",
+                    "### lane1 : game finished ###",
                     "Matylda 167",
 
-                    "### lane2 : game finished###",
+                    "### lane2 : game finished ###",
                     "Pimpek 300"};
 
                 int i = 0;
