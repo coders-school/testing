@@ -23,6 +23,9 @@ class Game {
     bool isLastFrame(int frameCount) const;
     bool isStrike(char currentRoll) const;
     bool isSpare(char nextRoll) const;
+    Frame getRegularFrame(const std::string& rolls, int currentRoll) const;
+    void incrementStrikeCounters(int& currentRoll, int frameCount) const;
+    void incrementSpareCounters(int& currentRoll, int frameCount) const;
 
    public:
     Game() = default;
