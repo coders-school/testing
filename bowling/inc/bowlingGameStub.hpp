@@ -64,11 +64,11 @@ void BowlingGameStub::outputScores()
 {
     if (isInputDirectoryGiven()) {
         showScores();
+    }
 
-        if (isOutputFileGiven()) {
+    if (isOutputFileGiven()) {
             saveScores();
         }
-    }
 }
 
 std::string BowlingGameStub::getOutputFileName()
