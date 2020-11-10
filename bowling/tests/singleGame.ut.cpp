@@ -216,7 +216,7 @@ SCENARIO("GameInput checker in SingleGame class")
         }
     }
 
-    GIVEN("Input of the game with bad bowling order")
+    GIVEN("Input of the game with a good bowling order")
     {
         auto [gameInput, expectedInput] =
             GENERATE(
