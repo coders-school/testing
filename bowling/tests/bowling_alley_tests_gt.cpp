@@ -12,14 +12,6 @@ class BowlingAlleyTests : public ::testing::Test {
 
 TEST_F(BowlingAlleyTests, bowlingAlleyCanBeLoadedFromFolder) {
     bowlingAlley.loadFromFolder(path);
-    auto expectedOutput{
-        "### Lane 1: game finished ###\n"
-        "Michael 158\n"
-        "Radek 166\n"
-        "### Lane 2: game in progress ###\n"
-        "Name1 21\n"
-        "Name2 17\n"
-        "24\n"
-        "### Lane 3: no game ###\n"};
-    EXPECT_EQ(bowlingAlley.getOutputString(), expectedOutput);
+    auto expectedGameCount{3};
+    EXPECT_EQ(bowlingAlley.getGames().size(), expectedGameCount);
 }

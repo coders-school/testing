@@ -36,3 +36,8 @@ std::string BowlingAlley::getOutputString() {
     }
     return stream.str();
 }
+
+const std::vector<std::shared_ptr<Game>>& BowlingAlley::getGames() const {
+    return games_;
+}
+
