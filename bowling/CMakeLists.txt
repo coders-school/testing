@@ -12,6 +12,7 @@ set(SOURCES
     src/bowlingGame.cpp
     src/directoryHandler.cpp
     src/fileHandler.cpp
+    src/freeFunctions.cpp
     src/lane.cpp
     src/singleGame.cpp)
 

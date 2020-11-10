@@ -5,6 +5,8 @@
 #include "fileHandler.hpp"
 #include "lane.hpp"
 
+#include "freeFunctions.hpp"
+
 #include <algorithm>
 #include <iostream>
 #include <sstream>
@@ -18,7 +20,6 @@ public:
     BowlingGameStub() = delete;
 
     bool isHelpToBePrinted();
-    std::string& printHelp() const;
 
     void calculateScores();
     void outputScores();
@@ -47,21 +48,6 @@ bool BowlingGameStub::isHelpToBePrinted()
                        [this](auto& helpParam) {
                            return parser_.checkIfArgumentExists(helpParam);
                        });
-}
-
-namespace {
-std::string helpMessage =
-    "BowlingGameStub <input directory> <output file>\n\
-This program can be used to calculate scores of the bowling game. It program takes two arguments :\n\
-\t<input directory> - input directory containing files with the games states on lanes\n\
-\t<output file> - optional, output file where scores can be stored. By default scores are printed on the screen.\n\n\
-BowlingGameStub -h or BowlingGameStub --help\n\
-\tprints this help\n\n";
-}
-
-std::string& BowlingGameStub::printHelp() const
-{
-    return helpMessage;
 }
 
 void BowlingGameStub::calculateScores()

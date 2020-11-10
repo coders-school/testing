@@ -29,7 +29,7 @@ SCENARIO("BowlingGame class can check if help is to be printed and trigger print
                     REQUIRE(testBowlingGame.isHelpToBePrinted());
 
                     std::stringstream ss;
-                    ss << testBowlingGame.printHelp();
+                    ss << printHelp();
                     REQUIRE_FALSE(ss.str().empty());
                     REQUIRE_THAT(ss.str(),
                                  StartsWith(expectedHelpBeginning));
@@ -54,7 +54,7 @@ SCENARIO("BowlingGame class can check if help is to be printed and trigger print
                     REQUIRE(testBowlingGame.isHelpToBePrinted());
 
                     std::stringstream ss;
-                    ss << testBowlingGame.printHelp();
+                    ss << printHelp();
                     REQUIRE_FALSE(ss.str().empty());
                     REQUIRE_THAT(ss.str(),
                                  StartsWith(expectedHelpBeginning));

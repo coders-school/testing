@@ -3,6 +3,8 @@
 #include "argumentParser.hpp"
 #include "lane.hpp"
 
+#include "freeFunctions.hpp"
+
 #include <string>
 #include <vector>
 
@@ -12,7 +14,6 @@ public:
     BowlingGame() = delete;
 
     bool isHelpToBePrinted();
-    std::string& printHelp() const;
 
     void calculateScores();
     void outputScores();
