@@ -2,14 +2,14 @@
 
 #include <algorithm>
 
-std::string DataParser::stringPreparing(std::string& playerResults) {
+std::string DataParser::prepareString(std::string& playerResults) {
     const char addToEndOfString = '|';
     playerResults.push_back(addToEndOfString);
 
     return playerResults;
 }
 
-std::vector<std::string> DataParser::stringSplitting(std::string& preparedStringWithPlayerResults) {
+std::vector<std::string> DataParser::splitString(std::string& preparedStringWithPlayerResults) {
     const std::string delimiter = "|";
     size_t position = 0;
     std::string token;
@@ -23,31 +23,31 @@ std::vector<std::string> DataParser::stringSplitting(std::string& preparedString
     return vectorWithResultsForEachLine;
 }
 
-std::vector<int> DataParser::stringProcessing(std::vector<std::string>& vectorWithResultsForEachLine) {
+std::vector<int> DataParser::processString(std::vector<std::string>& vectorWithResultsForEachLine) {
     std::vector<int> vectorWithResults{};
 
     std::find_if(vectorWithResultsForEachLine.cbegin(), vectorWithResultsForEachLine.cend(),
                  [&vectorWithResults](std::string bowlingLineString) {
                      std::find_if(bowlingLineString.cbegin(), bowlingLineString.cend(),
                                   [&vectorWithResults, &bowlingLineString](const char charackter) {
-                                      if (charackter == isStrike) {
+                                      if (charackter == strikeMarker) {
                                           vectorWithResults.emplace_back(strike);
                                           vectorWithResults.emplace_back(zeroPoints);
                                       }
 
-                                      if (charackter == isMiss) {
+                                      if (charackter == missMarker) {
                                           vectorWithResults.emplace_back(zeroPoints);
                                       }
 
                                       if (isdigit(charackter)) {
-                                          if (bowlingLineString[1] == isSpare) {
-                                              uint8_t firstThrow = *bowlingLineString.begin() - convertCharToInt;
+                                          if (bowlingLineString[1] == spareMarker) {
+                                              uint8_t firstThrow = *bowlingLineString.begin() - charToIntConverter;
                                               uint8_t secondThrow = strike - firstThrow;
                                               vectorWithResults.emplace_back(firstThrow);
                                               vectorWithResults.emplace_back(secondThrow);
                                               return true;
                                           }
-                                          uint8_t charackterToInteger = charackter - convertCharToInt;
+                                          uint8_t charackterToInteger = charackter - charToIntConverter;
                                           vectorWithResults.emplace_back(charackterToInteger);
                                       }
 
@@ -64,14 +64,14 @@ std::vector<int> DataParser::stringProcessing(std::vector<std::string>& vectorWi
     return vectorWithResults;
 }
 
-std::pair<std::string, std::vector<int>> DataParser::dataParsing(std::string& processingString) {
+std::pair<std::string, std::vector<int>> DataParser::parseData(std::string& processingString) {
     auto delimiterPosition = processingString.find_first_of(':');
     std::string playerName = processingString.substr(0, delimiterPosition);
 
     std::string playerResults = processingString.substr(++delimiterPosition);
-    std::string preparedStringWithPlayerResults = stringPreparing(playerResults);
-    std::vector<std::string> vectorWithResultsForEachLine = stringSplitting(preparedStringWithPlayerResults);
-    std::vector<int> playerResult = stringProcessing(vectorWithResultsForEachLine);
+    std::string preparedStringWithPlayerResults = prepareString(playerResults);
+    std::vector<std::string> vectorWithResultsForEachLine = splitString(preparedStringWithPlayerResults);
+    std::vector<int> playerResult = processString(vectorWithResultsForEachLine);
 
     return std::make_pair(playerName, playerResult);
 }
