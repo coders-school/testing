@@ -1,9 +1,10 @@
 #include <algorithm>
-
 #include <gtest/gtest.h>
 #include "DirectoryHandler.hpp"
 
+constexpr char invalidDirectoryPath[] = "../input/invalid";
 constexpr char inputManyFilesDirectoryPath[] = "../input/many-files";
+
 
 TEST(DirectoryHandlerTest, CheckAllLanesBeingProcessed) {
     std::vector<int> lanes{1, 2, 3};
@@ -30,4 +31,8 @@ TEST(DirectoryHandlerTest, CheckIfFirstLaneDataWasLoaded) {
     });
 
     ASSERT_TRUE(isContainsLine1);
+}
+
+TEST(DirectoryHandlerTest, InvalidDirectoryPathShouldThrowException) {
+    ASSERT_ANY_THROW(DirectoryHandler handler{invalidDirectoryPath});
 }

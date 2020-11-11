@@ -1,10 +1,12 @@
 #include <gtest/gtest.h>
 #include "Game.hpp"
 
+constexpr char invalidDirectoryPath[] = "../input/invalid";
 constexpr char inputOneFileDirectoryPath[] = "../input/one-file";
 constexpr char inputManyFilesDirectoryPath[] = "../input/many-files";
 constexpr char inputEmptyFileDirectoryPath[] = "../input/empty-file";
 [[maybe_unused]] constexpr char inputEmptyDirectoryDirectoryPath[] = "../input/empty-dir";
+
 
 constexpr char oneFileResultOutput[] = "../tests/results/resultOneFile.txt";
 constexpr char manyFilesResultOutput[] = "../tests/results/resultManyFiles.txt";
@@ -42,6 +44,10 @@ void loadResultFromFileAndCheckIfIsEqualToExpected(const char fileOutput[], cons
     }
 
     ASSERT_EQ(os.str(), expectedOutput);
+}
+
+TEST(GameTest, InvalidDirectoryPathGiven) {
+    ASSERT_ANY_THROW(Game game{invalidDirectoryPath});
 }
 
 TEST(GameTest, GameResultStringFromDirectoryWithOneFileShouldBeEqualToExpectedOneFile) {
