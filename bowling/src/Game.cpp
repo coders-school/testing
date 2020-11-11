@@ -29,13 +29,13 @@ void Game::saveDataToFile() {
 }
 
 void Game::processData() {
-    auto parser = std::make_shared<DataParser>();
+    auto parser = DataParser();
     std::map<int, std::vector<std::string>> rawLanes = directoryHandler_.getDirectoryData();
     for (auto lane : rawLanes) {
         auto laneNumber = lane.first;
         std::vector<std::shared_ptr<Player>> players;
         for (auto player : lane.second) {
-            auto playerData = parser->parseData(player);
+            auto playerData = parser.parseData(player);
             players.emplace_back(std::make_shared<Player>(playerData.first, playerData.second));
         }
         lanes_.emplace_back(std::make_shared<BowlingLane>(laneNumber, players));
