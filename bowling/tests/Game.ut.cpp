@@ -4,16 +4,14 @@
 constexpr char inputOneFileDirectoryPath[] = "../input/one-file";
 constexpr char inputManyFilesDirectoryPath[] = "../input/many-files";
 constexpr char inputEmptyFileDirectoryPath[] = "../input/empty-file";
-[[maybe_unused]]constexpr char inputEmptyDirectoryDirectoryPath[] = "../input/empty-dir";
-
+[[maybe_unused]] constexpr char inputEmptyDirectoryDirectoryPath[] = "../input/empty-dir";
 
 constexpr char oneFileResultOutput[] = "../tests/results/resultOneFile.txt";
 constexpr char manyFilesResultOutput[] = "../tests/results/resultManyFiles.txt";
 constexpr char emptyFileResultOutput[] = "../tests/results/resultEmptyFile.txt";
-[[maybe_unused]]constexpr char emptyDirectoryResultOutput[] = "../tests/results/resultEmptyDirectory.txt";
+[[maybe_unused]] constexpr char emptyDirectoryResultOutput[] = "../tests/results/resultEmptyDirectory.txt";
 
-
-[[maybe_unused]]constexpr char expectedEmptyDirectory[] = "";
+[[maybe_unused]] constexpr char expectedEmptyDirectory[] = "";
 constexpr char expectedOneFile[] =
     "### Lane 1: game in progress ###\n"
     "Name1 18\n"
@@ -30,17 +28,8 @@ constexpr char expectedManyFiles[] =
     "Radek 90\n";
 constexpr char expectedEmptyFile[] = "### Lane 1: no game ###\n";
 
-
-TEST(GameTest, GameResultStringFromDirectoryWithOneFileShouldBeEqualToExpectedOneFile) {
-    Game game{inputOneFileDirectoryPath};
-    ASSERT_EQ(game.getGameResult(), expectedOneFile);
-}
-
-TEST(GameTest, GameResultFromDirectoryWithOneFileSavedToFileAndOpenedFromItShouldBeEqualToExpectedOneFile) {
-    Game game{inputOneFileDirectoryPath, oneFileResultOutput};
-    game.saveDataToFile();
-
-    std::ifstream testFile(oneFileResultOutput, std::ios_base::in);
+void loadResultFromFileAndCheckIfIsEqualToExpected(const char fileOutput[], const char expectedOutput[]) {
+    std::ifstream testFile(fileOutput, std::ios_base::in);
     std::stringstream os;
     std::string line;
     if (testFile.is_open()) {
@@ -51,7 +40,19 @@ TEST(GameTest, GameResultFromDirectoryWithOneFileSavedToFileAndOpenedFromItShoul
     } else {
         FAIL() << "Cannot open file\n";
     }
-    ASSERT_EQ(os.str(), expectedOneFile);
+
+    ASSERT_EQ(os.str(), expectedOutput);
+}
+
+TEST(GameTest, GameResultStringFromDirectoryWithOneFileShouldBeEqualToExpectedOneFile) {
+    Game game{inputOneFileDirectoryPath};
+    ASSERT_EQ(game.getGameResult(), expectedOneFile);
+}
+
+TEST(GameTest, GameResultFromDirectoryWithOneFileSavedToFileAndOpenedFromItShouldBeEqualToExpectedOneFile) {
+    Game game{inputOneFileDirectoryPath, oneFileResultOutput};
+    game.saveDataToFile();
+    loadResultFromFileAndCheckIfIsEqualToExpected(oneFileResultOutput, expectedOneFile);
 }
 
 TEST(GameTest, GameResultStringFromDirectoryWithManyFilesShouldBeEqualToExpectedManyFiles) {
@@ -62,19 +63,7 @@ TEST(GameTest, GameResultStringFromDirectoryWithManyFilesShouldBeEqualToExpected
 TEST(GameTest, GameResultFromDirectoryWithManyFilesSavedToFileAndOpenedFromItShouldBeEqualToExpectedManyFiles) {
     Game game{inputManyFilesDirectoryPath, manyFilesResultOutput};
     game.saveDataToFile();
-
-    std::ifstream testFile(manyFilesResultOutput, std::ios_base::in);
-    std::stringstream os;
-    std::string line;
-    if (testFile.is_open()) {
-        while (getline(testFile, line)) {
-            os << line << '\n';
-        }
-        testFile.close();
-    } else {
-        FAIL() << "Cannot open file\n";
-    }
-    ASSERT_EQ(os.str(), expectedManyFiles);
+    loadResultFromFileAndCheckIfIsEqualToExpected(manyFilesResultOutput, expectedManyFiles);
 }
 
 TEST(GameTest, GameResultStringFromDirectoryWithEmptyFileShouldBeEqualToExpectedEmptyFile) {
@@ -85,40 +74,16 @@ TEST(GameTest, GameResultStringFromDirectoryWithEmptyFileShouldBeEqualToExpected
 TEST(GameTest, GameResultFromDirectoryWithEmptyFileSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyFile) {
     Game game{inputEmptyFileDirectoryPath, emptyFileResultOutput};
     game.saveDataToFile();
-    std::ifstream testFile(emptyFileResultOutput, std::ios_base::in);
-    std::stringstream os;
-    std::string line;
-    if (testFile.is_open()) {
-        while (getline(testFile, line)) {
-            os << line << '\n';
-        }
-        testFile.close();
-    } else {
-        FAIL() << "Cannot open file\n";
-    }
-    ASSERT_EQ(os.str(), expectedEmptyFile);
+    loadResultFromFileAndCheckIfIsEqualToExpected(emptyFileResultOutput, expectedEmptyFile);
 }
 
-//Test intentionally commented out to pass CI - The reason is that we can't crete empty directory on github repo
-// TEST(GameTest, GameResultStringFromEmptyDirectoryShouldBeEqualToExpectedEmptyDirectory) {
-//     Game game{inputEmptyDirectoryDirectoryPath};
-//     ASSERT_EQ(game.getGameResult(), expectedEmptyDirectory);
-// }
+TEST(DISABLED_GameTest, GameResultStringFromEmptyDirectoryShouldBeEqualToExpectedEmptyDirectory) {
+    Game game{inputEmptyDirectoryDirectoryPath};
+    ASSERT_EQ(game.getGameResult(), expectedEmptyDirectory);
+}
 
-// TEST(GameTest, GameResultFromEmptyDirectoryFilesSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyDirectory) {
-//     Game game{inputEmptyDirectoryDirectoryPath, emptyDirectoryResultOutput};
-//     game.saveDataToFile();
-
-//     std::ifstream testFile(emptyDirectoryResultOutput, std::ios_base::in);
-//     std::stringstream os;
-//     std::string line;
-//     if (testFile.is_open()) {
-//         while (getline(testFile, line)) {
-//             os << line << '\n';
-//         }
-//         testFile.close();
-//     } else {
-//         FAIL() << "Cannot open file\n";
-//     }
-//     ASSERT_EQ(os.str(), expectedEmptyDirectory);
-//}
+TEST(DISABLED_GameTest, GameResultFromEmptyDirectoryFilesSavedToFileAndOpenedFromItShouldBeEqualToExpectedEmptyDirectory) {
+    Game game{inputEmptyDirectoryDirectoryPath, emptyDirectoryResultOutput};
+    game.saveDataToFile();
+    loadResultFromFileAndCheckIfIsEqualToExpected(emptyDirectoryResultOutput, expectedEmptyDirectory);
+}
