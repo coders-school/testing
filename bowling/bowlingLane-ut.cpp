@@ -1,26 +1,27 @@
 #include <gtest/gtest.h>
+#include <memory>
 #include <string>
 #include <vector>
 
 #include "bowlingLane.hpp"
 
 struct TestBowlingLine : public ::testing::Test {
-    BowlingLane bl = BowlingLane();
-    std::string results{};
-    std::vector<std::pair<int, int>> points{{1, 1}, {1, 2}};
+    std::vector<std::unique_ptr<Player>> players;
+    std::vector<std::pair<int, int>> points{{1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}}; 
 };
 
-TEST_F(TestBowlingLine, checkIfSetPlayerAddPlayer) {
-    bl.setPlayer("player", points);
+TEST_F(TestBowlingLine, checkPrintResultToScreen) {
+    players.emplace_back(std::make_unique<Player>("player", points));
+    BowlingLane bl(std::move(players));
+    EXPECT_TRUE(bl.checkGameStatus());
+    
     bl.checkGameStatus();
-    results = bl.convertEnumToString();
-    std::cout << "sssssssssssssssssss" << results;
-    EXPECT_TRUE(results == "In Progress ");
+    EXPECT_EQ(bl.convertEnumToString(), "Finished ");
 }
 
-TEST_F(TestBowlingLine, checkPrintResultToScreen) {
+TEST_F(TestBowlingLine, checkSetPLayer) {
+    BowlingLane bl(std::move(players));
     bl.setPlayer("player", points);
     bl.checkGameStatus();
-    results = bl.printResultToScreen();
-    EXPECT_TRUE(results == "In Progress Name: player Score: 5");
+    EXPECT_EQ(bl.getResult(), "Finished player 30");
 }

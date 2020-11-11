@@ -8,7 +8,6 @@ class Game {
 public:
     void checkGameProgress(const std::vector<std::pair<int, int>>& score);
     bool getIsFinished() const;
-    static void printHelp();
 
 private:
     bool isFinished_;

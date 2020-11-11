@@ -56,7 +56,7 @@ std::vector<std::pair<int, int>> File::translateResultsToScoreVector(const std::
                 if (elem[i] == '-') {
                     temp.push_back(0);
                 } else if (std::isdigit(elem[i])) {
-                    temp.push_back((int)elem[i] - 48);
+                    temp.push_back((int)elem[i] - '0');
                 } else if (elem[i] == '/') {
                     temp.push_back(10 - temp[0]);
                 } else {
@@ -78,7 +78,6 @@ void File::readFile() {
         while (getline(lane, line)) {
             fileContents.push_back(line);
         }
-        lane.close();
     } else {
         std::cerr << "Could not open file ...";
     }

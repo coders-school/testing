@@ -1,13 +1,13 @@
 #include "bowlingLane.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <memory>
 
-BowlingLane::BowlingLane() {}
+// BowlingLane::BowlingLane() {}
 
-BowlingLane::BowlingLane(File file) {
-    file = File(name_);
-}
+BowlingLane::BowlingLane(std::vector<std::unique_ptr<Player>> players)
+    : players_(std::move(players)) {}
 
 void BowlingLane::setPlayer(std::string name, std::vector<std::pair<int, int>> points) {
     std::unique_ptr<Player> player = std::make_unique<Player>(name, points);
@@ -15,19 +15,39 @@ void BowlingLane::setPlayer(std::string name, std::vector<std::pair<int, int>> p
     players_.back()->countScore(points);
 }
 
-void BowlingLane::showResult() {
-    std::cout << BowlingLane::printResultToScreen();
+void BowlingLane::printResultToScreen() {
+    std::cout << BowlingLane::getResult();
 }
 
-void BowlingLane::checkGameStatus() {
+bool BowlingLane::checkGameStatus() {
     if (players_.empty()) {
         status_ = gameStatus::NoGame;
-    } else if (players_.at(0)->getPointsSize() == 10 && players_.at(0)->getPointsElem(9) != 10) {
-        status_ = gameStatus::Finish;
-    } else if (players_.at(0)->getPointsSize() == 11 && players_.at(0)->getPointsElem(9) != 10) {
-        status_ = gameStatus::Finish;
+        return false;
+    }
+    for (const auto& it: players_) {
+        if (it->getPointsSize() < 10) {
+            status_ = gameStatus::InProgress;
+            return true;
+        }
+    }
+        for (const auto& it: players_) {
+        if (it->getPointsSize() == 12) {
+            status_ = gameStatus::Finish;
+            return true;
+        }
+    }
+
+    for (auto it = 0; it < players_.size(); it++) {
+        if (players_[it]->getPointsSize() == 10 && players_[it]->getPointsElem(9) != 10) {
+            status_ = gameStatus::Finish;
+            return true;
+        } else if (players_[it] -> getPointsSize() == 11 && players_[it]->getPointsElem(9) != 10) {
+            status_ = gameStatus::Finish;
+            return true;
+        }
     }
     status_ = gameStatus::InProgress;
+    return false;
 }
 
 std::string BowlingLane::convertEnumToString() {
@@ -39,7 +59,7 @@ std::string BowlingLane::convertEnumToString() {
     return "No game ";
 }
 
-std::string BowlingLane::printResultToScreen() {
+std::string BowlingLane::getResult() {
     std::string result = convertEnumToString();
     for (const auto& it : players_) {
         result += it->getInfo();

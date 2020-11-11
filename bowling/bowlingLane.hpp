@@ -15,13 +15,13 @@ enum class gameStatus {
 
 class BowlingLane {
 public:
-    BowlingLane();
-    BowlingLane(File file);
+    BowlingLane(std::vector<std::unique_ptr<Player>> players);
     void setPlayer(std::string name, std::vector<std::pair<int, int>> points);
-    void showResult();
-    void checkGameStatus();
+    void printResultToScreen();
+    bool checkGameStatus();
+    gameStatus getGameStatus();
     std::string convertEnumToString();
-    std::string printResultToScreen();
+    std::string getResult();
 
 private:
     gameStatus status_;

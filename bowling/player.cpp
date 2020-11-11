@@ -25,7 +25,7 @@ void Player::setScore(int score) {
 
 void Player::countScore(std::vector<std::pair<int, int>> points) {
     int result = 0;
-    int lastNormalRound = 9 < points.size() ? 9 : points.size();
+    int lastNormalRound = (9 < points.size() ? 9 : points.size());
 
     for (auto it = 0; it <= lastNormalRound; it++) {
         if (points[it].first == 10 && points[it + 1].first == 10 && points.size() > it + 2) {
@@ -41,10 +41,6 @@ void Player::countScore(std::vector<std::pair<int, int>> points) {
     Player::setScore(result);
 }
 
-void Player::setPoints(std::vector<std::pair<int, int>> points) {
-    points_ = points;
-}
-
 int Player::getPointsSize() {
     return points_.size();
 }
@@ -55,8 +51,8 @@ int Player::getPointsElem(int elem) {
 
 std::string Player::getInfo() {
     auto ss = std::stringstream{};
-    ss << "Name: " << getName()
-       << " Score: " << getScore();
+    ss << getName()
+       << " " << getScore();
     return ss.str();
 }
 
