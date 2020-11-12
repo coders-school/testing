@@ -19,7 +19,7 @@ class Game {
    private:
     std::vector<PlayerData> players{};
 
-    std::vector<Frame> loadPlayerRolls(std::ifstream& file);
+    std::vector<Frame> getPlayerRolls(std::ifstream& file);
     std::vector<Frame> getFrames(const std::string& line);
     bool isLastFrame(int frameCount) const;
     bool isStrike(char currentRoll) const;

@@ -22,7 +22,7 @@ void Game::loadFromFile(const std::string& filePath) {
         std::string playerName{};
         std::vector<Frame> playerRolls{};
         std::getline(file, playerName, ':');
-        playerRolls = loadPlayerRolls(file);
+        playerRolls = getPlayerRolls(file);
         if (!file.eof()) {
             if (std::find_if(players.begin(), players.end(), [&](auto& player) {
                     return player.getName() == playerName && player.getRolls() == playerRolls;
@@ -34,7 +34,7 @@ void Game::loadFromFile(const std::string& filePath) {
     file.close();
 }
 
-std::vector<Frame> Game::loadPlayerRolls(std::ifstream& file) {
+std::vector<Frame> Game::getPlayerRolls(std::ifstream& file) {
     std::vector<Frame> playerRolls{};
     std::string line{};
     std::getline(file, line);
@@ -45,7 +45,7 @@ std::vector<Frame> Game::loadPlayerRolls(std::ifstream& file) {
 std::vector<Frame> Game::getFrames(const std::string& line) {
     std::vector<Frame> playerRolls{};
     Frame currentFrame{};
-    for (int currentChar = 0, frameNumber = 1; currentChar < line.size(); ++currentChar, ++frameNumber) {
+    for (int currentChar = 0, frameNumber = 1; currentChar < line.size(); ++frameNumber) {
         if (isStrike(line[currentChar])) {
             currentFrame = Frame('X', ' ');
             incrementCharForStrike(currentChar, frameNumber);
@@ -54,7 +54,7 @@ std::vector<Frame> Game::getFrames(const std::string& line) {
             incrementCharForSpare(currentChar, frameNumber);
         } else {
             currentFrame = getRegularFrame(line, currentChar);
-            currentChar += 2;
+            currentChar += 3;
         }
         playerRolls.push_back(currentFrame);
     }
@@ -69,14 +69,14 @@ Frame Game::getRegularFrame(const std::string& rolls, int currentRoll) const {
 }
 
 void Game::incrementCharForStrike(int& currentRoll, int frameNumber) const {
-    currentRoll++;
+    currentRoll += 2;
     if (isLastFrame(frameNumber)) {
         currentRoll++;
     }
 }
 
 void Game::incrementCharForSpare(int& currentRoll, int frameNumber) const {
-    currentRoll += 2;
+    currentRoll += 3;
     if (isLastFrame(frameNumber)) {
         currentRoll++;
     }
