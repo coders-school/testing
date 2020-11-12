@@ -36,8 +36,5 @@ std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber) con
 bool ArgumentParser::checkIfArgumentExists(const std::string& argument) const
 {
     auto foundIt = std::find(parsedArguments_.begin(), parsedArguments_.end(), argument);
-    if (foundIt != parsedArguments_.end()) {
-        return true;
-    }
-    return false;
+    return foundIt != parsedArguments_.end();
 }
