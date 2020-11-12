@@ -27,7 +27,8 @@ void ArgumentParser::parseArguments(const int argc, const char** argv)
 
 std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber) const
 {
-    if (static_cast<size_t>(argumentNumber) >= argumentsNumber_) {
+    size_t argNumber = static_cast<size_t>(argumentNumber);
+    if (argNumber >= argumentsNumber_) {
         return {};
     }
     return parsedArguments_[static_cast<size_t>(argumentNumber)];
@@ -36,8 +37,5 @@ std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber) con
 bool ArgumentParser::checkIfArgumentExists(const std::string& argument) const
 {
     auto foundIt = std::find(parsedArguments_.begin(), parsedArguments_.end(), argument);
-    if (foundIt != parsedArguments_.end()) {
-        return true;
-    }
-    return false;
+    return foundIt != parsedArguments_.end();
 }
