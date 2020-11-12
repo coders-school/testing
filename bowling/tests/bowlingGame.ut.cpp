@@ -1,7 +1,6 @@
 #include "catch.hpp"
 
 #include "bowlingGame.hpp"
-#include "bowlingGameStub.hpp"
 
 #include <sstream>
 
@@ -90,7 +89,7 @@ SCENARIO("Should save scores in file")
                 std::string temp{};
                 std::string wholeLine{};
 
-                while (ss >> temp) {
+                while (temp.str(ss)) {
                     wholeLine.append(temp);
                     if (temp == "\n") {
                         REQUIRE(wholeLine == expectedOutput[i++]);
