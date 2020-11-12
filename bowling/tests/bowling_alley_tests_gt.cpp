@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "BowlingAlley.hpp"
+#include "Game.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -19,4 +20,13 @@ TEST_F(BowlingAlleyTests, bowlingAlleyCanBeLoadedFromFolder) {
 TEST_F(BowlingAlleyTests, bowlingAlleyThrowsWhenLoadedNotFromAFolder) {
     std::string notExistingPath{"iDontExist"};
     EXPECT_THROW(bowlingAlley.loadFromFolder(notExistingPath), std::invalid_argument);
+}
+
+TEST_F(BowlingAlleyTests, bowlingAlleyReturnsOutputStringForManyGames) {
+    std::string expectedOutput{};
+    const auto& games = bowlingAlley.getGames();
+    for (size_t i{0}; i < games.size(); ++i) {
+        expectedOutput += games[i]->getOutputString(i + 1);
+    }
+    EXPECT_EQ(bowlingAlley.getOutputString(), expectedOutput);
 }
