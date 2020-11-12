@@ -19,13 +19,14 @@ class Game {
    private:
     std::vector<PlayerData> players{};
 
-    void loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls);
+    std::vector<Frame> loadPlayerRolls(std::ifstream& file);
+    std::vector<Frame> getFrames(const std::string& line);
     bool isLastFrame(int frameCount) const;
     bool isStrike(char currentRoll) const;
     bool isSpare(char nextRoll) const;
     Frame getRegularFrame(const std::string& rolls, int currentRoll) const;
-    void incrementStrikeCounters(int& currentRoll, int frameCount) const;
-    void incrementSpareCounters(int& currentRoll, int frameCount) const;
+    void incrementCharForStrike(int& currentRoll, int frameCount) const;
+    void incrementCharForSpare(int& currentRoll, int frameCount) const;
 
    public:
     Game() = default;

@@ -22,7 +22,7 @@ void Game::loadFromFile(const std::string& filePath) {
         std::string playerName{};
         std::vector<Frame> playerRolls{};
         std::getline(file, playerName, ':');
-        loadPlayerRolls(file, playerRolls);
+        playerRolls = loadPlayerRolls(file);
         if (!file.eof()) {
             if (std::find_if(players.begin(), players.end(), [&](auto& player) {
                     return player.getName() == playerName && player.getRolls() == playerRolls;
@@ -34,25 +34,33 @@ void Game::loadFromFile(const std::string& filePath) {
     file.close();
 }
 
-void Game::loadPlayerRolls(std::ifstream& file, std::vector<Frame>& playerRolls) {
-    std::string rolls{};
+std::vector<Frame> Game::loadPlayerRolls(std::ifstream& file) {
+    std::vector<Frame> playerRolls{};
+    std::string line{};
+    std::getline(file, line);
+    playerRolls = getFrames(line);
+    return playerRolls;
+}
+
+std::vector<Frame> Game::getFrames(const std::string& line) {
+    std::vector<Frame> playerRolls{};
     Frame currentFrame{};
-    int frameCount = 1;
-    std::getline(file, rolls);
-    for (int currentRoll = 0; currentRoll < rolls.size(); ++currentRoll) {
-        if (isStrike(rolls[currentRoll])) {
+    int frameNumber = 1;
+    for (int currentChar = 0; currentChar < line.size(); ++currentChar) {
+        if (isStrike(line[currentChar])) {
             currentFrame = Frame('X', ' ');
-            incrementStrikeCounters(currentRoll, frameCount);
-        } else if (isSpare(rolls[currentRoll + 1])) {
-            currentFrame = Frame(rolls[currentRoll], '/');
-            incrementSpareCounters(currentRoll, frameCount);
+            incrementCharForStrike(currentChar, frameNumber);
+        } else if (isSpare(line[currentChar + 1])) {
+            currentFrame = Frame(line[currentChar], '/');
+            incrementCharForSpare(currentChar, frameNumber);
         } else {
-            currentFrame = getRegularFrame(rolls, currentRoll);
-            currentRoll += 2;
+            currentFrame = getRegularFrame(line, currentChar);
+            currentChar += 2;
         }
-        frameCount++;
+        frameNumber++;
         playerRolls.push_back(currentFrame);
     }
+    return playerRolls;
 }
 
 Frame Game::getRegularFrame(const std::string& rolls, int currentRoll) const {
@@ -62,22 +70,22 @@ Frame Game::getRegularFrame(const std::string& rolls, int currentRoll) const {
     return Frame(rolls[currentRoll], rolls[currentRoll + 1]);
 }
 
-void Game::incrementStrikeCounters(int& currentRoll, int frameCount) const {
+void Game::incrementCharForStrike(int& currentRoll, int frameNumber) const {
     currentRoll++;
-    if (isLastFrame(frameCount)) {
+    if (isLastFrame(frameNumber)) {
         currentRoll++;
     }
 }
 
-void Game::incrementSpareCounters(int& currentRoll, int frameCount) const {
+void Game::incrementCharForSpare(int& currentRoll, int frameNumber) const {
     currentRoll += 2;
-    if (isLastFrame(frameCount)) {
+    if (isLastFrame(frameNumber)) {
         currentRoll++;
     }
 }
 
-bool Game::isLastFrame(int frameCount) const {
-    return frameCount == 10;
+bool Game::isLastFrame(int frameNumber) const {
+    return frameNumber == 10;
 }
 
 bool Game::isStrike(char currentRoll) const {
