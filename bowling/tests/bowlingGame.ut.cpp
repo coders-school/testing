@@ -89,7 +89,7 @@ SCENARIO("Should save scores in file")
                 std::string temp{};
                 std::string wholeLine{};
 
-                while (temp.str(ss)) {
+                while (ss >> temp) {
                     wholeLine.append(temp);
                     if (temp == "\n") {
                         REQUIRE(wholeLine == expectedOutput[i++]);
