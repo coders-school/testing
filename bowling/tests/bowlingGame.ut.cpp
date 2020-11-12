@@ -69,11 +69,11 @@ SCENARIO("Should save scores in file")
     GIVEN("Three arguments for start")
     {
         const char* userInput[] = {"./bowling", "../tests/testDirectory/goodInput/", "../tests/testDirectory/gameScores/result1.txt"};
-        BowlingGameStub bowlingGameStub(3, userInput);
+        BowlingGame bowlingGame(3, userInput);
         WHEN("Called function save scores")
         {
-            bowlingGameStub.calculateScores();
-            std::stringstream ss = bowlingGameStub.saveScores();
+            bowlingGame.calculateScores();
+            std::stringstream ss = bowlingGame.saveScores();
             THEN("Should save scores in file")
             {
                 std::vector<std::string> expectedOutput{
