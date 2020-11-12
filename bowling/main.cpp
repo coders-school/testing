@@ -2,41 +2,41 @@
 #include <iostream>
 #include <string>
 
-#include "BowlingAlley.hpp"
-#include "Game.hpp"
 #include <algorithm>
 #include <cstring>
+#include "BowlingAlley.hpp"
+#include "Game.hpp"
 
 bool isHelpFlag(int argc, const char** argv) {
-  for (int i = 1; i < argc; ++i) {
-    if(strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
-      return true;
+    for (int i = 1; i < argc; ++i) {
+        if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
 
 void printManual() {
-  std::cout << "program ma przyjmować 2 parametry z linii komend.\n";
-  std::cout << "Pierwszy to katalog, w którym będą pliki txt ze stanami gier na torach,\n";
-  std::cout << "a drugi opcjonalny to plik wyjściowy, w którym mają zostać zapisane przetworzone wyniki.\n";
-  std::cout << "Jeśli drugi parametr nie zostanie podany to wyniki mają zostać wypisane na ekran.\n";
-  std::cout << "Przykład użycia: ./bowling inputDirectory results.txt\n";
+    std::cout << "Program is supposed to take 2 parameters from the commandline.\n";
+    std::cout << "First one is a directory, where txt files containing initial game states, should be kept.\n";
+    std::cout << "Second one is optional, it is an output file, designed to save game results. \n";
+    std::cout << "If the second parameter is omitted, game results will be printed to the console.\n";
+    std::cout << "Example: ./bowling inputDirectory results.txt\n";
 }
 
 int main(int argc, const char** argv) {
-  if (argc <= 1) {
-    return -1;
-  }
-  if (isHelpFlag(argc, argv)) {
-    printManual();
-    return 0;
-  }
-  BowlingAlley alley(argv[1]);
-  if (argc >= 3) {
-    std::ofstream file(argv[2]);
-    alley.printOutputTo(file);
-  } else {
-    alley.printOutputTo(std::cout);
-  }
+    if (argc <= 1) {
+        return -1;
+    }
+    if (isHelpFlag(argc, argv)) {
+        printManual();
+        return 0;
+    }
+    BowlingAlley alley(argv[1]);
+    if (argc >= 3) {
+        std::ofstream file(argv[2]);
+        file << alley.getOutputString();
+    } else {
+        std::cout << alley.getOutputString();
+    }
 }

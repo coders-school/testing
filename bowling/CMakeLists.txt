@@ -39,7 +39,7 @@ endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
 
-set (SRC_FILES Game.cpp BowlingAlley.cpp)
+set (SRC_FILES Game.cpp BowlingAlley.cpp Frame.cpp PlayerData.cpp)
 add_library(src STATIC ${SRC_FILES})
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} src)
@@ -47,7 +47,7 @@ target_link_libraries(${PROJECT_NAME} src)
 enable_testing()
 add_executable(${PROJECT_NAME}-ut tests/bowling_tests_gt.cpp tests/bowling_alley_tests_gt.cpp)
 target_link_libraries(${PROJECT_NAME}-ut gtest_main src)
-target_include_directories(${PROJECT_NAME}-ut PRIVATE .)
+target_include_directories(${PROJECT_NAME}-ut PRIVATE ${CMAKE_SOURCE_DIR})
 add_test(NAME bowlingTests COMMAND ${PROJECT_NAME}-ut)
 
 set (FLAGS -Wall -Wextra -Wconversion -pedantic)
