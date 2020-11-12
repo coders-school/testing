@@ -1,8 +1,7 @@
-#include "catch.hpp"
+#include <sstream>
 
 #include "bowlingGame.hpp"
-
-#include <sstream>
+#include "catch.hpp"
 
 using Catch::Matchers::StartsWith;
 
@@ -67,35 +66,29 @@ SCENARIO("Should save scores in file")
 {
     GIVEN("Three arguments for start")
     {
-        const char* userInput[] = {"./bowling", "../tests/testDirectory/goodInput/", "../tests/testDirectory/gameScores/result1.txt"};
+        const char* resultFilePath = "../tests/testDirectory/gameScores/result1.txt";
+        const char* userInput[] = {"./bowling", "../tests/testDirectory/goodInput/", resultFilePath};
         BowlingGame bowlingGame(3, userInput);
         WHEN("Called function save scores")
         {
             bowlingGame.calculateScores();
-            std::stringstream ss = bowlingGame.saveScores();
+            bowlingGame.outputScores();
             THEN("Should save scores in file")
             {
-                std::vector<std::string> expectedOutput{
-                    "### lane1 : game in progress ###",
-                    "Zuzka 31",
-
-                    "### lane2 : game finished ###",
-                    "Matylda 167",
-
-                    "### lane3 : game finished ###",
-                    "Pimpek 300"};
-
-                int i = 0;
-                std::string temp{};
-                std::string wholeLine{};
-
-                while (ss >> temp) {
-                    wholeLine.append(temp);
-                    if (temp == "\n") {
-                        REQUIRE(wholeLine == expectedOutput[i++]);
-                        wholeLine.clear();
-                    }
+                std::stringstream expectedFile;
+                expectedFile << "### lane1: game finished ###\n"
+                             << "Matylda 167\n\n"
+                             << "### lane2: game finished ###\n"
+                             << "Pimpek 300\n\n"
+                             << "### lane3: game in progress ###\n"
+                             << "Zuzka 31\n\n";
+                std::ifstream fileStream(resultFilePath);
+                std::stringstream resultFile;
+                if (fileStream) {
+                    resultFile << fileStream.rdbuf();
+                    fileStream.close();
                 }
+                REQUIRE(expectedFile.str() == resultFile.str());
             }
         }
     }
