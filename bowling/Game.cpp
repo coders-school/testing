@@ -45,8 +45,7 @@ std::vector<Frame> Game::loadPlayerRolls(std::ifstream& file) {
 std::vector<Frame> Game::getFrames(const std::string& line) {
     std::vector<Frame> playerRolls{};
     Frame currentFrame{};
-    int frameNumber = 1;
-    for (int currentChar = 0; currentChar < line.size(); ++currentChar) {
+    for (int currentChar = 0, frameNumber = 1; currentChar < line.size(); ++currentChar, ++frameNumber) {
         if (isStrike(line[currentChar])) {
             currentFrame = Frame('X', ' ');
             incrementCharForStrike(currentChar, frameNumber);
@@ -57,7 +56,6 @@ std::vector<Frame> Game::getFrames(const std::string& line) {
             currentFrame = getRegularFrame(line, currentChar);
             currentChar += 2;
         }
-        frameNumber++;
         playerRolls.push_back(currentFrame);
     }
     return playerRolls;
