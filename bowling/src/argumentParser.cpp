@@ -27,7 +27,8 @@ void ArgumentParser::parseArguments(const int argc, const char** argv)
 
 std::string ArgumentParser::getArgument(const ArgumentNumber argumentNumber) const
 {
-    if (static_cast<size_t>(argumentNumber) >= argumentsNumber_) {
+    size_t argNumber = static_cast<size_t>(argumentNumber);
+    if (argNumber >= argumentsNumber_) {
         return {};
     }
     return parsedArguments_[static_cast<size_t>(argumentNumber)];
