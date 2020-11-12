@@ -17,11 +17,11 @@ bool isHelpFlag(int argc, const char** argv) {
 }
 
 void printManual() {
-    std::cout << "program ma przyjmować 2 parametry z linii komend.\n";
-    std::cout << "Pierwszy to katalog, w którym będą pliki txt ze stanami gier na torach,\n";
-    std::cout << "a drugi opcjonalny to plik wyjściowy, w którym mają zostać zapisane przetworzone wyniki.\n";
-    std::cout << "Jeśli drugi parametr nie zostanie podany to wyniki mają zostać wypisane na ekran.\n";
-    std::cout << "Przykład użycia: ./bowling inputDirectory results.txt\n";
+    std::cout << "Program is supposed to take 2 parameters from the commandline.\n";
+    std::cout << "First one is a directory, where txt files containing initial game states, should be kept.\n";
+    std::cout << "Second one is optional, it is an output file, designed to save game results. \n";
+    std::cout << "If the second parameter is omitted, game results will be printed to the console.\n";
+    std::cout << "Example: ./bowling inputDirectory results.txt\n";
 }
 
 int main(int argc, const char** argv) {
