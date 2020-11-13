@@ -7,15 +7,16 @@
 
 class GameTests : public ::testing::Test {
    protected:
-    Game game;
-    std::ofstream file;
-    std::string filePath;
+    std::string filePath{"defaultPath"};
+    std::ofstream file{filePath};
+    Game game{filePath};
     std::string tenStrikes{"X|X|X|X|X|X|X|X|X|X|"};
     std::string defaultPlayerName{"defaultPlayer"};
 
     void SetUp() override {
         std::string fileName = "/test_file.txt";
         filePath = std::filesystem::current_path().string() + fileName;
+        file.close();
         file.open(filePath, std::ios_base::out);
     }
 
