@@ -7,7 +7,7 @@
 class Game;
 class BowlingAlley {
 public:
-    BowlingAlley() = default;
+    BowlingAlley() = delete;
     explicit BowlingAlley(const std::filesystem::path& pathToFolder);
     void loadFromFolder(const std::filesystem::path& pathToFolder);
     std::string getOutputString();
