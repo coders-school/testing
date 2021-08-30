@@ -47,10 +47,10 @@ SCENARIO( "Counting bowling points for 10 frames - mixed 2 ways of counting poin
 
 SCENARIO( "Counting bowling points for 10 frames - mixed ways of counting points",  "[string][couting][mixedWayOfCounting]") {
 
-    GIVEN( "String with scores and expected results"" ) {
+    GIVEN( "String with scores and expected results" ) {
             auto j = GENERATE( framesAndResult{"26|X|5/|X|72|5/|X|6/|34|8/||9", {155,"ok"}},
                                framesAndResult{"3-|4-|X|6/|6-|8/|62|9/|72|X||XX", {129,"ok"}},
-			       framesAndResult{"8/|7/|6/|X|8-|1/|X|71|8/|23||", {142,"ok"}},
+			                   framesAndResult{"8/|7/|6/|X|8-|1/|X|71|8/|23||", {142,"ok"}},
                                framesAndResult{"X|53|4/|9/|25|7/|9-|X|53|7/||X", {138,"ok"}},
                                framesAndResult{"--|4/|71|X|45|8-|X|9-|54|32||", {103,"ok"}})
             
@@ -61,7 +61,7 @@ SCENARIO( "Counting bowling points for 10 frames - mixed ways of counting points
             THEN( "results should be " << j.second.first ) {
                 auto expected = j.second;
                 REQUIRE(result == expected);
-	    }
+	        }
         }
     }
 }
@@ -73,7 +73,27 @@ SCENARIO( "Counting bowling points for unfinished game",  "[string][couting][unf
                                framesAndResult{"71|4/|--|5/|", {28,"ok"}},
                                framesAndResult{"8/|1-|", {12,"ok"}},
                                framesAndResult{"X|X|X|", {60, "ok"}},
-                               framesAndResult{"--|", {0,"ok"}})
+            
+        WHEN( "returnResult() function called for " << j.first ) {
+            auto points = j.first;
+            auto result  = returnResult(points);  
+                                                   
+            THEN( "results should be " << j.second.first ) {
+                auto expected = j.second;
+                REQUIRE(result == expected);
+            }
+        }
+    }
+}
+
+SCENARIO( "Counting bowling points with zero points",  "[string][couting][zero]") {
+
+    GIVEN( "String with scores and expected results" ) {
+            auto j = GENERATE( framesAndResult{"--|--|--|--|--|--|--|--|--|X||XX", {30,"ok"}},
+                               framesAndResult{"--|--|--|--|--|--|--|--|--|X||11", {12,"ok"}},
+                               framesAndResult{"--|--|--|--|--|--|--|--|--|--||", {0,"ok"}},
+                               framesAndResult{"--|--|--|--|", {0,"ok"}},
+                               framesAndResult{"--|", {0,"ok"}},
             
         WHEN( "returnResult() function called for " << j.first ) {
             auto points = j.first;
