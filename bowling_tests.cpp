@@ -133,4 +133,49 @@ SCENARIO( "Checking is wrong character",  "[string][error][character]") {
     }
 }
 
+SCENARIO( "Checking it is wrong format",  "[string][error][format]") {
+
+    GIVEN( "String with scores and expected results" ) {
+            auto j = GENERATE( framesAndResult{"-1||23|2-|33|33|33|33|--|1-|X||XX", {0, "WrongFormat"}},
+                               framesAndResult{"X|X|X|X|X|X|X|X|X|X|XX", {0, "WrongFormat"}},
+                               framesAndResult{"44|44|44|44|4|4|34|44|X|--|--||", {0, "WrongFormat"}},
+                               framesAndResult{"|--|--|--|--|--|--|--|--|--|--||", {0, "WrongFormat"}},
+                               framesAndResult{"--|1/|11|11|-1|11|--||", {0, "WrongFormat"}},
+                               framesAndResult{"X|--|X|--||", {0, "WrongFormat"}},
+                               framesAndResult{"--|22|X|33|||", {0, "WrongFormat"}},
+                               framesAndResult{"|X", {0, "WrongFormat"}},
+                               framesAndResult{"X", {0, "WrongFormat"}},
+            
+        WHEN( "returnResult() function called for " << j.first ) {
+            auto points = j.first;
+            auto result  = returnResult(points);  
+                                                   
+            THEN( "results should be " << j.second.first ) {
+                auto expected = j.second;
+                REQUIRE(result == expected);
+            }
+        }
+    }
+}
+
+SCENARIO( "Checking it is wrong value",  "[string][error][value]") {
+
+    GIVEN( "String with scores and expected results" ) {
+            auto j = GENERATE( framesAndResult{"123|23|33|33|33|33|33|33|33|X||XX", {0, "WrongValue"}},
+                               framesAndResult{"12|2/|3/|3/|3/|3/|3/|3/|48|1/||", {0, "WrongValue"}},
+                               framesAndResult{"12|2/|3/|3/|19|3/|3/|3/|22|1/||", {0, "WrongValue"}},
+                               framesAndResult{"12|2/|91|3/|33|3/|3/|3/|22|1/||", {0, "WrongValue"}},
+            
+        WHEN( "returnResult() function called for " << j.first ) {
+            auto points = j.first;
+            auto result  = returnResult(points);  
+                                                   
+            THEN( "results should be " << j.second.first ) {
+                auto expected = j.second;
+                REQUIRE(result == expected);
+            }
+        }
+    }
+}
+
 
