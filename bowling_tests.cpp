@@ -178,4 +178,20 @@ SCENARIO( "Checking it is wrong value",  "[string][error][value]") {
     }
 }
 
+SCENARIO( "Checking it is wrong record quantity",  "[string][error][records]") {
 
+    GIVEN( "String with scores and expected results" ) {
+            auto j = GENERATE( framesAndResult{"23|23|33|33|33|33|33|33|33|X||XXX", {0, "RecordLimit"}},
+                               framesAndResult{"12|2/|3/|3/|3/|3/|3/|3/|43|1/|11||", {0, "RecordLimit"}},
+            
+        WHEN( "returnResult() function called for " << j.first ) {
+            auto points = j.first;
+            auto result  = returnResult(points);  
+                                                   
+            THEN( "results should be " << j.second.first ) {
+                auto expected = j.second;
+                REQUIRE(result == expected);
+            }
+        }
+    }
+}
