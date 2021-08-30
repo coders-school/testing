@@ -2,19 +2,19 @@
 
 #include "catch_amalgamated.hpp"
 
-using framesAndResult = std::pair<std::string,std::pair<size_t, std::string>>;
+using framesAndResult = std::pair<std::string, std::pair<size_t, std::string>>;
 
 SCENARIO( "Counting bowling points for 10 frames with the same results - for different ways of counting",  "[string][couting][sameFrames]") {
 
     GIVEN( "String with scores and expected results" ) {
 	    
-	    auto j = GENERATE( framesAndResult{"X|X|X|X|X|X|X|X|X|X||XX", {300,'ok'}},
-			       framesAndResult{"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5", {150,'ok'}},
-			       framesAndResult{"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", {90,'ok'}},
-			       framesAndResult{"52|52|52|52|52|52|52|52|52|52||", {70,'ok'}})
+	    auto j = GENERATE( framesAndResult{"X|X|X|X|X|X|X|X|X|X||XX", {300, "ok"}},
+                           framesAndResult{"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5", {150, "ok"}},
+                           framesAndResult{"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", {90, "ok"}},
+                           framesAndResult{"52|52|52|52|52|52|52|52|52|52||", {70, "ok"}})
 	    
         WHEN( "returnResult() function called for " << j.first ) {
-	    auto points = j.first;
+	        auto points = j.first;
             auto result  = returnResult(points);  
                                                    
             THEN( "results should be " << j.second.first ) {
@@ -29,9 +29,9 @@ SCENARIO( "Counting bowling points for 10 frames - mixed 2 ways of counting poin
 
     GIVEN( "String with scores and expected results" ) {
 
-            auto j = GENERATE( framesAndResult{"X|X|6/|X|X|7/|9/|X|X|9/||X", {221,'ok'}},
-                               framesAndResult{"9/|5/|53|7/|5/|5/|81|6/|8/|71||", {138,'ok'}},
-                               framesAndResult{"9-|X|63|X|X|9-|53|X|71|X||81", {147,'ok'}})
+            auto j = GENERATE( framesAndResult{"X|X|6/|X|X|7/|9/|X|X|9/||X", {221, "ok"}},
+                               framesAndResult{"9/|5/|53|7/|5/|5/|81|6/|8/|71||", {138, "ok"}},
+                               framesAndResult{"9-|X|63|X|X|9-|53|X|71|X||81", {147, "ok"}})
 
         WHEN( "returnResult() function called for " << j.first ) {
             auto points = j.first;
@@ -106,4 +106,31 @@ SCENARIO( "Counting bowling points with zero points",  "[string][couting][zero]"
         }
     }
 }
+
+SCENARIO( "Checking is wrong character",  "[string][error][character]") {
+
+    GIVEN( "String with scores and expected results" ) {
+            auto j = GENERATE( framesAndResult{"--|--|--|--|--|--|--|--|/-|X||XX", {0, "WrongCharacter"}},
+                               framesAndResult{"X|X|X|X|X|X|X|X|Y|X||23", {0, "WrongCharacter"}},
+                               framesAndResult{"11|11|11|--|--|33|33|X|--|--||", {0, "WrongCharacter"}},
+                               framesAndResult{"//|//|//|//|//|11|11|11|11|11||", {0, "WrongCharacter"}},
+                               framesAndResult{"44|44|44|44|44|44|44|44|44|X||/X", {0, "WrongCharacter"}},
+                               framesAndResult{"--|--|--|--|--|--|--|--|--|X||00", {0, "WrongCharacter"}},
+                               framesAndResult{"--|--|--|33|--|33|XX|", {0, "WrongCharacter"}},
+                               framesAndResult{"--|--|--|-*|", {0, "WrongCharacter"}},
+                               framesAndResult{"--|22|  |33|", {0, "WrongCharacter"}},
+                               framesAndResult{"-@|", {0, "WrongCharacter"}},
+            
+        WHEN( "returnResult() function called for " << j.first ) {
+            auto points = j.first;
+            auto result  = returnResult(points);  
+                                                   
+            THEN( "results should be " << j.second.first ) {
+                auto expected = j.second;
+                REQUIRE(result == expected);
+            }
+        }
+    }
+}
+
 
