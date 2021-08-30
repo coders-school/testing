@@ -140,6 +140,8 @@ SCENARIO( "Checking it is wrong format",  "[string][error][format]") {
                                framesAndResult{"X|X|X|X|X|X|X|X|X|X|XX", {0, "WrongFormat"}},
                                framesAndResult{"44|44|44|44|4|4|34|44|X|--|--||", {0, "WrongFormat"}},
                                framesAndResult{"|--|--|--|--|--|--|--|--|--|--||", {0, "WrongFormat"}},
+                               framesAndResult{"23|23|33|33|33|33|33|33|33|X||XXX", {0, "WrongFormat"}},
+                               framesAndResult{"12|2/|3/|3/|3/|3/|3/|3/|43|1/|11||", {0, "WrongFormat"}},
                                framesAndResult{"--|1/|11|11|-1|11|--||", {0, "WrongFormat"}},
                                framesAndResult{"X|--|X|--||", {0, "WrongFormat"}},
                                framesAndResult{"--|22|X|33|||", {0, "WrongFormat"}},
@@ -165,24 +167,6 @@ SCENARIO( "Checking it is wrong value",  "[string][error][value]") {
                                framesAndResult{"12|2/|3/|3/|3/|3/|3/|3/|48|1/||", {0, "WrongValue"}},
                                framesAndResult{"12|2/|3/|3/|19|3/|3/|3/|22|1/||", {0, "WrongValue"}},
                                framesAndResult{"12|2/|91|3/|33|3/|3/|3/|22|1/||", {0, "WrongValue"}},
-            
-        WHEN( "returnResult() function called for " << j.first ) {
-            auto points = j.first;
-            auto result  = returnResult(points);  
-                                                   
-            THEN( "results should be " << j.second.first ) {
-                auto expected = j.second;
-                REQUIRE(result == expected);
-            }
-        }
-    }
-}
-
-SCENARIO( "Checking it is wrong record quantity",  "[string][error][records]") {
-
-    GIVEN( "String with scores and expected results" ) {
-            auto j = GENERATE( framesAndResult{"23|23|33|33|33|33|33|33|33|X||XXX", {0, "RecordLimit"}},
-                               framesAndResult{"12|2/|3/|3/|3/|3/|3/|3/|43|1/|11||", {0, "RecordLimit"}},
             
         WHEN( "returnResult() function called for " << j.first ) {
             auto points = j.first;
