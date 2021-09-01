@@ -10,6 +10,10 @@
 
 ___
 
+## [Catch2 - github.com](https://github.com/catchorg/Catch2)
+
+___
+
 ## Przydatne asercje
 
 * <!-- .element: class="fragment fade-in" --> <code>REQUIRE( expression )</code>

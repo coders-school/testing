@@ -10,10 +10,10 @@
 
 ___
 
-## SHM - zadanie grupowe
+## SHM (Premium)
 
-* Napisz testy do SHM (0 punktów)
-  * nie zgłaszajcie nam PR ;) możecie się pochwalić testami lub zapytać o nie na Discordzie.
+* Napiszcie testy do SHM
+* Możecie się pochwalić testami lub zapytać o nie na Discordzie.
 
 ___
 
@@ -22,7 +22,9 @@ ___
 Dobierzcie się w nowe grupy. W grupie mają być osoby, z którymi jeszcze nie współpracowaliście 🙂
 
 * Zróbcie burzę mózgów i napiszcie scenariusze testowe w formacie GIVEN WHEN THEN do programu, którego zadaniem jest liczyć punkty w kręglach. Scenariusze mają być napisane we frameworku Catch2, ale nie muszą zawierać żadnego kodu. Nawet nie musicie implementować tego programu (jeszcze 😉). Chodzi o to, aby pokryć jak największą funkcjonalność testami. Opis zasad gry w kręgle poniżej.
-  * 1 punkt za każdy scenariusz testowy. Scenariusze pokrywające tę samą funkcjonalność będą liczone jako jeden.
+* +10 XP za minimum 15 różnych kombinacji danych wejściowych
+* +5 XP za minimum 20 różnych kombinacji danych wejściowych
+* Starajcie się pokryć skrajne przypadki
 
 ___
 
