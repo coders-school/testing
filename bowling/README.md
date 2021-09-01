@@ -8,6 +8,7 @@ Dobierzcie się w nowe grupy. W grupie mają być osoby, z którymi jeszcze nie 
 * +10 XP za minimum 15 różnych kombinacji danych wejściowych
 * +5 XP za minimum 20 różnych kombinacji danych wejściowych
 * Starajcie się pokryć skrajne przypadki
+* Scenariusze zgłoście jako PR na gałąź bowling-testcases w repo testing. Będą one oceniane manualnie.
 
 ## Zasady gry (EN)
 
