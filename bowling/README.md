@@ -1,13 +1,18 @@
 # Bowling
 
+Wrzućcie scenariusze testowe do katalogu bowling. Będą ocenione manualnie.
+
 Dobierzcie się w nowe grupy. W grupie mają być osoby, z którymi jeszcze nie współpracowaliście 🙂
 
-Zróbcie burzę mózgów i napiszcie scenariusze testowe w formacie GIVEN WHEN THEN do programu, którego zadaniem jest liczyć punkty w kręglach. Scenariusze mają być napisane we frameworku Catch2, ale nie muszą zawierać żadnego kodu. Nawet nie musicie implementować tego programu (jeszcze 😉). Chodzi o to, aby pokryć jak największą funkcjonalność testami. Opis zasad gry w kręgle poniżej.
-1 punkt za każdy scenariusz testowy. Scenariusze pokrywające tę samą funkcjonalność będą liczone jako jeden.
+* Zróbcie burzę mózgów i napiszcie scenariusze testowe w formacie GIVEN WHEN THEN do programu, którego zadaniem jest liczyć punkty w kręglach. Scenariusze mają być napisane we frameworku Catch2, ale nie muszą zawierać żadnego kodu. Nawet nie musicie implementować tego programu (jeszcze 😉). Chodzi o to, aby pokryć jak największą funkcjonalność testami. Opis zasad gry w kręgle poniżej.
+* +10 XP za minimum 15 różnych kombinacji danych wejściowych
+* +5 XP za minimum 20 różnych kombinacji danych wejściowych
+* Starajcie się pokryć skrajne przypadki
+* Scenariusze zgłoście jako PR na gałąź bowling-testcases w repo testing. Będą one oceniane manualnie.
 
+## Zasady gry (EN)
 
-Bowling - The scoring rules
-
+```text
 Each game, or "line" of bowling, includes ten turns,
 or "frames" for the bowler.
 
@@ -71,3 +76,4 @@ Total score == 10 frames x 15 == 150
 
 X|7/|9-|X|-8|8/|-6|X|X|X||81
 Total score == 167
+```
