@@ -10,6 +10,10 @@ int result(int number) {
     return number;
 }
 
+void showErrorMessage(const std::string& errorText) {
+    throw std::logic_error(errorText);
+}
+
 SCENARIO("Miss in every game") {
     GIVEN("Ten turns") {
         std::vector<int> game(0);
@@ -138,6 +142,71 @@ SCENARIO("Game without strike and spare") {
             THEN("Result") {
                 REQUIRE(gameresult == 64);
                 }
+        }
+    }
+}
+
+SCENARIO("Game with extra throw") {
+    GIVEN("Game with extra throw") {
+        std::vector<int> game{5, 3, 4, 3, 2, 2, 5, 1, 3, 0, 6, 2, 4, 4, 3, 3, 7, 1, 10, 10, 5};
+        WHEN("Count result") {
+            auto gameresult = result(83);
+            THEN("Result") {
+                REQUIRE(gameresult == 83);
+                }
+        }
+    }
+}
+
+SCENARIO("Game with not enough rounds") {
+    GIVEN("Game with not enough rounds") {
+        std::vector<int> game{1};
+        const int minimumThrowsNumber = 20;
+        WHEN("Not enough rounds") {
+            game.size() < minimumThrowsNumber;
+            THEN("Not enough rounds, show error") {
+                CHECK_THROWS_AS(showErrorMessage("Not enough rounds!"), std::exception);
+            }
+        }
+    }
+}
+
+SCENARIO("Game with too many rounds") {
+    GIVEN("Game with too many rounds") {
+        std::vector<int> game{1, 3, 2, 4, 3, 6, 4, 1, 5, 0, 6, 2, 4, 1, 3, 2, 2, 7, 3, 5, 1, 3};
+        const int maximumThrowsNumber = 21;
+        WHEN("Too many rounds") {
+            game.size() > maximumThrowsNumber;
+            THEN("Too many rounds, show error") {
+                CHECK_THROWS_AS(showErrorMessage("Too many rounds!"), std::exception);
+            }
+        }
+    }
+}
+
+SCENARIO("Only positive points") {
+    GIVEN("All points") {
+        std::vector<int> game{5, 3, 4, 3, 7, 2, 5, 1, 8, 0, 6, 2, 4, 4, 3, 3, 7, 1, 2, 2};
+        WHEN("Check all points") {
+            bool elementsArePositive;
+            THEN("All points should be positive") {
+                elementsArePositive = std::all_of(game.cbegin(), game.cend(),
+                                                  [](int throwPoints) { return (throwPoints >= 0) ? true : false; });
+            }
+            REQUIRE(elementsArePositive);
+        }
+    }
+}
+
+SCENARIO("Too many points") {
+    GIVEN("All points") {
+        std::vector<int> game{20, 111};
+
+        WHEN("Count result") {
+            auto gameresult = result(2220);
+            THEN("Throw have more than 10 points") {
+                CHECK_THROWS_AS(showErrorMessage("Too many points!"), std::exception);
+            }
         }
     }
 }
