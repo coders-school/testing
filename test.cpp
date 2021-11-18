@@ -1,22 +1,24 @@
-// #include <algorithm>
-// #include <string>
-// #include <vector>
+#include <string>
 #include "catch.hpp"
 
-// SCENARIO("Sort function sorts elements in vector", "[sort][vector]") {
-    // GIVEN("a vector with items {-3, 2, 1}") {
-    //     std::vector v{-3, 2, 1};
+unsigned short calculateTotalScore(std::string) {
+    return 301;
+}
 
-    //     WHEN("is sorted") {
-    //         std::sort(begin(v), end(v));
+SCENARIO("A function calculates total bowling score from frame scores", "[bowling]") {
+    GIVEN("the frame scores {\"X|X|X|X|X|X|X|X|X|X||XX\"}") {
+        std::string frameScores{"X|X|X|X|X|X|X|X|X|X||XX"};
 
-    //         THEN("the sorted vector is {-3, 1, 2}") {
-    //             std::vector expectedV {-3, 1, 2};
-    //             REQUIRE(v == expectedV);
-    //             REQUIRE(std::is_sorted(cbegin(v), cend(v)));
-    //         }
-    //     }
-    // }
+        WHEN("total score is calculated") {
+            auto totalScore = calculateTotalScore(frameScores);
+
+            THEN("the expected total score is") {
+                unsigned short expectedTotalScore{300};
+                REQUIRE(totalScore == expectedTotalScore);
+            }
+        }
+    }
+}
 
 //     GIVEN("a vector") {
 //         auto v = GENERATE(std::vector{1, 2, 3},
@@ -36,34 +38,3 @@
 //             }
 //         }
 //     }
-
-//     GIVEN("a vector with items {'C', 'b', 'a'}") {
-//         std::vector v{'C', 'b', 'a'};
-
-//         WHEN("is sorted") {
-//             std::sort(begin(v), end(v));
-
-//             THEN("the sorted vector is {'C', 'a', 'b'}") {
-//                 std::vector expectedV {'C', 'a', 'b'};
-//                 REQUIRE(v == expectedV);
-//                 REQUIRE(std::is_sorted(cbegin(v), cend(v)));
-//             }
-//         }
-//     }
-// }
-
-// SCENARIO("Sort function sorts elements in string", "[sort][string]") {
-//     GIVEN("a string \"baC\"") {
-//         std::string s{"baC"};
-
-//         WHEN("is sorted") {
-//             std::sort(begin(s), end(s));
-
-//             THEN("the sorted string is \"Cab\"") {
-//                 std::string expectedString {"Cab"};
-//                 REQUIRE(s == expectedString);
-//                 REQUIRE(std::is_sorted(cbegin(s), cend(s)));
-//             }
-//         }
-//     }
-// }
