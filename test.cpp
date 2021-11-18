@@ -1,3 +1,5 @@
+#define CATCH_CONFIG_MAIN
+
 #include <string>
 #include "catch.hpp"
 
@@ -75,6 +77,36 @@ SCENARIO("The calculateTotalScore() function calculates a total bowling score fo
         }
     }
 
+    GIVEN("the frame scores: \"--|4/|71|X|45|8-|X|9-|54|32||\"") {
+        std::string frameScores{"--|4/|71|X|45|8-|X|9-|54|32||"};
+        int totalScore{-1};
+
+        WHEN("total score is calculated") {
+            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+
+            THEN("the expected total score is") {
+                int expectedTotalScore{103};
+                REQUIRE(totalScore == expectedTotalScore);
+                REQUIRE(resultCode == ResultCode::OK);
+            }
+        }
+    }
+
+    GIVEN("the frame scores: \"X|53|4/|9/|25|7/|9-|X|53|7/||X\"") {
+        std::string frameScores{"X|53|4/|9/|25|7/|9-|X|53|7/||X"};
+        int totalScore{-1};
+
+        WHEN("total score is calculated") {
+            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+
+            THEN("the expected total score is") {
+                int expectedTotalScore{138};
+                REQUIRE(totalScore == expectedTotalScore);
+                REQUIRE(resultCode == ResultCode::OK);
+            }
+        }
+    }
+
     GIVEN("the frame scores: \"-|-|-|-|-|-|-|-|-|-||--\"") {
         std::string frameScores{"-|-|-|-|-|-|-|-|-|-||--"};
         int totalScore{-1};
@@ -108,9 +140,24 @@ SCENARIO("The calculateTotalScore() function calculates a total bowling score fo
         }
     }
 
+    GIVEN("the frame scores: \"x|x|x|x|x|x|x|x|x|x||xx\" (lower case 'x')") {
+        std::string frameScores{"x|x|x|x|x|x|x|x|x|x||xx"};
+        int totalScore{-1};
+
+        WHEN("total score is calculated") {
+            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+
+            THEN("the expected total score is") {
+                int expectedTotalScore{300};
+                REQUIRE(totalScore == expectedTotalScore);
+                REQUIRE(resultCode == ResultCode::OK);
+            }
+        }
+    }
+
     GIVEN("the frame scores with unalowed characters") {
         std::string frameScores = GENERATE(std::string{"?|X|X|X|X|X|X|X|X|X||XX"},
-                                           std::string{"X\X|X|X|X|X|X|X|X|X||XX"},
+                                           std::string{"X\\X|X|X|X|X|X|X|X|X||XX"},
                                            std::string{"_|X|X|X|X|X|X|X|X|X||XX"});
 
         int totalScore{-1};
@@ -122,6 +169,28 @@ SCENARIO("The calculateTotalScore() function calculates a total bowling score fo
                 int expectedTotalScore{0};
                 REQUIRE(totalScore == expectedTotalScore);
                 REQUIRE(resultCode == ResultCode::BadCharacter);
+            }
+        }
+    }
+
+    GIVEN("the frame scores with wrong frame format") {
+        std::string frameScores = GENERATE(std::string{"X||X|X|X|X|X|X|X|X|X||XX"},
+                                           std::string{"X|X|X|X|X|X|X|X|X|X||XX|"},
+                                           std::string{"X|X|X|X|X|X|X|X|X|X|X||XX|"},
+                                           std::string{"|X|X|X|X|X|X|X|X|X|X|X||XX|"},
+                                           std::string{"XX||X|X|X|X|X|X|X|X||XX"},
+                                           std::string{"X|X|X|X|X|"},
+                                           std::string{"X|X|X|X|X|X|X|X|X||XX"});
+
+        int totalScore{-1};
+
+        WHEN("total score is calculated") {
+            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+
+            THEN("the expected total score is") {
+                int expectedTotalScore{0};
+                REQUIRE(totalScore == expectedTotalScore);
+                REQUIRE(resultCode == ResultCode::BadFormat);
             }
         }
     }
