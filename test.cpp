@@ -89,23 +89,22 @@ SCENARIO("The calculateTotalScore() function calculates a total bowling score fo
             }
         }
     }
+
+    GIVEN("the frame scores: \"X|X|X|X|X|X|X|X|X|X||XX\" (with white spaces)") {
+        std::string frameScores = GENERATE(std::string{"X | X|X| X|X|X |X| X |X| X     ||XX"},
+                                           std::string{" X|X| X |X |   X |X|X|X |X|X || XX"},
+                                           std::string{"   X|X|X|      X | X  |X|X|X|X|X| |   X  X   "});
+
+        int totalScore{-1};
+
+        WHEN("total score is calculated") {
+            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+
+            THEN("the expected total score is") {
+                int expectedTotalScore{300};
+                REQUIRE(totalScore == expectedTotalScore);
+                REQUIRE(resultCode == ResultCode::OK);
+            }
+        }
+    }
 }
-
-//     GIVEN("a vector") {
-//         auto v = GENERATE(std::vector{1, 2, 3},
-//                           std::vector{1, 3, 2},
-//                           std::vector{2, 1, 3},
-//                           std::vector{2, 3, 1},
-//                           std::vector{3, 1, 2},
-//                           std::vector{3, 2, 1});
-
-//         WHEN("vector " << v[0] << v[1] << v[2] << "is sorted") {
-//             std::sort(begin(v), end(v));
-
-//             THEN("the sorted vector is") {
-//                 std::vector expectedV {1, 2, 3};
-//                 REQUIRE(v == expectedV);
-//                 REQUIRE(std::is_sorted(cbegin(v), cend(v)));
-//             }
-//         }
-//     }
