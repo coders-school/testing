@@ -10,187 +10,99 @@ enum class ResultCode {
     UndefinedError
 };
 
-// dummy function
-ResultCode calculateTotalScore(const std::string& frameScores, int* totalScore) {
+struct FramesAndResults {
+    std::string frames;
+    int totalScore;
+    ResultCode resultCode;
+};
+
+// dummy function to be tested
+ResultCode calculateTotalScore(const std::string& frames, int* totalScore) {
     *totalScore = -1;  // result impossible to achieve
     return ResultCode::UndefinedError;
 }
 
 SCENARIO("The calculateTotalScore() function calculates a total bowling score for given frame scores", "[bowling][totalScore]") {
-    GIVEN("the frame scores: \"X|X|X|X|X|X|X|X|X|X||XX\"") {
-        std::string frameScores{"X|X|X|X|X|X|X|X|X|X||XX"};
-        int totalScore{-1};
-
+    GIVEN("the frame scores") {
+        FramesAndResults framesAndResults = GENERATE(FramesAndResults{"X|X|X|X|X|X|X|X|X|X||XX", 300, ResultCode::OK},
+                                                     FramesAndResults{"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", 90, ResultCode::OK},
+                                                     FramesAndResults{"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5", 150, ResultCode::OK},
+                                                     FramesAndResults{"-|-|-|-|-|-|-|-|-|-||--", 0, ResultCode::OK},
+                                                     FramesAndResults{"--|4/|71|X|45|8-|X|9-|54|32||", 103, ResultCode::OK},
+                                                     FramesAndResults{"X|53|4/|9/|25|7/|9-|X|53|7/||X", 138, ResultCode::OK},
+                                                     FramesAndResults{"X|7/|9-|X|-8|8/|-6|X|X|X||81", 167, ResultCode::OK});
         WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+            int totalScore{-1};
+            ResultCode resultCode = calculateTotalScore(framesAndResults.frames, &totalScore);
 
-            THEN("the expected total score is") {
-                int expectedTotalScore{300};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
+            THEN("the expected total score for:\n\"" << framesAndResults.frames << "\"\nis: " << framesAndResults.totalScore) {
+                REQUIRE(totalScore == framesAndResults.totalScore);
+                REQUIRE(resultCode == framesAndResults.resultCode);
             }
         }
     }
 
-    GIVEN("the frame scores: \"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||\"") {
-        std::string frameScores{"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||"};
-        int totalScore{-1};
-
+    GIVEN("the frame scores with white spaces") {
+        FramesAndResults framesAndResults = GENERATE(FramesAndResults{"X | X|X| X|X|X |X| X |X| X     ||XX", 300, ResultCode::OK},
+                                                     FramesAndResults{" X|X| X |X |   X |X|X|X |X|X || XX", 300, ResultCode::OK},
+                                                     FramesAndResults{"   X|X|X|      X | X  |X|X|X|X|X| |   X  X   ", 300, ResultCode::OK});
         WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+            int totalScore{-1};
+            ResultCode resultCode = calculateTotalScore(framesAndResults.frames, &totalScore);
 
-            THEN("the expected total score is") {
-                int expectedTotalScore{90};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
+            THEN("the expected total score for:\n\"" << framesAndResults.frames << "\"\nis: " << framesAndResults.totalScore) {
+                REQUIRE(totalScore == framesAndResults.totalScore);
+                REQUIRE(resultCode == framesAndResults.resultCode);
             }
         }
     }
 
-    GIVEN("the frame scores: \"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5\"") {
-        std::string frameScores{"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5"};
-        int totalScore{-1};
-
+    GIVEN("the frame scores with lower case 'x'") {
+        FramesAndResults framesAndResults = GENERATE(FramesAndResults{"x|x|x|x|x|x|x|x|x|x||xx", 300, ResultCode::OK},
+                                                     FramesAndResults{"X|X|X|x|X|x|x|x|x|x||xx", 300, ResultCode::OK});
         WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+            int totalScore{-1};
+            ResultCode resultCode = calculateTotalScore(framesAndResults.frames, &totalScore);
 
-            THEN("the expected total score is") {
-                int expectedTotalScore{150};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
+            THEN("the expected total score for:\n\"" << framesAndResults.frames << "\"\nis: " << framesAndResults.totalScore) {
+                REQUIRE(totalScore == framesAndResults.totalScore);
+                REQUIRE(resultCode == framesAndResults.resultCode);
             }
         }
     }
 
-    GIVEN("the frame scores: \"X|7/|9-|X|-8|8/|-6|X|X|X||81\"") {
-        std::string frameScores{"X|7/|9-|X|-8|8/|-6|X|X|X||81"};
-        int totalScore{-1};
-
+    GIVEN("the frame scores with disallowed characters") {
+        FramesAndResults framesAndResults = GENERATE(FramesAndResults{"?|X|X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadCharacter},
+                                                     FramesAndResults{"X\\X|X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadCharacter},
+                                                     FramesAndResults{"_|X|X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadCharacter});
         WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+            int totalScore{-1};
+            ResultCode resultCode = calculateTotalScore(framesAndResults.frames, &totalScore);
 
-            THEN("the expected total score is") {
-                int expectedTotalScore{167};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
-            }
-        }
-    }
-
-    GIVEN("the frame scores: \"--|4/|71|X|45|8-|X|9-|54|32||\"") {
-        std::string frameScores{"--|4/|71|X|45|8-|X|9-|54|32||"};
-        int totalScore{-1};
-
-        WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
-
-            THEN("the expected total score is") {
-                int expectedTotalScore{103};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
-            }
-        }
-    }
-
-    GIVEN("the frame scores: \"X|53|4/|9/|25|7/|9-|X|53|7/||X\"") {
-        std::string frameScores{"X|53|4/|9/|25|7/|9-|X|53|7/||X"};
-        int totalScore{-1};
-
-        WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
-
-            THEN("the expected total score is") {
-                int expectedTotalScore{138};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
-            }
-        }
-    }
-
-    GIVEN("the frame scores: \"-|-|-|-|-|-|-|-|-|-||--\"") {
-        std::string frameScores{"-|-|-|-|-|-|-|-|-|-||--"};
-        int totalScore{-1};
-
-        WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
-
-            THEN("the expected total score is") {
-                int expectedTotalScore{0};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
-            }
-        }
-    }
-
-    GIVEN("the frame scores: \"X|X|X|X|X|X|X|X|X|X||XX\" (with white spaces)") {
-        std::string frameScores = GENERATE(std::string{"X | X|X| X|X|X |X| X |X| X     ||XX"},
-                                           std::string{" X|X| X |X |   X |X|X|X |X|X || XX"},
-                                           std::string{"   X|X|X|      X | X  |X|X|X|X|X| |   X  X   "});
-
-        int totalScore{-1};
-
-        WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
-
-            THEN("the expected total score is") {
-                int expectedTotalScore{300};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
-            }
-        }
-    }
-
-    GIVEN("the frame scores: \"x|x|x|x|x|x|x|x|x|x||xx\" (lower case 'x')") {
-        std::string frameScores{"x|x|x|x|x|x|x|x|x|x||xx"};
-        int totalScore{-1};
-
-        WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
-
-            THEN("the expected total score is") {
-                int expectedTotalScore{300};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::OK);
-            }
-        }
-    }
-
-    GIVEN("the frame scores with unalowed characters") {
-        std::string frameScores = GENERATE(std::string{"?|X|X|X|X|X|X|X|X|X||XX"},
-                                           std::string{"X\\X|X|X|X|X|X|X|X|X||XX"},
-                                           std::string{"_|X|X|X|X|X|X|X|X|X||XX"});
-
-        int totalScore{-1};
-
-        WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
-
-            THEN("the expected total score is") {
-                int expectedTotalScore{0};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::BadCharacter);
+            THEN("the expected total score for:\n\"" << framesAndResults.frames << "\"\nis: " << framesAndResults.totalScore) {
+                REQUIRE(totalScore == framesAndResults.totalScore);
+                REQUIRE(resultCode == framesAndResults.resultCode);
             }
         }
     }
 
     GIVEN("the frame scores with wrong frame format") {
-        std::string frameScores = GENERATE(std::string{"X||X|X|X|X|X|X|X|X|X||XX"},
-                                           std::string{"X|X|X|X|X|X|X|X|X|X||XX|"},
-                                           std::string{"X|X|X|X|X|X|X|X|X|X|X||XX|"},
-                                           std::string{"|X|X|X|X|X|X|X|X|X|X|X||XX|"},
-                                           std::string{"XX||X|X|X|X|X|X|X|X||XX"},
-                                           std::string{"X|X|X|X|X|"},
-                                           std::string{"X|X|X|X|X|X|X|X|X||XX"});
-
-        int totalScore{-1};
+        FramesAndResults framesAndResults = GENERATE(FramesAndResults{"X||X|X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"X|||X|X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"X|X|X|X|X|X|X|X|X|X||XX|", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"X|X|X|X|X|X|X|X|X|X|X||XX|", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"|X|X|X|X|X|X|X|X|X|X|X||XX|", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"XX||X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"X|X|X|X|X|", 0, ResultCode::BadFormat},
+                                                     FramesAndResults{"X|X|X|X|X|X|X|X||XX", 0, ResultCode::BadFormat});
 
         WHEN("total score is calculated") {
-            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+            int totalScore{-1};
+            ResultCode resultCode = calculateTotalScore(framesAndResults.frames, &totalScore);
 
-            THEN("the expected total score is") {
-                int expectedTotalScore{0};
-                REQUIRE(totalScore == expectedTotalScore);
-                REQUIRE(resultCode == ResultCode::BadFormat);
+            THEN("the expected total score for:\n\"" << framesAndResults.frames << "\"\nis: " << framesAndResults.totalScore) {
+                REQUIRE(totalScore == framesAndResults.totalScore);
+                REQUIRE(resultCode == framesAndResults.resultCode);
             }
         }
     }
