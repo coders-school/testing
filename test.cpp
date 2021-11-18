@@ -58,6 +58,19 @@ SCENARIO("The calculateTotalScore() function calculates a total bowling score fo
             }
         }
     }
+
+    GIVEN("the frame scores: \"-|-|-|-|-|-|-|-|-|-||--\"") {
+        std::string frameScores{"-|-|-|-|-|-|-|-|-|-||--"};
+
+        WHEN("total score is calculated") {
+            auto totalScore = calculateTotalScore(frameScores);
+
+            THEN("the expected total score is") {
+                unsigned short expectedTotalScore{0};
+                REQUIRE(totalScore == expectedTotalScore);
+            }
+        }
+    }
 }
 
 //     GIVEN("a vector") {
