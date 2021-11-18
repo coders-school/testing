@@ -107,4 +107,22 @@ SCENARIO("The calculateTotalScore() function calculates a total bowling score fo
             }
         }
     }
+
+    GIVEN("the frame scores with unalowed characters") {
+        std::string frameScores = GENERATE(std::string{"?|X|X|X|X|X|X|X|X|X||XX"},
+                                           std::string{"X\X|X|X|X|X|X|X|X|X||XX"},
+                                           std::string{"_|X|X|X|X|X|X|X|X|X||XX"});
+
+        int totalScore{-1};
+
+        WHEN("total score is calculated") {
+            ResultCode resultCode = calculateTotalScore(frameScores, &totalScore);
+
+            THEN("the expected total score is") {
+                int expectedTotalScore{0};
+                REQUIRE(totalScore == expectedTotalScore);
+                REQUIRE(resultCode == ResultCode::BadCharacter);
+            }
+        }
+    }
 }
