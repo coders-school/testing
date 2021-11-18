@@ -1,12 +1,13 @@
 #include <string>
 #include "catch.hpp"
 
+// dummy function
 unsigned short calculateTotalScore(std::string) {
     return 301;
 }
 
-SCENARIO("A function calculates total bowling score from frame scores", "[bowling]") {
-    GIVEN("the frame scores {\"X|X|X|X|X|X|X|X|X|X||XX\"}") {
+SCENARIO("The calculateTotalScore() function calculates a total bowling score for given frame scores", "[bowling][totalScore]") {
+    GIVEN("the frame scores: \"X|X|X|X|X|X|X|X|X|X||XX\"") {
         std::string frameScores{"X|X|X|X|X|X|X|X|X|X||XX"};
 
         WHEN("total score is calculated") {
@@ -14,6 +15,45 @@ SCENARIO("A function calculates total bowling score from frame scores", "[bowlin
 
             THEN("the expected total score is") {
                 unsigned short expectedTotalScore{300};
+                REQUIRE(totalScore == expectedTotalScore);
+            }
+        }
+    }
+
+    GIVEN("the frame scores: \"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||\"") {
+        std::string frameScores{"9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||"};
+
+        WHEN("total score is calculated") {
+            auto totalScore = calculateTotalScore(frameScores);
+
+            THEN("the expected total score is") {
+                unsigned short expectedTotalScore{90};
+                REQUIRE(totalScore == expectedTotalScore);
+            }
+        }
+    }
+
+    GIVEN("the frame scores: \"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5\"") {
+        std::string frameScores{"5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5"};
+
+        WHEN("total score is calculated") {
+            auto totalScore = calculateTotalScore(frameScores);
+
+            THEN("the expected total score is") {
+                unsigned short expectedTotalScore{150};
+                REQUIRE(totalScore == expectedTotalScore);
+            }
+        }
+    }
+    
+    GIVEN("the frame scores: \"X|7/|9-|X|-8|8/|-6|X|X|X||81\"") {
+        std::string frameScores{"X|7/|9-|X|-8|8/|-6|X|X|X||81"};
+
+        WHEN("total score is calculated") {
+            auto totalScore = calculateTotalScore(frameScores);
+
+            THEN("the expected total score is") {
+                unsigned short expectedTotalScore{167};
                 REQUIRE(totalScore == expectedTotalScore);
             }
         }
