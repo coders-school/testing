@@ -1,4 +1,4 @@
-#include "catch_amalgamated.hpp"
+#include <catch2/catch_all.hpp>
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -33,8 +33,9 @@ SCENARIO("Testing sort algorithm with a custom comparator", "[vector][sort][grea
                           std::vector{3, 2, 1});
 
         WHEN("sort is called with std::greater functor") {
-            std::sort(begin(v), end(v), std::greater{});
             // std::sort(begin(v), end(v), [](auto lhs, auto rhs){ return lhs > rhs; });
+            std::sort(begin(v), end(v), std::greater{})
+            // std::ranges::sort(v, std::ranges::greater{});
 
             THEN("v is {3, 2, 1}") {
                 std::vector expected = {3, 2, 1};
