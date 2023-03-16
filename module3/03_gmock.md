@@ -4,25 +4,11 @@
 
 ___
 
-## GMock - dokumentacja
-
-* [GMock for Dummies](https://github.com/google/googletest/blob/main/docs/gmock_for_dummies.md)
-* [GMock cheatsheet](https://github.com/google/googletest/blob/main/docs/gmock_cheat_sheet.md)
-* [GMock cookbook](https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md)
-
-___
-
-## Tworzenie mocków
-
-1. Pisanie z palca
-2. [Użycie skryptu generującego](https://github.com/google/googletest/tree/master/googlemock/scripts/generator)
-
-___
+## Pisanie mocków
 
 ```cpp
 class Foo {
-  ...
-  virtual ~Foo();
+  virtual ~Foo() {}
   virtual int GetSize() const = 0;
   virtual string Describe(const char* name) = 0;
   virtual string Describe(int type) = 0;
@@ -32,9 +18,9 @@ class Foo {
 
 ```cpp
 #include "gmock/gmock.h"
+#include "foo.h"
 
 class MockFoo : public Foo {
-  ...
   MOCK_METHOD(int, GetSize, (), (const, override));
   MOCK_METHOD(string, Describe, (const char* name), (override));
   MOCK_METHOD(string, Describe, (int type), (override));
@@ -42,6 +28,13 @@ class MockFoo : public Foo {
 };
 ```
 <!-- .element: class="fragment fade-in" -->
+
+___
+
+## Tworzenie mocków
+
+1. Pisanie z palca
+2. [Użycie skryptu generującego](https://github.com/google/googletest/tree/master/googlemock/scripts/generator)
 
 ___
 
@@ -69,7 +62,7 @@ EXPECT_CALL(foo, Process(_, 10))
 Oczekujemy, że na `foo` zostanie zawołana funkcja `Process` z obojętnie jakim pierwszym parametrem i 10 jako drugi parametr. Za pierwszym razem zwróci true, za drugim false.
 <!-- .element: class="fragment fade-in" -->
 
-[Więcej możliwości w GoogleMock CheatSheet](https://github.com/google/googletest/blob/master/googlemock/docs/cheat_sheet.md#setting-expectations-expectcall)
+[Więcej możliwości w dokumentacji](https://github.com/google/googletest/blob/main/docs/reference/mocking.md#expect_call-expect_call)
 <!-- .element: class="fragment fade-in" -->
 
 ___
@@ -110,6 +103,14 @@ StrictMock<MockFoo> strict_foo;  // The type is a subclass of MockFoo.
 
 Wywołania dodatkowych funkcji poza oczekiwanymi są traktowane jak błędy, przez które test nie przechodzi.
 <!-- .element: class="fragment fade-in" -->
+
+___
+
+## GMock - dokumentacja
+
+* [GMock for Dummies](https://github.com/google/googletest/blob/main/docs/gmock_for_dummies.md)
+* [GMock cheatsheet](https://github.com/google/googletest/blob/main/docs/gmock_cheat_sheet.md)
+* [GMock cookbook](https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md)
 
 ___
 <!-- .slide: style="font-size: 0.95em" -->
