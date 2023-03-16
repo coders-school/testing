@@ -119,7 +119,7 @@ ___
 * <!-- .element: class="fragment fade-in" --> Zazwyczaj używa się stubów lub dummy
 * <!-- .element: class="fragment fade-in" --> Można użyć GMock, ale komplikuje to kod
 
-Zobacz [GoogleMock CookBook](https://github.com/google/googletest/blob/master/googlemock/docs/cook_book.md#mocking-free-functions)
+Zobacz [GoogleMock CookBook](https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md#mocking-free-functions)
 <!-- .element: class="fragment fade-in" -->
 
 ___

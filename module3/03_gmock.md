@@ -6,9 +6,9 @@ ___
 
 ## GMock - dokumentacja
 
-* [GMock for Dummies](https://github.com/google/googletest/blob/master/googlemock/docs/for_dummies.md)
-* [GMock cheatsheet](https://github.com/google/googletest/blob/master/googlemock/docs/cheat_sheet.md)
-* [GMock cookbook](https://github.com/google/googletest/blob/master/googlemock/docs/cook_book.md)
+* [GMock for Dummies](https://github.com/google/googletest/blob/main/docs/gmock_for_dummies.md)
+* [GMock cheatsheet](https://github.com/google/googletest/blob/main/docs/gmock_cheat_sheet.md)
+* [GMock cookbook](https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md)
 
 ___
 
