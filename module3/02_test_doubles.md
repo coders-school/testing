@@ -175,3 +175,12 @@ Do obiektów typu mock najczęściej wykorzystuje się bibliotekę GMock.
 
 [Zobacz przykłady atrap w repo Pizzas](https://github.com/coders-school/pizzas/blob/master/test/mocks/PizzaMock.hpp)
 <!-- .element: class="fragment fade-in" -->
+
+___
+
+## Praca domowa
+
+W repozytorium [Pizzas](https://github.com/coders-school/pizzas)
+
+1. Napisz własne klasy PizzaDummy i PizzaStub. Porównaj je z implementacjami w pliku `test/mocks/PizzaMock.hpp`
+2. Popraw interfejs Pizza, aby nie posiadał on swojego konstruktora. Napisz odpowiednie konstruktory w klasach dziedziczących (jeśli są potrzebne). Popraw też atrapy testowe.
