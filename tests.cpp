@@ -1,5 +1,6 @@
 #include <catch2/catch_all.hpp>
 #include "bowling_game.hpp" 
+#include <string>
 
 SCENARIO("Testing all possible bowling game scenarios") {
     GIVEN( "The game has started" ) {
@@ -729,7 +730,7 @@ SCENARIO("Negative Test Cases") {
 
             std::string gameString = game.generateGameString();
             THEN("The game must not be over") {
-                REQUIRE_THROWS(calculateScore());
+                REQUIRE_THROWS(game.calculateScore());
             }
         }
     }
