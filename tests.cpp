@@ -106,6 +106,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
             }
             game.roll(9);
             game.roll(1);
+            game.roll(1);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -206,7 +207,6 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(6);
             game.roll(8);
             game.roll(1);
-            game.roll(0);
             game.roll(10);
             game.roll(2);
             game.roll(4);
@@ -221,6 +221,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(10);
             game.roll(8);
             game.roll(2);
+            game.roll(10);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -250,11 +251,12 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(10);
             game.roll(10);
             game.roll(10); 
+            game.roll(10);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
             std::string gameString = game.generateGameString();
-            AND_THEN("The generated string should be 'X|7/|9-|X|-8|8/|-6|X|X|X||XX'") {
+            AND_THEN("The generated string should be 'X|7/|9-|X|-8|8/|5/|X|X|X||XX'") {
                 REQUIRE(gameString == "X|7/|9-|X|-8|8/|-6|X|X|X||XX");
             }
             AND_THEN("The calculated score should be 180") {
@@ -267,7 +269,6 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(6);
             game.roll(8);
             game.roll(1);
-            game.roll(0);
             game.roll(10);
             game.roll(2);
             game.roll(4);
@@ -300,7 +301,6 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(6);
             game.roll(8);
             game.roll(1);
-            game.roll(0);
             game.roll(10);
             game.roll(2);
             game.roll(4);
@@ -389,7 +389,6 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(6);
             game.roll(8);
             game.roll(1);
-            game.roll(0);
             game.roll(10);
             game.roll(2);
             game.roll(4);
