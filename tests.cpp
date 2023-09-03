@@ -1,9 +1,9 @@
 #include <catch2/catch_all.hpp>
-#include "bowling_game.hpp" 
 #include <string>
+#include "bowling_game.hpp"
 
 SCENARIO("Testing all possible bowling game scenarios") {
-    GIVEN( "The game has started" ) {
+    GIVEN("The game has started") {
         BowlingGame game;
         game.start();
 
@@ -251,7 +251,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(10);
             game.roll(10);
             game.roll(10);
-            game.roll(10); 
+            game.roll(10);
             game.roll(10);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
@@ -314,9 +314,9 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(5);
             game.roll(5);
             game.roll(10);
-            game.roll(10); 
             game.roll(10);
-            game.roll(10); 
+            game.roll(10);
+            game.roll(10);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -597,7 +597,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 game.roll(6);
             }
             game.roll(0);
-            game.roll(0); 
+            game.roll(0);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -616,7 +616,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
             }
             game.roll(9);
             game.roll(1);
-            game.roll(5); 
+            game.roll(5);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -635,7 +635,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 game.roll(5);
             }
             game.roll(10);
-            game.roll(5); 
+            game.roll(5);
             game.roll(5);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
@@ -707,31 +707,31 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 REQUIRE(game.calculateScore() == 165);
             }
         }
-}
+    }
 
-SCENARIO("Negative Test Cases") {
-    GIVEN( "The game has started" ) {
-        BowlingGame game;
-        game.start();
+    SCENARIO("Negative Test Cases") {
+        GIVEN("The game has started") {
+            BowlingGame game;
+            game.start();
 
-        WHEN("Random frames scores") {
-            game.roll(10);
-            game.roll(7);
+            WHEN("Random frames scores") {
+                game.roll(10);
+                game.roll(7);
 
-            std::string gameString = game.generateGameString();
-            THEN("The game must not be over") {
-                REQUIRE(game.isOver() == false);
+                std::string gameString = game.generateGameString();
+                THEN("The game must not be over") {
+                    REQUIRE(game.isOver() == false);
+                }
             }
-        }
 
-        WHEN("Random frames scores") {
-            game.roll(10);
-            game.roll(7);
+            WHEN("Random frames scores") {
+                game.roll(10);
+                game.roll(7);
 
-            std::string gameString = game.generateGameString();
-            THEN("The game must not be over") {
-                REQUIRE_THROWS(game.calculateScore());
+                std::string gameString = game.generateGameString();
+                THEN("The game must not be over") {
+                    REQUIRE_THROWS(game.calculateScore());
+                }
             }
         }
     }
-}
