@@ -106,7 +106,6 @@ SCENARIO("Testing all possible bowling game scenarios") {
             }
             game.roll(9);
             game.roll(1);
-            game.roll(1); // Bonus ball
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -125,7 +124,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 game.roll(5);
             }
             game.roll(10);
-            game.roll(1); // Bonus ball
+            game.roll(1);
+            game.roll(1);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -281,6 +281,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(5);
             game.roll(10);
             game.roll(5);
+            game.roll(5);
+            game.roll(5);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -310,6 +312,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(1);
             game.roll(5);
             game.roll(5);
+            game.roll(10);
+            game.roll(10); 
             game.roll(10);
             game.roll(10); 
             THEN("The game must be over") {
@@ -372,7 +376,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 REQUIRE(game.isOver() == true);
             }
             std::string gameString = game.generateGameString();
-            AND_THEN("The generated string should be '--|--|--|--|--|--|--|--|--|0/||5'") {
+            AND_THEN("The generated string should be '--|--|--|--|--|--|--|--|--|-/||5'") {
                 REQUIRE(gameString == "--|--|--|--|--|--|--|--|--|-/||5");
             }
             AND_THEN("The calculated score should be 15") {
@@ -399,6 +403,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
             game.roll(5);
             game.roll(10);
             game.roll(10);
+            game.roll(10);
+            game.roll(10);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -420,6 +426,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
                     game.roll(5);
                 }
             }
+            game.roll(10);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -462,6 +469,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
                     game.roll(10);
                 }
             }
+            game.roll(5);
+            game.roll(5);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -505,6 +514,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
                     game.roll(10);
                 }
             }
+            game.roll(0);
+            game.roll(0);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -527,6 +538,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
                     game.roll(5);
                 }
             }
+            game.roll(0);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
@@ -551,8 +563,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 REQUIRE(game.isOver() == true);
             }
             std::string gameString = game.generateGameString();
-            AND_THEN("The generated string should be '36|63|36|63|36|63|36|63|36|X||XX'") {
-                REQUIRE(gameString == "36|63|36|63|36|63|36|63|36|X||XX");
+            AND_THEN("The generated string should be '36|36|36|36|36|36|36|36|36|X||XX'") {
+                REQUIRE(gameString == "36|36|36|36|36|36|36|36|36|X||XX");
             }
             AND_THEN("The calculated score should be 111") {
                 REQUIRE(game.calculateScore() == 111);
@@ -565,13 +577,14 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 game.roll(6);
             }
             game.roll(5);
-            game.roll(5); // Bonus ball
+            game.roll(5);
+            game.roll(5);
             THEN("The game must be over") {
                 REQUIRE(game.isOver() == true);
             }
             std::string gameString = game.generateGameString();
-            AND_THEN("The generated string should be '36|63|36|63|36|63|36|63|36|5/||5'") {
-                REQUIRE(gameString == "36|63|36|63|36|63|36|63|36|5/||5");
+            AND_THEN("The generated string should be '36|36|36|36|36|36|36|36|36|5/||5'") {
+                REQUIRE(gameString == "36|36|36|36|36|36|36|36|36|5/||5");
             }
             AND_THEN("The calculated score should be 96") {
                 REQUIRE(game.calculateScore() == 96);
@@ -589,8 +602,8 @@ SCENARIO("Testing all possible bowling game scenarios") {
                 REQUIRE(game.isOver() == true);
             }
             std::string gameString = game.generateGameString();
-            AND_THEN("The generated string should be '36|63|36|63|36|63|36|63|36|--||'") {
-                REQUIRE(gameString == "36|63|36|63|36|63|36|63|36|--||");
+            AND_THEN("The generated string should be '36|36|36|36|36|36|36|36|36|--||'") {
+                REQUIRE(gameString == "36|36|36|36|36|36|36|36|36|--||");
             }
             AND_THEN("The calculated score should be 81") {
                 REQUIRE(game.calculateScore() == 81);
@@ -696,7 +709,7 @@ SCENARIO("Testing all possible bowling game scenarios") {
         }
 }
 
-SCENARIO("Bowling Game - Negative Test Cases") {
+SCENARIO("Negative Test Cases") {
     GIVEN( "The game has started" ) {
         BowlingGame game;
         game.start();
