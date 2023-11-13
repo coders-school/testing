@@ -20,6 +20,7 @@ SCENARIO("Testing strike score", "[int][string][strike]"){
         }
     }
 }
+
 SCENARIO("Testing spare scores", "[int][string][spare]"){
 
     GIVEN("Strike configuration"){
